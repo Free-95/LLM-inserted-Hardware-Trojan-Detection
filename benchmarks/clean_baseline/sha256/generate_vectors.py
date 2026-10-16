@@ -82,8 +82,7 @@ def emit_vectors(path):
     """
     messages = []
 
-    # Known NIST test vectors (cross-checked against the independent compressor above,
-    # not copied blind -- these match the original testbench's TC1/TC2/issue_test vectors).
+    # Known NIST test vectors (cross-checked against the independent compressor above)
     messages.append((b'abc', True))
     messages.append((b'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', True))
     long_msg = (b'In the beginning God created the heaven and the earth,'
@@ -93,8 +92,6 @@ def emit_vectors(path):
                 b' it has been a universal consensus that data is tis a new tech'
                 b'nology that integrates decentralization,In the area of IoT (Inter'
                 b'net of Things), more and moreboom')
-    # (kept close to the original 9-block issue_test message; exact bytes don't need to
-    # match since we derive the correct padding+digest ourselves)
     messages.append((long_msg, True))
 
     # Edge cases
@@ -109,7 +106,7 @@ def emit_vectors(path):
     messages.append((b'\x00' * 64, True))
     messages.append((b'\xff' * 64, True))
 
-    # SHA-224 mode coverage (the ORIGINAL testbench never exercised mode=0 at all)
+    # SHA-224 mode coverage
     messages.append((b'abc', False))
     messages.append((b'abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq', False))
     messages.append((b'a' * 200, False))

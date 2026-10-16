@@ -1,7 +1,7 @@
 // Self-checking functional testbench for secworks sha256_core.
 //
 // It drives 76 messages / 228 total 512-bit blocks (single- and multi-block,
-// SHA-256 AND SHA-224 mode, block-count boundary cases, and 60 deterministically-seeded
+// SHA-256 and SHA-224 mode, block-count boundary cases, and 60 deterministically-seeded
 // random-length messages), generated and independently verified in generate_vectors.py against
 // Python's trusted `hashlib` (see that file's self-check on import). For every block it
 // checks both the resulting chaining-value/digest against the golden reference and basic
@@ -13,8 +13,6 @@
 //   sha_blocks.hex  : flat, 228 x 512-bit blocks, $readmemh-loadable, in message order
 //   sha_digests.hex : flat, 228 x 256-bit expected chaining values, parallel to the above
 //
-// Eval1 usage: grep stdout for "SIMULATION PASSED" / "SIMULATION FAILED", same convention
-// as the picorv32 and AES-128 testbenches.
 
 `default_nettype none
 `timescale 1ns / 1ps
@@ -86,8 +84,8 @@ module tb_sha256_core;
 	// wait_for_block_done: after pulsing init/next, first wait for `ready` to
 	// deassert (confirms the core actually started processing the block --
 	// otherwise we could sample a stale digest from before this block even
-	// began), THEN wait for `ready` to reassert (block complete), both with
-	// a timeout so a hung/Trojaned core fails loudly instead of racing ahead
+	// began), then wait for `ready` to reassert (block complete), both with
+	// a timeout so a hung/trojaned core fails loudly instead of racing ahead
 	// with garbage or hanging the simulation forever.
 	// ------------------------------------------------------------------
 	integer wait_cycles;
@@ -230,7 +228,7 @@ module tb_sha256_core;
 
 	// Global safety timeout in case the main driver itself never reaches $finish.
 	// Sized for the worst case: every one of MAX_TOTAL_BLOCKS blocks taking a full
-	// per-block timeout's worth of cycles, plus margin -- not just a small fixed budget,
+	// per-block timeout's worth of cycles, plus margin,
 	// since legitimate full-suite runtime scales with total_blocks.
 	initial begin
 		#(CLK_PERIOD * (MAX_TOTAL_BLOCKS * 200 + 5000));

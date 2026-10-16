@@ -6,47 +6,41 @@ module wb_arbiter_2m1s #(
     parameter ADDR_WIDTH = 32,
     parameter SELECT_WIDTH = (DATA_WIDTH / 8)
 )(
-    input  wire                    clk,
-    input  wire                    rst_n,
+    input clk,
+    input rst_n,
 
-    // -------------------------------------------------------------
     // Master 0 Interface
-    // -------------------------------------------------------------
-    input  wire [ADDR_WIDTH-1:0]   m0_addr_i,
-    input  wire [DATA_WIDTH-1:0]   m0_dat_i,
-    output wire [DATA_WIDTH-1:0]   m0_dat_o,
-    input  wire                    m0_we_i,
-    input  wire [SELECT_WIDTH-1:0] m0_sel_i,
-    input  wire                    m0_stb_i,
-    input  wire                    m0_cyc_i,
-    output wire                    m0_ack_o,
-    output wire                    m0_err_o,
+    input  [ADDR_WIDTH-1:0]   m0_addr_i,
+    input  [DATA_WIDTH-1:0]   m0_dat_i,
+    output [DATA_WIDTH-1:0]   m0_dat_o,
+    input                     m0_we_i,
+    input  [SELECT_WIDTH-1:0] m0_sel_i,
+    input                     m0_stb_i,
+    input                     m0_cyc_i,
+    output                    m0_ack_o,
+    output                    m0_err_o,
 
-    // -------------------------------------------------------------
     // Master 1 Interface
-    // -------------------------------------------------------------
-    input  wire [ADDR_WIDTH-1:0]   m1_addr_i,
-    input  wire [DATA_WIDTH-1:0]   m1_dat_i,
-    output wire [DATA_WIDTH-1:0]   m1_dat_o,
-    input  wire                    m1_we_i,
-    input  wire [SELECT_WIDTH-1:0] m1_sel_i,
-    input  wire                    m1_stb_i,
-    input  wire                    m1_cyc_i,
-    output wire                    m1_ack_o,
-    output wire                    m1_err_o,
+    input  [ADDR_WIDTH-1:0]   m1_addr_i,
+    input  [DATA_WIDTH-1:0]   m1_dat_i,
+    output [DATA_WIDTH-1:0]   m1_dat_o,
+    input                     m1_we_i,
+    input  [SELECT_WIDTH-1:0] m1_sel_i,
+    input                     m1_stb_i,
+    input                     m1_cyc_i,
+    output                    m1_ack_o,
+    output                    m1_err_o,
 
-    // -------------------------------------------------------------
     // Shared Slave Interface
-    // -------------------------------------------------------------
-    output reg  [ADDR_WIDTH-1:0]   s_addr_o,
-    output reg  [DATA_WIDTH-1:0]   s_dat_o,
-    input  wire [DATA_WIDTH-1:0]   s_dat_i,
-    output reg                     s_we_o,
-    output reg  [SELECT_WIDTH-1:0] s_sel_o,
-    output reg                     s_stb_o,
-    output reg                     s_cyc_o,
-    input  wire                    s_ack_i,
-    input  wire                    s_err_i
+    output reg [ADDR_WIDTH-1:0]   s_addr_o,
+    output reg [DATA_WIDTH-1:0]   s_dat_o,
+    input      [DATA_WIDTH-1:0]   s_dat_i,
+    output reg                    s_we_o,
+    output reg [SELECT_WIDTH-1:0] s_sel_o,
+    output reg                    s_stb_o,
+    output reg                    s_cyc_o,
+    input                         s_ack_i,
+    input                         s_err_i
 );
 
     // Internal request indicators
@@ -137,3 +131,4 @@ module wb_arbiter_2m1s #(
     assign m1_err_o = (grant == 1'b1) ? s_err_i : 1'b0;
 
 endmodule
+

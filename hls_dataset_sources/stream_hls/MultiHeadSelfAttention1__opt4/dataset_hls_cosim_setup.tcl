@@ -1,4 +1,0 @@
-open_project hls_MultiHeadSelfAttention1
-open_solution solution1
-
-cosim_design -setup

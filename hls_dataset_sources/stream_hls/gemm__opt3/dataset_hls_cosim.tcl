@@ -1,4 +1,0 @@
-open_project hls_gemm
-open_solution solution1
-
-cosim_design

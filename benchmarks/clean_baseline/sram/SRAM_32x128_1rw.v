@@ -1,4 +1,3 @@
-// Golden SRAM_32x128_1rw (reference model)
 module SRAM_32x128_1rw (
     input  wire          clk0,
     input  wire          csb0,   // Active-low chip select

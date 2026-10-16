@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 ////                                                              ////
-////  spi_define.v                                                ////
+////  spi_defines.v                                                ////
 ////                                                              ////
 ////  This file is part of the SPI IP core project                ////
 ////  http://www.opencores.org/projects/spi/                      ////

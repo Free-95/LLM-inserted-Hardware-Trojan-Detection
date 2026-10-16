@@ -1,4 +1,0 @@
-open_project hls_bicg
-open_solution solution1
-
-cosim_design -setup

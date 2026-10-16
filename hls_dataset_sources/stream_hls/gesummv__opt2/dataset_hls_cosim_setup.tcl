@@ -1,4 +1,0 @@
-open_project hls_gesummv
-open_solution solution1
-
-cosim_design -setup

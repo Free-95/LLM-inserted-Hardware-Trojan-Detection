@@ -1,4 +1,0 @@
-open_project hls_FeedForward
-open_solution solution1
-
-cosim_design -setup

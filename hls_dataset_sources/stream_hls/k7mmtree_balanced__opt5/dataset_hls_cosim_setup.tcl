@@ -1,4 +1,0 @@
-open_project hls_k7mmtree_balanced
-open_solution solution1
-
-cosim_design -setup

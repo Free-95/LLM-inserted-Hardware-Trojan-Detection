@@ -1,4 +1,0 @@
-open_project hls_k3mm
-open_solution solution1
-
-cosim_design

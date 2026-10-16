@@ -1,0 +1,13 @@
+{
+  "design": "aes128",
+  "target_file": "aes_128.v",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "state[7:0] == 0x5A AND key[7:0] == 0xA5, same applied cycle (P = 2^-16 under random input). Detect flag pipelined through a 20-stage shift register matched to the core's measured 21-cycle latency.",
+  "observable_effect": "Bit 96 of the final-round key input (k9b) is flipped on the aligned output cycle, corrupting one bit of the final AES round's key addition and producing a wrong ciphertext on `out` for that one (state,key) pair only.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_182_vectors": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (user-supplied, genuine sky130A PDK, 428 real standard cells)"
+}

@@ -1,4 +1,0 @@
-open_project hls_k7mmseq_unbalanced
-open_solution solution1
-
-cosim_design -setup

@@ -1,2 +1,0 @@
-source script_EvolveGCN.tcl
-exit

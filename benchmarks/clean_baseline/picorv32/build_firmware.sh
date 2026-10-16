@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rebuilds firmware.hex from source. Requires a RISC-V cross compiler that can
-# target rv32im/ilp32, e.g. Ubuntu's `gcc-riscv64-linux-gnu` package (yes, it
+# target rv32im/ilp32, e.g. Ubuntu's `gcc-riscv64-linux-gnu` package (it
 # can target rv32 too via -march/-mabi), or a dedicated riscv32-unknown-elf-gcc.
 set -e
 
