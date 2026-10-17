@@ -1,0 +1,14 @@
+{
+  "design": "aes128",
+  "target_file": "aes_128.v",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "A saturating 3-bit counter increments only when state[15:0]==0xCAFE (P=2^-16/cycle, reused for its own purpose, not a free-running always-on counter). Payload fires on the 5th such occurrence. Detect flag pipelined through a 20-stage shift register matched to the core's measured 21-cycle latency.",
+  "observable_effect": "Bit 16 of the final-round key input (k9b) is flipped on the aligned output cycle of the 5th trigger occurrence, corrupting one bit of the final round's key addition for that cycle's ciphertext only.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_182_vectors": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (user-supplied, genuine sky130A PDK)",
+  "bug_fixed_during_development": "hit_cnt and trig_sr initially had no reset/initial value; their X (unknown) simulation state deadlocked the counter's own increment-guard condition, causing every CAFE hit (not just the 5th) to corrupt output. Fixed with `initial hit_cnt = 0; initial trig_sr = 0;`, re-verified clean on all three gates."
+}

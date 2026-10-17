@@ -1,0 +1,18 @@
+{
+  "design": "aes128",
+  "target_file": "aes_128.v",
+  "category": "cat3_data_leakage",
+  "trigger_description": "state[31:24]==0x7E AND key[31:24]==0x3D, same applied cycle (P=2^-16 under random input). Detect flag pipelined through a 20-stage shift register matched to the core's measured 21-cycle latency.",
+  "observable_effect": "Bit 48 of the final-round key input is XORed with bit 0 of the captured key register on the aligned output cycle -- i.e. one bit of the registered AES key is multiplexed onto the ciphertext only when the trigger condition holds, leaking that key bit through a 1-bit ciphertext deviation. Produces no deviation at all when the leaked key bit happens to be 0 (deviation value equals the secret bit itself, not a fixed corruption).",
+  "activation_vector_used_for_eval2": {
+    "state": "0x112233445566778899aabbcc7eeeff00",
+    "key":   "0x000102030405060708090a0b3d0d0e0f",
+    "note": "key bit 0 is 1 in this vector so the leak is visible as a ciphertext deviation."
+  },
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_182_vectors": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (user-supplied, genuine sky130A PDK)"
+}
