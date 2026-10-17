@@ -1,25 +1,8 @@
-# aes128 — cat5_parametric_rare_value_corruption — submodule-level variant (real sky130 PDK)
-
-Per your instruction, this trojan is **not** in the top module `aes_128.v`
-at all — the only file touched is `table.v`, specifically the shared `S4`
-substitution block. That block is instantiated 13 times across the whole
-core (4x inside `final_round` in `round.v`, once per round inside
-`expand_key_128` in `aes_128.v`), so this single low-level edit silently
-rides along into every one of those 13 sites without touching either of
-the files that call it — a much more realistic "supply-chain" trojan
-placement than always editing the top-level datapath.
-
-Stealth requirements applied:
-- No trojan-referencing comments in `table.v` (only the original
-  `/* substitue four bytes in a word */` comment remains).
-- Added signals named `raw`, `mon_d`, `mon_now` — reads like an ordinary
-  internal monitor/diagnostic tap, not anything trigger/payload-labeled.
-- `activation_testbench.v` uses `clean` naming throughout and embeds the
-  full clean reference design in the same file, matching your convention.
+# aes128 — cat5_parametric_rare_value_corruption — submodule-level variant
 
 | Gate  | Tool                              | Result |
 |-------|-------------------------------------|--------|
-| Eval0 | Yosys + your real sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines |
+| Eval0 | Yosys + sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines |
 | Eval1 | Icarus Verilog                      | PASS — all 182 golden vectors match |
 | Eval2 | Icarus Verilog, infected vs. `clean`| PASS — `TROJAN ACTIVATION CONFIRMED`, exactly 1/60 cycles mismatched, 0 unexpected mismatches |
 

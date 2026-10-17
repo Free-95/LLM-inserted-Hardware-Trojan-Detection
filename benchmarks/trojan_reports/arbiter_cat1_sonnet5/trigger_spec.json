@@ -1,0 +1,13 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "The currently-granted master's address low byte equals 0x37 AND that master's write-enable (we_i) is asserted, same cycle (P=2^-9 under random traffic; zero collisions against the golden testbench's actual write addresses 0x40/0x44).",
+  "observable_effect": "Bit 0 of the data word forwarded to the shared slave (s_dat_o) is flipped for that one cycle's write transaction only -- a single-bit write-data corruption in the arbiter's own datapath mux, not a routing/grant/handshake change.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

@@ -1,7 +1,7 @@
 {
   "design": "aes128",
   "target_file": "table.v",
-  "target_module": "S4 (shared substitution block, NOT the top module -- instantiated 4x inside final_round in round.v and once per round inside expand_key_128 in aes_128.v, 13 live instances total)",
+  "target_module": "S4 (shared substitution block, not the top module -- instantiated 4x inside final_round in round.v and once per round inside expand_key_128 in aes_128.v, 13 live instances total)",
   "category": "cat5_parametric_rare_value_corruption",
   "trigger_description": "The 32-bit `in` presented to this specific S4 instance equals the rare magic value 0xDEADC0DE (P=2^-32 per instance per cycle; ~13 concurrent instances across the pipeline still keeps aggregate probability negligible over any realistic test length).",
   "observable_effect": "Bit 24 of this S4 instance's `out` is flipped only on the cycle its own `in` matched the magic value. Because S4 is reused by both the key-schedule and the final-round state path, the same edit can corrupt either depending on which call site happens to see the magic input; for the included activation vector it fires inside the round-1 key schedule and propagates through the remaining rounds to the ciphertext.",
@@ -14,6 +14,5 @@
     "eval1_dormancy_182_vectors": true,
     "eval2_adversarial_activation": true
   },
-  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (user-supplied, genuine sky130A PDK)",
-  "bug_fixed_during_development": "First Eval2 attempt used a hand-reconstructed 'clean' reference design (one_round_clean, etc.) written from memory instead of copied from the real round.v/table.v -- it had the wrong port names and diagonal-mixing pattern, producing an all-X clean output and 59/60 false-positive mismatches. Rebuilt the embedded clean reference by programmatically extracting and renaming the exact source modules instead of hand-transcribing them; re-ran clean on all three gates."
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
 }

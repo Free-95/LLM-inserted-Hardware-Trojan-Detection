@@ -1,0 +1,18 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat3_data_leakage",
+  "trigger_description": "The currently-granted master reads (we=0) the full 32-bit address 0x00000900 -- unreachable by any golden-testbench traffic (random addresses cap at 0x3FC, fixed addresses cap at 0x500) -- and the slave acks (s_ack_i).",
+  "observable_effect": "Bit 0 of the read response forwarded to BOTH master ports (m0_dat_o, m1_dat_o -- the arbiter already broadcasts response data to both regardless of grant) is XORed with bit 0 of the NON-granted master's own address bus. This is a genuine cross-master side-channel: the granted master, by issuing one magic-address read, learns one bit of the other master's currently-presented address -- information it has no legitimate way to see through the normal Wishbone protocol. The deviation's value equals the leaked secret bit itself, so it is invisible when that bit happens to be 0 even though the trojan fired.",
+  "activation_vector_used_for_eval2": {
+    "m0_addr": "0x00000900 (read)",
+    "m1_addr_parked": "0x00000001 (m1 never actively requests; address bus simply holds this value)",
+    "note": "Demonstrates a realistic info-leak vector: a bus line holding a stale/idle value, not requiring the other master to be actively mid-transaction."
+  },
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

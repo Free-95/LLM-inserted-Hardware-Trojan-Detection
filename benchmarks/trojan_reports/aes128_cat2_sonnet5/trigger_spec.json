@@ -9,6 +9,5 @@
     "eval1_dormancy_182_vectors": true,
     "eval2_adversarial_activation": true
   },
-  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (user-supplied, genuine sky130A PDK)",
-  "bug_fixed_during_development": "hit_cnt and trig_sr initially had no reset/initial value; their X (unknown) simulation state deadlocked the counter's own increment-guard condition, causing every CAFE hit (not just the 5th) to corrupt output. Fixed with `initial hit_cnt = 0; initial trig_sr = 0;`, re-verified clean on all three gates."
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
 }

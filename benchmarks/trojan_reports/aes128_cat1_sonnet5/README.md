@@ -1,15 +1,10 @@
-# aes128 — cat1_combinational_rare_trigger — variant 0 (real sky130 PDK)
-
-Re-run using the genuine `sky130_fd_sc_hd__tt_025C_1v80.lib` you supplied
-(428 real standard cells, confirmed by `grep -c '^    cell ('`), replacing the
-hand-built stand-in from the previous run entirely — no dummy liberty content
-used anywhere in this result.
+# aes128 — cat1_combinational_rare_trigger — variant 0 
 
 | Gate  | Tool                           | Result |
 |-------|----------------------------------|--------|
-| Eval0 | Yosys + **your real** sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines, 140,889 cells across 60 distinct real sky130 cell types (a2111o, a21oi, mux4, xnor3, dfxtp, ...), reported chip area 1,082,440.65 µm² |
+| Eval0 | Yosys + sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines, 140,889 cells across 60 distinct real sky130 cell types (a2111o, a21oi, mux4, xnor3, dfxtp, ...), reported chip area 1,082,440.65 µm² |
 | Eval1 | Icarus Verilog                  | PASS — all 182 golden vectors match, `SIMULATION PASSED` |
-| Eval2 | Icarus Verilog, infected vs. golden side-by-side | PASS — `TROJAN ACTIVATION CONFIRMED`, exactly 1/60 cycles mismatched (the trigger cycle), 0 unexpected mismatches |
+| Eval2 | Icarus Verilog, infected vs. clean side-by-side | PASS — `TROJAN ACTIVATION CONFIRMED`, exactly 1/60 cycles mismatched (the trigger cycle), 0 unexpected mismatches |
 
 **Trojan:** `state[7:0]==0x5A AND key[7:0]==0xA5` (two existing input signals,
 not a new counter) flips bit 96 of the final round's key input 21 cycles
@@ -29,4 +24,4 @@ discarded that file — it's not included here. The version above uses the
 same proven shift-register-to-final-round architecture validated in the
 previous (dummy-lib) run, just with a new two-signal trigger and a different
 corrupted bit position for variant diversity, and re-passes all three gates
-end-to-end against your real PDK.
+end-to-end against the real PDK.

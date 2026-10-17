@@ -1,10 +1,10 @@
-# aes128 — cat2_sequential_counter_timebomb — variant 0 (real sky130 PDK)
+# aes128 — cat2_sequential_counter_timebomb — variant 0 
 
 | Gate  | Tool                              | Result |
 |-------|-------------------------------------|--------|
-| Eval0 | Yosys + your real sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines, clean `PROC_INIT` extraction of the two FF init attributes, full technology mapping |
+| Eval0 | Yosys + sky130_fd_sc_hd lib | PASS — exit 0, 0 `ERROR` lines, clean `PROC_INIT` extraction of the two FF init attributes, full technology mapping |
 | Eval1 | Icarus Verilog                      | PASS — all 182 golden vectors match |
-| Eval2 | Icarus Verilog, infected vs. golden | PASS — `TROJAN ACTIVATION CONFIRMED`, exactly 1/80 cycles mismatched (the 5th-hit cycle), 0 unexpected mismatches |
+| Eval2 | Icarus Verilog, infected vs. clean | PASS — `TROJAN ACTIVATION CONFIRMED`, exactly 1/80 cycles mismatched (the 5th-hit cycle), 0 unexpected mismatches |
 
 **Trojan:** a saturating 3-bit counter (reused purpose-built state, not a
 free-running always-on counter) increments only when `state[15:0]==0xCAFE`;

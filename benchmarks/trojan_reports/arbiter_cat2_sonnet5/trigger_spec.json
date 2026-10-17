@@ -1,0 +1,13 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "The currently-granted master issues a new transaction (req rising edge) to the full 32-bit address 0x00000700 -- an address outside every mask/range the golden testbench ever produces (random addresses capped at 0x3FC, explicit fixed addresses capped at 0x500), so this is unreachable under golden traffic. A 2-bit saturating counter counts DISCRETE occurrences (edge-detected, not held-cycle count); the payload fires only on the 3rd such occurrence.",
+  "observable_effect": "On the 3rd occurrence only, the write-enable bit forwarded to the shared slave (s_we_o) is flipped -- silently turning a read into a write (or vice versa) for that one transaction. The 1st, 2nd, and any 4th+ occurrence are completely unaffected (counter saturates at 3, firing condition checks ==2 only).",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}
