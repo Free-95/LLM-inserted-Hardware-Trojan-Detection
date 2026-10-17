@@ -1,0 +1,13 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat7_protocol_violation",
+  "trigger_description": "The currently-granted master requests the full 32-bit trap address 0x00000B00 (unreachable by golden traffic -- random addresses cap at 0x3FC, fixed addresses cap at 0x500) and the slave acks.",
+  "observable_effect": "The NON-granted master's ack_o is forced high for that same cycle, even though that master never asserted cyc/stb at all -- i.e. BOTH m0_ack_o and m1_ack_o assert simultaneously. This is a textbook 'double-asserts a grant to two requesters' handshake violation: the Wishbone protocol's single-grant invariant (exactly one master's ack active at a time) is broken, which could cause both masters' downstream logic to simultaneously believe they own a completed transaction they never actually participated in.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

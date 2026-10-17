@@ -1,0 +1,13 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat4_dos_hang",
+  "trigger_description": "The currently-granted master issues any request (cyc asserted) to the full 32-bit trap address 0x00000A00 -- unreachable by golden-testbench traffic (random addresses cap at 0x3FC, fixed addresses cap at 0x500).",
+  "observable_effect": "A sticky latch (hold_latched) permanently set on first trigger, never cleared except by reset. Once set, the arbiter's lock-release condition is permanently disabled: `lock` can never deassert again, meaning NO future arbitration decision can ever occur. Whichever master held the bus at trigger time keeps it forever in name only (lock stuck at 1); in practice this permanently denies bus access to the OTHER master for the remainder of operation -- a genuine, irreversible denial-of-service, not a transient one-cycle glitch.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

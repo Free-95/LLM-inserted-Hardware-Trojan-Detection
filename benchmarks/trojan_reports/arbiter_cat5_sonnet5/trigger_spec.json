@@ -1,0 +1,13 @@
+{
+  "design": "arbiter",
+  "target_file": "wb_arbiter_2m1s.v",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "The currently-granted master's byte-select operand (sel_i) is anything other than 4'hF during an active request. The golden testbench uses sel_i=4'hF for literally every active transaction with no exceptions, so this is not merely statistically rare but categorically unreachable under golden traffic -- any real system exercising partial-word (byte/halfword) accesses, however, would trigger it immediately.",
+  "observable_effect": "The address forwarded to the shared slave (s_addr_o) is XORed with 0x00000010 (bit 4) for that one transaction only. Every full-word (sel=F) transaction, before, during, and after any partial-word transaction, is completely unaffected -- purely combinational, no persistent/sticky state.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_testbench": true,
+    "eval2_adversarial_activation": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}
