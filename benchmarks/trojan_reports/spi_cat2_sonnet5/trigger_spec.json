@@ -1,0 +1,14 @@
+{
+  "design": "spi",
+  "target_file": "spi_top.v",
+  "target_module": "spi_top (the top module -- the Trojan reuses this module's own existing interrupt-pulse condition and corrupts its own RX register-readback mux, both of which only exist at this level)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "An 8-bit hidden counter (xfer_cnt) increments by 1 only when (tip && last_bit && pos_edge) -- the EXACT SAME existing event this core already uses to pulse its own wb_int_o interrupt a few lines above -- so it adds no toggling activity beyond what already exists. Reaching xfer_cnt==100 (a direct equality against the post-increment value, unlike the cat2 UART sample's pre-increment comparison) fires the payload on that 100th completed transfer. The golden testbench was directly instrumented (not estimated) and confirmed to produce exactly 40 completed transfers across its entire run (9 feature vectors + 30-transfer sweep + busy-rejection test), giving the 100-count threshold a verified 2.5x margin.",
+  "observable_effect": "On the transfer where xfer_cnt reaches 100, reading back SPI_RX_0 over the Wishbone bus returns the bit-complement of the correct received data (rx[31:0] ^ 32'hFFFFFFFF) instead of the real value -- but the actual SPI serial bus (mosi_pad_o/sclk_pad_o/ss_pad_o) is completely untouched during this same transfer, confirmed directly via live pin comparison against a clean reference. This is a corruption of the register-readback/control path only, not the data path: any logic analyzer on the physical SPI bus would see a perfectly correct transfer, while the host CPU reading the result back over the Wishbone bus gets the wrong value. The corruption affects exactly one readback (the transfer on which the count is reached) and is not latched -- the very next transfer's readback is correct again.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_spi_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

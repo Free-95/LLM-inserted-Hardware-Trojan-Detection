@@ -1,0 +1,51 @@
+{
+  "design": "spi",
+  "category": "cat6_benign_watermark",
+  "target_file": "spi_top.v",
+  "target_module": "spi_top",
+  "new_signals": [],
+  "trigger_condition": {
+    "check_expression": "wb_adr_i[`SPI_OFS_BITS] == 3'b111 (byte address 0x1C), evaluated in the existing combinational register-read mux",
+    "inputs_used": [
+      {
+        "name": "wb_adr_i",
+        "pre_existing": true,
+        "description": "existing Wishbone address input; only bits [4:2] (the `SPI_OFS_BITS` macro) are decoded by this core's register map"
+      }
+    ],
+    "magic_value": "address offset 3'b111 (byte address 0x1C)",
+    "magic_value_derivation": "no PRNG/data-value calibration needed: this core's register map only decodes 7 of the 8 possible 3-bit address offsets -- SPI_RX_0..3/SPI_TX_0..3 (offsets 0-3, shared between read and write), SPI_CTRL (4), SPI_DEVIDE (5) and SPI_SS (6). Offset 7 (byte address 0x1C) is not assigned to any register in the original design and falls through to the read mux's default arm (32'bx, undefined). This design's own golden testbench (tb_spi_top.v) never addresses byte 0x1C anywhere -- confirmed directly by inspecting every address literal it uses (0x0, 0x4, 0x8, 0xc, 0x10, 0x14, 0x18, all handled through the wb_master_model and none ever 0x1c) -- so the trigger is structurally unreachable in the golden run with no PRNG replay required, confirmed further by a full Eval1 pass"
+  },
+  "payload": {
+    "clean_behavior": "default: wb_dat = 32'bx;  // offset 7 falls through to the undefined default",
+    "infected_behavior": "3'b111: wb_dat = 32'h53504936;  // offset 7 now returns a fixed constant instead of falling through to default",
+    "description": "the infected design adds exactly one explicit case arm to the controller's existing, unmodified register-read mux (the combinational always block that already decodes wb_adr_i[4:2] into one of 7 real registers): when the address offset is exactly 3'b111 (byte address 0x1C, outside the documented register map), the mux returns a fixed 32-bit constant, 32'h53504936 (ASCII 'SPI6'), instead of the clean design's undefined (32'bx) fallthrough. This is a benign IP-ownership watermark: every one of the 7 real, documented registers (RX/TX 0-3, CTRL, DEVIDE, SS) behaves bit-for-bit identically to the clean design, and the watermark is reachable only by reading a register address no documented driver, specification, or the golden testbench ever uses."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of spi_top (a read at byte address 0x1C / address offset 3'b111); no internal/hierarchical probing of the DUT",
+    "procedure": [
+      "issue a Wishbone read with wb_adr_i[4:2] == 3'b111 (byte address 0x1C, outside the 7 documented register offsets)",
+      "the infected design returns the fixed watermark constant 32'h53504936 on wb_dat_o, while the clean design returns its default don't-care (32'bx) value",
+      "any read or write of the 7 real, documented registers (offsets 0-6) is completely unaffected"
+    ]
+  },
+  "one_shot_or_persistent": "combinational and stateless, re-triggerable on every matching read: the mux simply decodes the address on every access, so the watermark is returned every single time offset 7 is addressed, and is fully inactive (bit-for-bit identical to the clean design) for every other offset -- confirmed via two independent near-miss checkpoints against two different real, documented registers",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of spi_top.v, spi_clgen.v and spi_shift.v, top-module chip area 16095.4368 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_spi_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "all checks passed: register sanity, 9 fixed feature vectors, 30 MSB-mode sweep transfers across 10 lengths/3 vectors/4 polarity combos, busy-rejection -- confirms the golden run never addresses byte 0x1C (offset 7), so the new case arm is never taken and every documented register read/write is bit-for-bit identical to the clean design"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench driving both DUTs from one shared, lockstepped stimulus bus (mirroring the design's own golden wb_master_model.v write/read task timing exactly, the pattern this design's cat7 submission established as necessary for this core's ack-generation timing) through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: (1) near-miss -- write then read back SPI_SS (a real, documented register): infected and clean both correctly return the written value; (2) near-miss -- write then read back SPI_DIVIDE (another real, documented register): infected and clean both correctly return the written value, confirming the trigger is specific to the unused offset 7 and not a general address-decode break; (3) TRIGGER -- read byte address 0x1C (offset 7): infected DUT returned the fixed watermark 0x53504936, clean DUT returned its undefined default (0xxxxxxxxx). 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the payload is a single new case arm added to the controller's existing, otherwise-untouched register-read mux, commented as a plausible 'reserved offset, part-ID readback for bring-up bookkeeping' -- a believable artifact of real hardware IP, which commonly do expose a read-only part/revision ID at a reserved address; no comment anywhere mentions a trigger, watermark, or anything trojan-related. The diff against the clean file is exactly one line -- no new signals, no new registers, no change to any existing register's read or write behavior, no change to the FSM-free control logic, address decode for the 7 real registers, SPI shift logic, or clock generator. This is the smallest possible diff of any variant submitted across either design so far."
+}

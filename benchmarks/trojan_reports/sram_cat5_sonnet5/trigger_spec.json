@@ -1,0 +1,63 @@
+{
+  "design": "sram",
+  "category": "cat5_parametric_rare_value_corruption",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "mg_param",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "merge-lane parametric qualifier, reused for RMW commit bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "check_expression": "mg_param = (latched_addr == 7'h2A) & (latched_sel == 4'b1010)",
+    "inputs_used": [
+      {
+        "name": "latched_addr",
+        "pre_existing": true,
+        "description": "existing 7-bit register latching the target word address on every write transaction, already used to redrive the SRAM macro during S_RMW_WR_WAIT"
+      },
+      {
+        "name": "latched_sel",
+        "pre_existing": true,
+        "description": "existing 4-bit register latching the byte-select pattern on every write transaction, already used by the controller's own merge_bytes function"
+      }
+    ],
+    "magic_value": "address 7'h2A (word 42) AND byte-select pattern 4'b1010, simultaneously",
+    "magic_value_derivation": "no PRNG/data-value calibration needed: this design's own golden testbench exercises read-modify-write (RMW, sel != 4'h0 and != 4'hF) transactions ONLY at word addresses 0-7 (its 16-pattern byte-select sweep loop runs for i=0..7). Word address 7'h2A (42) is written in the earlier exhaustive full-word sweep (sel=4'hF, which never reaches the RMW merge path at all) but never undergoes an RMW transaction anywhere in the golden run, so the address half of this two-parameter AND condition is structurally unreachable in S_RMW_MERGE regardless of the sel pattern -- confirmed directly by inspecting the golden testbench's RMW-sweep address range and empirically confirmed via a full Eval1 run"
+  },
+  "payload": {
+    "clean_behavior": "S_RMW_MERGE: merged_word <= merge_bytes(sram_dout, latched_wdata, latched_sel);",
+    "infected_behavior": "S_RMW_MERGE: merged_word <= mg_param ? (merge_bytes(sram_dout, latched_wdata, latched_sel) ^ 32'h00000100) : merge_bytes(sram_dout, latched_wdata, latched_sel);",
+    "description": "the controller's existing RMW merge computation (merge_bytes, a pre-existing function combining the old SRAM word and the new write word per the byte-select pattern) is left completely unmodified. Only the committed result is conditionally corrupted: when the rare two-parameter combination mg_param is true (word address 7'h2A AND byte-select pattern 4'b1010, both of which the controller already latches for its own use), bit 8 of the merged word (0x00000100, the low bit of byte lane 1) is flipped before being written back to the SRAM macro. Every other address, every other sel pattern, and every RMW at the documented address with a different sel pattern (or vice versa) commits the correct merged value -- this is a parametric trojan requiring an exact combination of two independent, pre-existing control parameters to fire, not a single rare data value."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (an RMW write at a specific address with a specific byte-select pattern, followed by a read-back); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a read-modify-write transaction (wb_we_i=1) targeting word address 7'h2A (byte address 32'hA8) with byte-select pattern wb_sel_i=4'b1010 -- both parameters must match simultaneously",
+      "the infected design flips bit 8 of the merged word before committing it to the SRAM macro, while the clean design commits the correct merge",
+      "read the address back to observe the corrupted value (differs from the correct merge result by exactly XOR 0x00000100)"
+    ]
+  },
+  "one_shot_or_persistent": "combinational/stateless and re-triggerable on every matching transaction: fires every time an RMW write hits exactly address 7'h2A with sel exactly 4'b1010, and is fully inactive for any RMW at a different address, any RMW with a different sel pattern, or any full-word/sel=0 write regardless of address (confirmed via the two independent near-miss checkpoints below, each holding one parameter fixed at its documented trigger value while varying the other)",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156433.7824 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "all checks passed: reset sanity, exhaustive 128-word write/read sweep, boundary addresses, full 16-pattern byte-select RMW sweep with exact-latency checks, back-to-back transactions, abort recovery, err sanity -- confirms the golden run never issues an RMW transaction at word address 7'h2A (its RMW sweep covers only words 0-7), so mg_param is never true and every RMW merge result is bit-for-bit unchanged"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: (1) near-miss, address mismatch -- RMW write at word 0x2B (not 0x2A) with the documented sel pattern 4'b1010: infected and clean match; (2) near-miss, sel mismatch -- RMW write at the documented word 0x2A with a different sel pattern (4'b0101, not 4'b1010): infected and clean match; (3) TRIGGER -- RMW write at word 0x2A with sel exactly 4'b1010 (both parameters match simultaneously): clean correctly merged/stored the word, infected corrupted it by XOR 0x00000100, exactly as documented. 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, mg_param (\"merge-lane parametric qualifier, reused for RMW commit bookkeeping\"), is named and commented like ordinary control/bookkeeping logic; no comment anywhere mentions a trigger, corruption, parametric condition, or anything trojan-related. The diff against the clean file is a 4-line declaration/comment block (immediately after the existing wb_valid declaration) and a 2-line change to the single merged_word assignment in the existing S_RMW_MERGE case arm -- the merge_bytes computation itself is reused completely unmodified on both branches of the conditional, port list, parameters, FSM state encoding, and the module's SRAM-macro instantiation are all untouched. The trigger reuses two registers (latched_addr, latched_sel) the controller already maintains for its own RMW bookkeeping, adding no new storage beyond the single-bit mg_param wire."
+}

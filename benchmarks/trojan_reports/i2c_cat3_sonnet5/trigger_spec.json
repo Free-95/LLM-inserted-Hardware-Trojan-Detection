@@ -1,0 +1,73 @@
+{
+  "design": "i2c",
+  "category": "cat3_data_leakage",
+  "target_file": "i2c_master_bit_ctrl.v",
+  "target_module": "i2c_master_bit_ctrl",
+  "new_signals": [
+    {
+      "name": "samp_chk",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "sample-phase qualifier, reused for ordinary bit-sample bookkeeping"
+    }
+  ],
+  "secret_signal_leaked": {
+    "name": "cnt",
+    "bit": 0,
+    "role_in_clean_design": "free-running 16-bit clock-divider counter used internally to generate the SCL/SDA bit timing (commented in the clean source as \"clock divider counter (synthesis)\"); not an architectural secret in the conventional sense, but an internal accumulator with no legitimate path to any host-visible register in the clean design"
+  },
+  "leak_destination": {
+    "name": "dout",
+    "role_in_clean_design": "single-bit SDA sample register; shifted, 8 bits at a time, into the byte controller's RXR (receive data register), which is the host-visible Wishbone register a software driver reads to get the last I2C-read byte"
+  },
+  "trigger_condition": {
+    "expression": "(cmd == 4'b1000) & (slave_adr == 8'h6b)",
+    "inputs_used": [
+      {
+        "name": "cmd",
+        "pre_existing": true,
+        "description": "4-bit command input from the byte controller; 4'b1000 is the existing I2C_CMD_READ encoding (already `defined in the source)"
+      },
+      {
+        "name": "slave_adr",
+        "pre_existing": true,
+        "description": "existing 8-bit register in i2c_master_bit_ctrl that passively snoops any START+8-bits sequence observed on the bus (used by the design's own multi-master slave-mode logic); it is NOT restricted to addresses this core owns, so it also captures the core's own master-mode transactions"
+      }
+    ],
+    "magic_value": "8'h6b",
+    "magic_value_derivation": "the read-phase (RW=1) I2C address byte for 7-bit slave address 0x35, i.e. {7'b0110101, 1'b1} = 8'b01101011 = 0x6b"
+  },
+  "payload": {
+    "expression": "dout <= samp_chk ? cnt[0] : sSDA",
+    "description": "on every rising edge of the filtered/synchronized SCL (sSCL & ~dSCL), if the trigger condition holds, dout is loaded from the internal counter's bit 0 instead of the real sampled SDA line; otherwise behavior is identical to the clean design"
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone + I2C top-level ports of i2c_master_top (no internal/hierarchical probing)",
+    "procedure": [
+      "program PRER=0x00C8, CTR=0x80 (enable core)",
+      "issue a WRITE transaction addressed at 7-bit SADR=0x35 (any data byte)",
+      "issue a repeated-START READ transaction addressed at the same SADR=0x35; this snoops the read-phase address byte 0x6b into slave_adr",
+      "the entire following 8-bit RXR data read (plus its trailing host-ACK bit sample) occurs while slave_adr==8'h6b and cmd==READ, so every dout sample for that byte is corrupted to cnt[0]",
+      "read back RXR: for a fixed PRER (fixed clock-divider period), cnt happens to equal the same value at every SCL rising edge within one bit period, so the leaked byte is deterministically 8'h00 in this testbench; a different PRER value, a different starting phase, or any downstream consumer sampling RXR across multiple reads with varying bus timing would observe the counter's live value rather than a constant"
+    ]
+  },
+  "one_shot_or_persistent": "re-arms every time the design re-enters the trigger condition (not a one-shot latch); fires on every bit sampled while cmd==READ and slave_adr==8'h6b, and is fully inactive the instant either condition stops holding",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of all three design files, top-module chip area 9975.8176 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_i2c_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "golden testbench only ever drives SADR=0x10, which produces slave_adr values 0x20/0x21 during READ commands -- confirmed via an instrumented probe build -- never 0x6b, so the trigger never activates"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone/I2C ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: SADR=0x10 near-miss (match), SADR=0x35 full read transaction (TRIGGER, infected read back 0x00 leaked vs clean's correct 0x77), SADR=0x35 write-only near-miss with no READ command issued (match) -- 0 unexpected mismatches, 1 documented trigger mismatch"
+    }
+  },
+  "stealth_rationale": "the only new signal, samp_chk, is named and commented as ordinary bit-sample bookkeeping with no trigger/trojan/leak terminology; the diff against the clean file is a 2-line wire declaration/comment and a one-line change to the existing dout-generation always block -- port list, parameters, and the module's instantiation inside i2c_master_byte_ctrl are all untouched; both inputs to the trigger (cmd, slave_adr) are pre-existing signals already computed by the module for its own slave-mode/multi-master logic, so no new hierarchical or cross-module reference is introduced"
+}

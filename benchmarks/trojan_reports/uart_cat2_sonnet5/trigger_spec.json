@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "impl_top.v",
+  "target_module": "impl_top (the top module -- the Trojan reuses the led_reg mux's own existing uart_rx_valid clock-enable condition, which only exists in impl_top, so it is a natural top-module target this time rather than a submodule)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "An 8-bit hidden counter (cnt) increments by 1 only when uart_rx_valid is asserted -- i.e. it is gated behind the SAME existing clock-enable condition the legitimate led_reg mux already uses, so it produces no extra toggling activity beyond what led_reg itself already has. The payload compares cnt against its PRE-increment value each cycle (due = cnt==150), so the corruption actually lands on the reception immediately AFTER the 150th one since the last reset release -- i.e. the 151st completed UART byte reception. Resets to 0 whenever sw_0 (reset) is asserted. P = 1/256 per reception on average (the counter wraps every 256 receptions and re-fires), never reached by the golden testbench, which produces exactly 70 uart_rx_valid pulses across its entire run (verified by direct instrumentation).",
+  "observable_effect": "On the 151st completed reception since reset, led_reg is loaded with uart_rx_data XOR 8'hFF instead of uart_rx_data -- a single corrupted parallel-output (and visually, LED-pattern) sample, after which normal operation resumes immediately on the next reception (the corruption is not latched/sticky). uart_txd / the serial echo path is unaffected, since uart_tx_data is wired directly from uart_rx_data and was not touched -- this Trojan corrupts only the parallel/LED-facing observable output, not the serial one, which is itself a useful property for a detector dataset (a Trojan whose effect is visible on only one of two redundant observable paths).",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

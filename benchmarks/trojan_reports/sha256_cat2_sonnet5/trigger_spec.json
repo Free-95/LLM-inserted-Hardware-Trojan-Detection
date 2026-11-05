@@ -1,0 +1,16 @@
+{
+  "design": "sha256",
+  "target_file": "sha256_core.v",
+  "target_module": "sha256_core (the top module -- the completed-operation state this trojan counts, CTRL_DONE, lives in the core's own control FSM, which has no cleaner home in either submodule)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "A hidden counter (op_cnt) counts how many blocks this core has finished hashing, advancing only on the cycle where the core's own control FSM is in its existing CTRL_DONE state -- not a new always-active counter. The golden testbench processes 228 blocks total across its entire run (76 messages, SHA-256 and SHA-224 modes, single- and multi-block); the counter's terminal/arming value is 230 (reached on the 231st completion), safely outside golden-testbench range but reachable by simply running the design through more blocks. Once armed, the latch stays set permanently (does not self-clear).",
+  "observable_effect": "From the completion after the counter reaches its terminal value onward, one bit (the LSB) of the H0 chaining-value word is flipped during every subsequent digest update -- directly observable on the real top-level `digest` port on every block from that point on, regardless of message content. The corruption is independent of the message data; it depends only on cumulative completed-operation count, and persists for every subsequent hash once armed.",
+  "expected_value_if_clean": "digest exactly matches the independently-computed reference for every block, regardless of how many prior blocks were processed.",
+  "expected_value_if_infected": "digest matches the reference for the first 231 completed blocks, then differs (one flipped bit propagated through the rest of that block's compression, and every block thereafter) from the 232nd completion onward, with no recovery short of a full reset.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_sha256_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

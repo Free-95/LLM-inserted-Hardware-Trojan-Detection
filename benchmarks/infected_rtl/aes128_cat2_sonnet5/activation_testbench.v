@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+
 module tb_eval2_activation;
     localparam integer CLK_PERIOD = 10;
     localparam integer LATENCY    = 21;

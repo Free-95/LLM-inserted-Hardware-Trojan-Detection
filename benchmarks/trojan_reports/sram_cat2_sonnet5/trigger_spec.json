@@ -1,0 +1,80 @@
+{
+  "design": "sram",
+  "category": "cat2_sequential_counter_timebomb",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "svc_cnt",
+      "type": "reg",
+      "width": 8,
+      "comment_in_source": "service-cycle counter, reused for full-word load bookkeeping"
+    },
+    {
+      "name": "csel",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "full-word load calibration select"
+    }
+  ],
+  "trigger_condition": {
+    "counter_increment_expression": "svc_cnt <= svc_cnt + 8'h1  // when (state==S_IDLE) & wb_valid & wb_we_i & (wb_sel_i==4'b1111)",
+    "check_expression": "csel = (state==S_IDLE) & wb_valid & wb_we_i & (wb_sel_i==4'b1111) & (svc_cnt==8'd200)",
+    "inputs_used": [
+      {
+        "name": "state",
+        "pre_existing": true,
+        "description": "existing FSM state register"
+      },
+      {
+        "name": "wb_valid",
+        "pre_existing": true,
+        "description": "existing transaction-valid strobe (wb_cyc_i & wb_stb_i & !wb_ack_o)"
+      },
+      {
+        "name": "wb_we_i",
+        "pre_existing": true,
+        "description": "existing write-enable input"
+      },
+      {
+        "name": "wb_sel_i",
+        "pre_existing": true,
+        "description": "existing 4-bit byte-select input"
+      }
+    ],
+    "magic_value": "8'd200",
+    "magic_value_derivation": "chosen well above the exact number of full-word-write decode events (==wb_sel_i==4'hF) the design's own golden testbench produces, confirmed directly with an instrumented probe build: 144 total (128 exhaustive full writes + 1 boundary-word-0 write + 1 boundary-word-127 write + 8 full-write entries within the 16-pattern byte-select sweep + 4 back-to-back writes + 1 aborted-but-already-decoded write + 1 err-check write), well short of 200"
+  },
+  "payload": {
+    "clean_behavior": "sram_din = wb_dat_i;  // full write",
+    "infected_behavior": "sram_din = csel ? (wb_dat_i ^ 32'h00000001) : wb_dat_i;  // full write",
+    "description": "the shared 8-bit counter svc_cnt tallies every full-word-write decode event the controller's FSM already recognizes. When the counter equals the magic value 200 (i.e. on the 201st such event) at the moment a full-word write is decoded, the word committed to the SRAM macro on that one write is corrupted (XOR 32'h00000001) instead of storing the real value. Every status/ack signal behaves identically to the clean design; only the data value of the one write that happens to coincide with the 201st event is wrong, and the counter keeps counting afterward rather than resetting or re-arming, so the corruption fires exactly once per 200-count cycle (would recur again at count 456, 712, ... if the design ran that long) and never on any nearby count."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (write + read-back); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "from reset, issue exactly 200 full-word writes (wb_sel_i=4'hF) to any addresses (each one deterministically increments svc_cnt by exactly 1 -- this controller's FSM, unlike the i2c designs submitted earlier, has no retry/arbitration variance, so a plain filler-write count suffices with no probe-based calibration needed)",
+      "issue the 201st full-word write -- the infected design corrupts the stored word (XOR 32'h00000001) while the clean design stores it correctly",
+      "read the address back to observe the corrupted value"
+    ]
+  },
+  "one_shot_or_persistent": "re-arms every 200-count cycle (not latched): fires again at svc_cnt==200+256=456 after the counter wraps and reaches 200 again (8-bit counter), and is fully inactive at every other count; confirmed via the near-miss checkpoints at counts 199 and 201 that it is an exact single-count match, not a threshold that stays armed past it",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156744.08 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden run produces exactly 144 full-word-write decode events (confirmed directly via an instrumented probe build), far short of the magic count 200, so the design never triggers and every exact-latency assertion passes unchanged"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: 199 filler full-word writes + 1 verified write (svc_cnt=199 at check, near-miss, matches), 200 filler full-word writes + 1 verified write (svc_cnt=200 at check, TRIGGER, infected corrupts the word by XOR 1), 201 filler full-word writes + 1 verified write (svc_cnt=201 at check, near-miss, matches) -- 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signals, svc_cnt (\"service-cycle counter\") and csel (\"full-word load calibration select\"), are named and commented like ordinary calibration/housekeeping logic; no comment anywhere mentions a trigger, payload, count, or anything trojan-related. The diff against the clean file is a 4-line declaration/comment block, a 3-line addition to one existing FSM transition arm (reusing the exact same decode condition the design already computes to route into the full-write state), and a one-line change to the existing full-write sram_din assignment -- port list, parameters, and the module's SRAM-macro instantiation are all untouched"
+}

@@ -1,0 +1,14 @@
+{
+  "design": "fft",
+  "target_file": "butterfly_2point.v",
+  "target_module": "butterfly_2point (the shared butterfly core -- instantiated once in fft_8point.sv and reused across all 12 butterfly operations of every FFT run)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "num2 (the 'X1' sample forwarded into both cpx_mad wings) exactly equals 32'hCAFEBABE (P=2^-32, never reached by golden testbench traffic). Purely combinational -- no registers, no counter, no pipeline-alignment concerns.",
+  "observable_effect": "Bit 16 of the lower wing's result (result2) is overwritten with bit 31 of num1 (the 'X0' sample's real-part sign bit) -- a raw, unprocessed bit copied directly, not derived through the legitimate complex multiply-add math. This is a genuine information leak: one bit of sample X0's data becomes visible through the output associated with an unrelated sample X1's rare value, which the normal FFT algorithm never exposes. Deviation is only visible when the leaked bit is 1 -- if num1's real part happens to be non-negative, the trojan fires internally but produces no visible change.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

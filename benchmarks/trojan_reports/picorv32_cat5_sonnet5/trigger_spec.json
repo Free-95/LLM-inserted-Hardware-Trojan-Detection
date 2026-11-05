@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (single-file design, no submodule split -- the top module is necessarily the target)",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "The ALU's second source operand (reg_op2) equals exactly 32'hc001d00d -- a single, full-width 32-bit operand equality with NO additional combined qualifier (unlike the cat1 variant, which ANDs a 16-bit match with the existing instr_add decode flag). P = 2^-32 per cycle the shared add/sub ALU path is used. Verified empirically (the same methodology required throughout this design, since operand values are computed at runtime): the full real RV32IM self-checking firmware ran to a genuine SIMULATION PASSED with this exact magic value present in the design, confirming it provably never arose as an ALU second operand during real program execution.",
+  "observable_effect": "The LSB of the ALU's add/sub result is flipped before being latched into the destination register, for any instruction using the shared is_lui_auipc_jal_jalr_addi_add_sub ALU path (LUI/AUIPC/JAL/JALR/ADDI/ADD/SUB) whose second operand happens to equal the exact magic constant. In practice only register-register ADD/SUB can supply an arbitrary full 32-bit value via a register; ADDI's operand comes from a 12-bit sign-extended immediate and so can never numerically reach this 32-bit constant, and LUI/AUIPC/JAL/JALR's second operands are similarly constrained by their own encodings -- so despite the lack of an explicit instruction-type qualifier, the corruption is in practice reachable only via reg-reg ADD/SUB, the same observable surface as the cat1 variant, but via a structurally different (single, unqualified) trigger condition.",
+  "expected_value_if_clean": "Every instruction using the shared add/sub ALU path computes its result exactly, for every operand value.",
+  "expected_value_if_infected": "The shared add/sub ALU path computes the correct result for every operand value except when the second operand equals exactly 0xc001d00d, where the result's LSB is flipped.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

@@ -1,0 +1,19 @@
+{
+  "design": "fft",
+  "target_file": "cpx_mad.v",
+  "target_module": "cpx_mad (complex multiply-add unit -- instantiated 2x inside the single butterfly_2point core, upper_wing and lower_wing)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "A saturating 2-bit counter counts DISCRETE occurrences (edge-detected) of the module's own 'A' operand (A_r_reg1, the already-pipelined real part of the num1 input) equaling 0xFACE (P=2^-16 per occurrence, never reached by golden testbench traffic). Fires on the 3rd occurrence.",
+  "observable_effect": "Bit 14 of the imaginary half of `result` is XORed with 0x4000 for the full duration the triggering occurrence's operand stays matched (not a single-cycle pulse), ensuring the corruption is present whichever cycle the top-level FSM actually samples this module's continuously-streaming output.",
+  "top_level_trigger_sequence": {
+    "run_1": "warmup: input_data[2]=0xFACE0000, others small ordinary values -- consumes exactly 1 of the 3 required counts via a non-final-stage occurrence (dormant on its own, since it's not the 3rd).",
+    "run_2": "trigger: input_data[4]=-1346 (0xFABE0000), others small ordinary values -- this single vector's own two internal occurrences push the cumulative count 1->2->3, with the 3rd landing precisely on the FINAL FFT stage (stage_idx==2), where the corruption survives uninterrupted to output_data.",
+    "derivation": "The exact -1346 value was found via a 2-point affine probe against the real vedic_multiplier_q8_8 + CORDIC pipeline (not assumed math): two trial simulations established an approximately affine relationship between input_data[4]'s real part and ram[0]'s value at the moment stage 2 reads it, then the target was solved algebraically and confirmed exact via simulation."
+  },
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

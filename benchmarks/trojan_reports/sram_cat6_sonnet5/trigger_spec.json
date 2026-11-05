@@ -1,0 +1,58 @@
+{
+  "design": "sram",
+  "category": "cat6_benign_watermark",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "id",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "read-phase lane qualifier, used for ID-tag bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "check_expression": "id = (latched_sel == 4'b0000)",
+    "inputs_used": [
+      {
+        "name": "latched_sel",
+        "pre_existing": true,
+        "description": "existing 4-bit register that latches the byte-select pattern presented on every transaction (including reads, where sel has no effect on the clean design's behavior), already used by the controller's own RMW merge logic"
+      }
+    ],
+    "magic_value": "read-cycle byte-select pattern 4'b0000",
+    "magic_value_derivation": "no PRNG/data-value calibration needed: this design's own golden testbench issues every single read through one task, wb_read, which hardcodes wb_sel_i = 4'hF unconditionally for every read it ever performs (full 128-word sweep, boundary reads, sel-sweep readbacks, back-to-back reads, post-abort recovery read, err-check read). A read presented with sel == 4'b0000 therefore never occurs anywhere in the golden run -- confirmed directly by inspecting the testbench's wb_read task body and confirmed empirically via a full Eval1 run"
+  },
+  "payload": {
+    "clean_behavior": "S_RD_ACK: wb_dat_o <= sram_dout;",
+    "infected_behavior": "S_RD_ACK: wb_dat_o <= id ? 32'h43415436 : sram_dout;",
+    "description": "when a read transaction is presented with the byte-select pattern all-zero (4'b0000) -- a pattern no legitimate full-word read in this design's normal usage ever sets, since sel is conventionally driven all-ones (4'hF) for a 32-bit read -- the controller returns a fixed 32-bit constant, 32'h43415436 (ASCII 'CAT6'), instead of the real SRAM-stored data at the requested address. This is a benign IP-ownership watermark: it never corrupts, delays, or otherwise affects any ordinary read or write access (sel=4'hF reads, and all writes which do not go through this qualifier at all), and only surfaces through a read command pattern deliberately chosen to be unused by any conventional bus master, letting a designer later prove authorship/origin of a suspect die by issuing this exact out-of-band read pattern and checking for the signature."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (a read transaction with wb_sel_i=4'b0000); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a read transaction (wb_we_i=0) to any address with wb_sel_i explicitly driven to 4'b0000 (instead of the conventional 4'hF for a full-word read)",
+      "the infected design returns the fixed watermark constant 32'h43415436 regardless of what is actually stored at the requested address, while the clean design returns the real stored data",
+      "any ordinary read (sel=4'hF) or any write (which never evaluates id) is completely unaffected"
+    ]
+  },
+  "one_shot_or_persistent": "combinational/stateless and re-triggerable on every matching read: fires every time a read is presented with sel exactly 4'b0000, and is fully inactive for a read with any other sel pattern (confirmed via a near-miss checkpoint using a different nonzero-but-not-4'hF pattern, proving the condition requires the exact all-zero pattern rather than merely 'not 4'hF') and for every write regardless of sel",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156455.0528 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "all checks passed: reset sanity, exhaustive 128-word write/read sweep, boundary addresses, full 16-pattern byte-select RMW sweep with exact-latency checks, back-to-back transactions, abort recovery, err sanity -- confirms the golden run's single wb_read task hardcodes sel=4'hF for every read it issues, so id is never true and every read returns the real stored data unchanged"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: (1) near-miss, ordinary read sel=4'hF: infected and clean both correctly return the stored data; (2) near-miss, partial nonzero sel=4'b0001 (not all-zero): infected and clean both correctly return the stored data, proving the trigger requires the exact all-zero pattern; (3) TRIGGER, sel=4'b0000: clean correctly returns the stored data, infected returns the fixed watermark constant 0x43415436 instead, exactly as documented. 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, id (\"read-phase lane qualifier, used for ID-tag bookkeeping\"), is named and commented like ordinary control/bookkeeping logic; no comment anywhere mentions a trigger, watermark, signature, or anything trojan-related. The diff against the clean file is a 4-line declaration/comment block (immediately after the existing wb_valid declaration) and a one-line change to the existing S_RD_ACK data-registration statement -- port list, parameters, FSM state encoding, and the module's SRAM-macro instantiation are all untouched. The trigger reuses a register (latched_sel) the controller already maintains for its own RMW bookkeeping, adding no new storage beyond the single-bit id wire, and the payload is a hardcoded constant rather than any additional state."
+}

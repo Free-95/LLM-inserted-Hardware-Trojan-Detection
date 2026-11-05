@@ -37,9 +37,8 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-
-`include "spi_defines.v"
 `timescale 1ns / 10ps
+`include "spi_defines.v"
 
 module spi_shift (clk, rst, latch, byte_sel, len, lsb, go,
                   pos_edge, neg_edge, rx_negedge, tx_negedge,

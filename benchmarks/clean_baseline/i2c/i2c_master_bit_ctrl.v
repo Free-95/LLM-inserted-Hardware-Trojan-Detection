@@ -133,7 +133,7 @@
 // Tsu:sto     4.0us            0.6us   setup time for a stop conditon
 // Tbuf        4.7us            1.3us   Bus free time between a stop and start condition
 //
-
+`timescale 1ns / 1ps
 `define I2C_CMD_START 4'b0001
 `define I2C_CMD_STOP  4'b0010
 `define I2C_CMD_WRITE 4'b0100

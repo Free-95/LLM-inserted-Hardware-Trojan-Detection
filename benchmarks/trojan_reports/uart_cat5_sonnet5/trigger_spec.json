@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "impl_top.v",
+  "target_module": "impl_top (the top module -- the Trojan sits directly on the RX-to-TX datapath assignment, which only exists at this level)",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "uart_rx_data (the single received-byte operand, with no AND/XOR combination against any other signal and no counter/timebomb) equals exactly 8'h93. P = 2^-8 per byte, never reached by golden testbench traffic (its full 58-distinct-byte stimulus set was enumerated in Python and confirmed to never include 0x93).",
+  "observable_effect": "uart_tx_data is assigned uart_rx_data ^ 8'hFF instead of uart_rx_data, but ONLY for the single operand value 0x93; all 255 other byte values pass through the retransmit path bit-exact. This corrupts the retransmitted/echoed byte on uart_txd only -- the receiver's own internal state (uart_rx_data) and the led output (which is wired from uart_rx_data directly, not from the corrupted uart_tx_data) both continue to show the TRUE received byte 0x93 correctly. This is a textbook parametric rare-value corruption: a pure single-operand equality check with no latching, no state, no timing dependency, and full bit-exactness preserved for every other value in the operand's range -- exactly the narrow, value-specific corruption class this project's broad/randomized testbench coverage was built to catch, in contrast to a trigger that happened to survive a narrower test suite.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

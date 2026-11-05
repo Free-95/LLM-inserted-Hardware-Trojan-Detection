@@ -1,0 +1,16 @@
+{
+  "design": "i2c",
+  "target_file": "i2c_master_byte_ctrl.v",
+  "target_module": "i2c_master_byte_ctrl",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "din (the host-provided transmit byte, i.e. TXR as seen by this module) equals the rare constant 0xBA at the exact cycle the byte-controller's shift register is loaded (ld=1) for a WRITE command (write=1). All three conditions (an 8-bit data-value match, plus two single-bit existing control signals) must hold simultaneously; natural probability is roughly 2^-8 per load, assuming a uniformly-distributed data byte, well under the P<2^-8 cat1 threshold.",
+  "observable_effect": "On the triggering cycle, the shift register sr is loaded with (din ^ 8'h01) instead of din -- the low bit of the byte about to be transmitted is silently flipped before it ever reaches the bus. Every subsequent bit shifted onto sda_pad_o for that byte is therefore wrong (0xBB is physically transmitted on the wire instead of the intended 0xBA), while every status/handshake signal (cmd_ack, i2c_busy, ack_out, dcnt, the whole FSM) behaves identically to the clean design -- this is a pure data-value corruption with no control-flow or protocol-timing deviation, textbook cat1.",
+  "expected_value_if_clean": "A host writing 0xBA to TXR and issuing a WRITE command causes exactly 0xBA to be transmitted on the I2C bus (and, through the shared memory-mapped test slave used in Eval2, exactly 0xBA is what a subsequent read-back of that address returns).",
+  "expected_value_if_infected": "The same write of 0xBA is silently transmitted as 0xBB; a subsequent read-back of that address returns 0xBB, with no error, NACK, hang, or status-register anomaly anywhere in the transaction.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_i2c_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK, user-supplied)"
+}

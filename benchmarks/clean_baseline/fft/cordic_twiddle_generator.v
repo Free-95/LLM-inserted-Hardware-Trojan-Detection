@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 // Top module: Twiddle Factor generator
 module cordic_twiddle_generator (
     input clk,

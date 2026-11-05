@@ -68,7 +68,7 @@
 //               Revision 1.5  2001/11/10 10:52:55  rherveille
 //               Changed PRER reset value from 0x0000 to 0xffff, conform specs.
 //
-
+`timescale 1ns / 1ps
 
 module i2c_master_top
   (

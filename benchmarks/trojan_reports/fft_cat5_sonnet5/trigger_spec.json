@@ -1,0 +1,19 @@
+{
+  "design": "fft",
+  "target_file": "vedic_multiplier_q8_8.v",
+  "target_module": "vedic_multiplier_q8_8 (16x16 Q8.8 fixed-point multiplier -- instantiated 4x inside every cpx_mad [mult_rr, mult_ii, mult_ri, mult_ir], itself instantiated 2x inside the single butterfly_2point core, so this one edit reaches 8 live call sites)",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "The 'A' operand equals the rare 16-bit value 0x5A5A (P=2^-16, never reached by golden testbench traffic). In every one of the 8 live instances, 'A' is always a sample-derived value (B_r or B_i from cpx_mad), never the twiddle factor (always wired to 'B') -- so the trigger is a genuine data-dependent operand value, directly reachable through input_data.",
+  "observable_effect": "Result is XORed with 0x0100 (bit 8, chosen to clearly exceed the FFT testbench's +/-64 Q8.8 LSB tolerance) only on the triggering multiplication. Every other operand value is completely unaffected.",
+  "top_level_trigger_vector": {
+    "input_data[4]": "0x5A5A0005 (real part = 0x5A5A, the magic trigger value)",
+    "input_data[0]": "0x01000010 (ordinary, unrelated value)",
+    "derivation": "num2 (and therefore B_r, the 'A' operand feeding mult_rr/mult_ri) equals input_data[4] unchanged for the very first butterfly of any run, so no multi-stage engineering was needed."
+  },
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

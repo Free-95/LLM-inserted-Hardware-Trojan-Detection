@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 // 16-Bit Ripple Carry Adder / Subtractor
 module rca_16bit (
     input  signed [15:0] A,

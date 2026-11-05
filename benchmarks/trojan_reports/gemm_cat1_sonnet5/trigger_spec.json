@@ -1,0 +1,16 @@
+{
+  "design": "gemm",
+  "target_file": "systolic_pe.v",
+  "target_module": "systolic_pe (a leaf PE instantiated 9x inside the top module systolic_array_gemm -- a shared, deeply-reused submodule, not the top itself)",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "a_in[7:0] (the incoming activation operand's low byte) equals 8'hA5 (165) AND b_in[0] (the incoming weight operand's LSB) is 1 AND en is asserted. A rare AND combination of several existing operand/enable bits, P ~= 2^-9 per active cycle, never reached by the golden testbench's small (-9..100) operand range.",
+  "observable_effect": "The affected PE's c_out accumulator -- and therefore the corresponding element of the top-level c_mat_out bus -- is offset by +4096 relative to the correct matrix-multiply accumulation in that cycle. No other element and no other cycle is affected.",
+  "expected_value_if_clean": "c_mat_out element equals the exact golden matrix-multiply accumulation with no offset.",
+  "expected_value_if_infected": "c_mat_out element equals the golden accumulation plus 4096.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_gemm_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "uart_tx.v",
+  "target_module": "uart_tx (submodule of top-level impl_top; reached through the real uart_rxd/uart_txd loopback path)",
+  "category": "cat7_protocol_violation",
+  "trigger_description": "uart_tx_data == 8'h4E at the moment a byte is loaded (fsm_state==FSM_IDLE && uart_tx_en), latched into svc_release for the duration of that byte's transmission -- checked at load time rather than mid-shift, for the same reachability reason documented in the cat4 sample (data_to_send's bit 7 freezes at its loaded value while lower bits shift down, so a magic-value comparison performed later in the frame can silently become unreachable for the intended byte). P = 2^-8 per byte transmitted, never reached by golden testbench traffic -- the golden testbench's full 58-distinct-byte stimulus set was enumerated in Python and confirmed to never include 0x4E.",
+  "observable_effect": "uart_tx_busy is forced low for exactly the single clock cycle where fsm_state==FSM_STOP and next_bit is about to fire (the cycle immediately before the FSM legitimately transitions back to FSM_IDLE), but ONLY when svc_release is latched. txd_reg itself is completely untouched by this change and continues correctly outputting the real stop bit (logic 1) during that same cycle -- Eval2 explicitly proved uart_txd stays bit-for-bit identical to the clean reference for the entire transmission, with the divergence isolated to exactly one cycle of uart_tx_busy. This is a pure handshake/protocol-level fault, not a data fault: any downstream consumer that trusts uart_tx_busy as its 'bus is free' signal (a FIFO controller deciding when it is safe to load the next byte, for example) would be told the bus was available one cycle before the current frame had genuinely finished -- a textbook 'drops a busy/lock signal one cycle early' violation, reachable purely by sending 0x4E over the real RX pin.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

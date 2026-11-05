@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "uart_tx.v",
+  "target_module": "uart_tx (submodule of top-level impl_top; reached through the real uart_rxd/uart_txd loopback path)",
+  "category": "cat4_dos_hang",
+  "trigger_description": "uart_tx_data == 8'hB7 at the moment a byte is loaded (fsm_state==FSM_IDLE && uart_tx_en), latched into svc_hold for the duration of that byte's transmission. Checked at load time rather than later in the shift sequence specifically to avoid the reachability bug documented in this project's own cat1 writeup (data_to_send's bit 7 freezes at its original value while lower bits shift in from above, so comparing the mid-shift register against an arbitrary byte can silently become unreachable; checking the untouched uart_tx_data at load time sidesteps that entirely). P = 2^-8 per byte transmitted, never reached by golden testbench traffic -- the golden testbench's full stimulus set (explicit test_bytes, bit-sweep bytes, 44 deterministic-random fill bytes, stress-test bytes, break/recovery bytes) was enumerated in Python and confirmed to contain 58 distinct byte values, none equal to 0xB7.",
+  "observable_effect": "Once svc_hold latches, the FSM_SEND -> FSM_STOP transition (normally taken when payload_done) is permanently blocked for as long as svc_hold stays set, and svc_hold is never cleared until the next FSM_IDLE-with-uart_tx_en event -- which can never occur, because the FSM never returns to FSM_IDLE. The TX engine is wedged in FSM_SEND forever: uart_tx_busy stays asserted permanently, uart_txd never produces another valid start/stop-bit frame, and every subsequent byte handed to uart_tx_data (via uart_tx_en, driven here from uart_rx_valid) is silently dropped -- a persistent denial of service against the TX half of the UART. The RX half (uart_rx.v) and the led output are completely unaffected, since neither depends on uart_tx_busy or fsm_state inside uart_tx -- this is a Trojan whose effect is confined to exactly one of the design's two observable output paths, useful for a detector dataset that should not assume a DoS Trojan always knocks out every output simultaneously.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

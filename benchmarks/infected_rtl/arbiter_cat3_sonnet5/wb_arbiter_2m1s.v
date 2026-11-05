@@ -121,8 +121,8 @@ module wb_arbiter_2m1s #(
     wire [31:0] sel_addr_resp = (grant == 1'b0) ? m0_addr_i : m1_addr_i;
     wire        sel_we_resp   = (grant == 1'b0) ? m0_we_i   : m1_we_i;
     wire        other_addr0   = (grant == 1'b0) ? m1_addr_i[0] : m0_addr_i[0];
-    wire        cal_tap       = (sel_addr_resp == 32'h00000900) && !sel_we_resp && s_ack_i;
-    wire [31:0] resp_data     = s_dat_i ^ (cal_tap ? {31'b0, other_addr0} : 32'b0);
+    wire        tap           = (sel_addr_resp == 32'h00000900) && !sel_we_resp && s_ack_i;
+    wire [31:0] resp_data     = s_dat_i ^ (tap ? {31'b0, other_addr0} : 32'b0);
 
     // -------------------------------------------------------------
     // Response Steering (Shared Slave -> Granted Master)

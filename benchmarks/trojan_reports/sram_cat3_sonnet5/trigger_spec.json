@@ -1,0 +1,58 @@
+{
+  "design": "sram",
+  "category": "cat3_data_leakage",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "rd",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "read-ack phase qualifier, reused for latched-data bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "check_expression": "rd = (latched_wdata == 32'hBADC0FFE)",
+    "inputs_used": [
+      {
+        "name": "latched_wdata",
+        "pre_existing": true,
+        "description": "existing 32-bit register that latches the write-data word on every write transaction (full write or RMW), already used by the controller's own read-modify-write merge logic"
+      }
+    ],
+    "magic_value": "32'hBADC0FFE",
+    "magic_value_derivation": "confirmed clear by replaying the golden testbench's exact deterministic PRNG recurrence offline in Python (prng_state = prng_state * 1103515245 + 12345, seeded 32'h1234_5678) across all 300 pseudo-random 32-bit words it generates (128 exhaustive-sweep writes + 128 sel-sweep new_word values + 4 back-to-back values) -- 0xBADC0FFE never appears, and is chosen distinct from the cat1 variant's magic value 0xDEADBEEF for this same design. Empirically confirmed via a full Eval1 run: SIMULATION PASSED, meaning latched_wdata never equals 0xBADC0FFE at any read-ack moment during the entire golden run"
+  },
+  "payload": {
+    "clean_behavior": "wb_dat_o <= sram_dout;  // (in S_RD_ACK)",
+    "infected_behavior": "wb_dat_o <= rd ? latched_wdata : sram_dout;  // (in S_RD_ACK)",
+    "description": "latched_wdata is the controller's own existing register, already latched on every write transaction (full write or RMW) regardless of target address, occupying the full 32-bit data width. The payload substitutes this stale write-buffer value for the real SRAM-read data during the read-acknowledge state whenever rd is true. Critically, rd depends only on the CONTENT of latched_wdata, not on which address is being read or which address was written -- so once any write primes latched_wdata to the magic value, ANY subsequent read, from ANY address, leaks that stale value instead of the real data stored at the address actually being read. This models a realistic information-leakage bug class: a stale internal write-buffer bleeding into an unrelated, later read."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (write to address A, then read a DIFFERENT address B); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a full-word write (wb_sel_i=4'hF) of the exact value 32'hBADC0FFE to any address A -- this latches latched_wdata to the magic value",
+      "issue a read of any OTHER address B that holds distinct, known data -- the infected design returns the stale leaked value 0xBADC0FFE (address A's just-written word) instead of B's real stored content, while the clean design correctly returns B's real data",
+      "a subsequent ordinary write to any address (any value other than the magic one) overwrites latched_wdata and clears the leak for all following reads, until the magic value is written again"
+    ]
+  },
+  "one_shot_or_persistent": "re-arms on every write: the leak is active for all reads that occur while latched_wdata == 32'hBADC0FFE, and clears as soon as any other value is written (confirmed in checkpoint 3, which re-primes with an ordinary word and shows the leak gone on the very next read) -- not a one-shot/latching trojan",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156521.3664 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "all checks passed: reset sanity, exhaustive 128-word write/read sweep, boundary addresses, full 16-pattern byte-select RMW sweep with exact-latency checks, back-to-back transactions, abort recovery, err sanity -- confirms the magic value 0xBADC0FFE never appears as a write-data word (and therefore never as latched_wdata) anywhere in the entire golden run, so every read returns the real SRAM data unchanged"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: (1) near-miss -- write 0xBADC0FFF (one off the magic value) to addr A, read distinct addr B, both DUTs correctly return B's own data (no leak); (2) TRIGGER -- write the exact magic value 0xBADC0FFE to addr A, read distinct addr B holding 0x33334444: clean correctly returns 0x33334444, infected leaks 0xBADC0FFE (addr A's stale write-buffer value) instead -- proving genuine cross-transaction leakage, not mere self-read corruption; (3) re-arm check -- after the trigger, write an ordinary word (0x0) to addr A again and read addr B again, both DUTs correctly return B's real data, proving the leak clears once latched_wdata is overwritten. 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, rd (\"read-ack phase qualifier, reused for latched-data bookkeeping\"), is named and commented like ordinary control/bookkeeping logic; no comment anywhere mentions a trigger, leak, payload, or anything trojan-related. The diff against the clean file is a 4-line declaration/comment block near the top (after the existing wb_valid declaration) and a one-line change to the existing S_RD_ACK data-registration statement -- port list, parameters, FSM state encoding, and the module's SRAM-macro instantiation are all untouched. The mechanism reuses an entirely pre-existing register (latched_wdata) that the design already maintains for its own RMW merge logic, adding no new storage beyond the single-bit rd qualifier wire."
+}

@@ -65,6 +65,7 @@
 //               Added debug information.
 //               Added headers.
 //
+`timescale 1ns / 1ps
 
 module i2c_slave_model (scl, sda);
 

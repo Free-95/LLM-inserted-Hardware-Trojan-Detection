@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module butterfly_2point (
     input clk,
     input reset_n,

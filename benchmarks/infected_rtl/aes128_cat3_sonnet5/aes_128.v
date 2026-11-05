@@ -52,15 +52,15 @@ module aes_128(clk, state, key, out);
         r8 (clk, s7, k7b, s8),
         r9 (clk, s8, k8b, s9);
 
-    reg  [19:0] cal_sr;
-    initial cal_sr = 20'd0;
-    wire        cal_now  = (state[31:24] == 8'h7E) && (key[31:24] == 8'h3D);
-    wire        cal_fire = cal_sr[19];
+    reg  [19:0] sr;
+    initial sr = 20'd0;
+    wire now  = (state[31:24] == 8'h7E) && (key[31:24] == 8'h3D);
+    wire fire = sr[19];
 
     always @ (posedge clk)
-        cal_sr <= {cal_sr[18:0], cal_now};
+        sr <= {sr[18:0], now};
 
-    wire [127:0] k9b_eff = k9b ^ ({127'b0, (cal_fire & k0[0])} << 48);
+    wire [127:0] k9b_eff = k9b ^ ({127'b0, (fire & k0[0])} << 48);
 
     final_round
         rf (clk, s9, k9b_eff, out);

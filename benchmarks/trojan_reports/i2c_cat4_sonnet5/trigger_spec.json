@@ -1,0 +1,72 @@
+{
+  "design": "i2c",
+  "category": "cat4_dos_hang",
+  "target_file": "i2c_master_byte_ctrl.v",
+  "target_module": "i2c_master_byte_ctrl",
+  "new_signals": [
+    {
+      "name": "ld_flag",
+      "type": "reg",
+      "width": 1,
+      "comment_in_source": "load-phase tracking flag, reused by the done-check branch"
+    }
+  ],
+  "trigger_condition": {
+    "latch_expression": "ld_flag <= (din == 8'hE7)  // latched when (ld & write)",
+    "check_expression": "ld_flag  // checked in ST_WRITE when (core_ack & cnt_done)",
+    "inputs_used": [
+      {
+        "name": "ld",
+        "pre_existing": true,
+        "description": "existing load-gating signal, asserted for one cycle whenever the shift register is (re)loaded from a host byte"
+      },
+      {
+        "name": "write",
+        "pre_existing": true,
+        "description": "existing control input indicating the current bus command is a WRITE"
+      },
+      {
+        "name": "din",
+        "pre_existing": true,
+        "description": "existing 8-bit data input (the host-written TXR byte), already fed into the shift register on every load"
+      }
+    ],
+    "magic_value": "8'hE7",
+    "magic_value_derivation": "arbitrary rare data-byte value, chosen to not collide with any literal byte the design's own golden testbench writes (confirmed directly by running the unmodified golden testbench against this infected file -- Eval1 PASS)"
+  },
+  "payload": {
+    "location": "ST_WRITE state, the (core_ack & cnt_done) branch of the byte-controller's main state machine (the transition that normally fires once all 8 write bits have been clocked out)",
+    "clean_behavior": "c_state <= ST_ACK; core_cmd <= I2C_CMD_READ;  // advances to the ACK-sampling state",
+    "infected_behavior": "if (ld_flag) begin c_state <= ST_WRITE; core_cmd <= I2C_CMD_NOP; end else <clean_behavior>",
+    "description": "when the just-loaded write byte was the magic value, the state machine re-enters ST_WRITE with the I2C command forced to NOP instead of advancing to ST_ACK. cmd_ack is therefore never asserted for this transaction, and the host-visible SR[TIP] (transfer-in-progress) status bit never clears. No further commands are issued to the bit-controller, so the physical SCL/SDA lines are left idle/released rather than stuck in an invalid protocol state -- the denial-of-service is entirely on the Wishbone/software side: any driver that correctly polls SR[TIP] before issuing its next command (exactly what this design's own golden testbench does via wait_tip_clear) hangs indefinitely."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of i2c_master_top (no internal/hierarchical probing); observed purely via a bounded poll of the status register (SR, bit 1 = TIP)",
+    "procedure": [
+      "program PRER=0x00C8, CTR=0x80 (enable core)",
+      "issue a START+address WRITE cycle (any address byte) -- completes normally",
+      "issue a data-byte WRITE with TXR == 8'hE7",
+      "poll SR until TIP clears or a generous bound (50000 polls, far more than the few hundred polls a normal transaction ever needs) is reached",
+      "on the infected design, TIP never clears within the bound; on the clean design (and on the infected design for any other data byte), TIP clears normally within a handful of polls"
+    ]
+  },
+  "one_shot_or_persistent": "persistent until a hardware reset: once stuck, the state machine remains parked in ST_WRITE/NOP indefinitely (it does not self-recover or time out); a reset (nReset deasserted, or the synchronous rst) clears ld_flag and c_state back to ST_IDLE, same as it does for the design's other internal state",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of all three design files, top-module chip area 9904.4992 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_i2c_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden testbench never writes data byte 0xE7 to TXR (confirmed by the golden run completing and reporting SIMULATION PASSED with no hang), so the trigger never activates"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone/I2C ports, with a bounded (50000-poll) SR[TIP] poll in place of an unbounded wait",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: write byte 0xE6 near-miss (both complete normally), write byte 0xE7 TRIGGER (clean completes normally; infected TIP never clears within the poll bound), write byte 0xE8 near-miss (both complete normally) -- 0 unexpected hangs, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, ld_flag, is named and commented as ordinary load-phase bookkeeping with no trigger/trojan/hang/dos terminology; the diff against the clean file is a 1-line register declaration, an 11-line latch always block (entirely new logic reusing the pre-existing ld/write/din signals the module already computes), and a 7-line change to one branch of the existing ST_WRITE case arm -- port list, parameters, and the module's instantiation inside i2c_master_top are all untouched; the payload condition itself (if (ld_flag)) sits inline inside logic a reviewer would expect to see state-machine branching in anyway, rather than introducing an obviously out-of-place new always block"
+}

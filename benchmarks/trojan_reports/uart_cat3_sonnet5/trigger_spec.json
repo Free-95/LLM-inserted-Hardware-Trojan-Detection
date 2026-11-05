@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "impl_top.v",
+  "target_module": "impl_top (the top module -- the Trojan needs a real observable output port to multiplex onto, which only exists at this level)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "quiet_cnt (a 16-bit counter that resets to 0 on reset or on every uart_rx_valid reception, and otherwise free-runs) reaching/exceeding 12000 cycles of continuous link idle since the last reception. Chosen with a verified margin: the golden testbench was directly instrumented and its single longest naturally-occurring idle gap (sw_0 asserted, no reception) was measured at exactly 4201 cycles -- the 12000-cycle threshold leaves roughly 2.85x headroom above that measured maximum, not a guess.",
+  "observable_effect": "Once quiet_cnt crosses the threshold, led_reg is continuously driven from link_hist -- a hidden 8-bit register that XOR-folds together every byte ever received since the last reset -- instead of holding its last legitimately-received value as the clean design does. This is a genuine information leak: an attacker who can force (or simply wait for) a long enough idle period on the line can read a digest of all prior session traffic off the LED output, a channel with no documented relationship to session history. The design's own existing checkpoints (right after reset, ~3 cycles after each reception -- the exact discipline tb_uart.v itself uses) never observe this, since quiet_cnt is always near-zero at those instants; the leak is only visible to an observer polling led during otherwise-unremarkable idle time, which the golden testbench never does. The instant a new byte arrives, led_reg and quiet_cnt both reset to normal behavior with no latching or corruption of the real datapath.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

@@ -1,0 +1,16 @@
+{
+  "design": "sha256",
+  "target_file": "sha256_w_mem.v",
+  "target_module": "sha256_w_mem (the message-schedule submodule, instantiated once inside the top module sha256_core -- not the top itself)",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "At block-init time, the incoming message block's final 32-bit word (block[31:0], which the design itself stores as the message-schedule seed word w_mem[15]) equals exactly 32'hdeadc0de. This is a combinational AND of 32 individual bit-equality terms on an existing input signal -- P = 2^-32 per block. Verified by direct script scan that this exact 32-bit value never occurs as any of the 2,727 unique 32-bit words present across all 228 real test blocks (76 messages, SHA-256 and SHA-224 modes, the project's own golden vector set).",
+  "observable_effect": "Instead of storing the seed word unchanged, one bit (the LSB) of that word is flipped before being written into w_mem[15]. Because SHA-256's message schedule recurrence and compression function both exhibit strong avalanche behavior, this single-bit seed corruption propagates through the remaining message-schedule expansion and all 64 compression rounds, producing a digest that differs from the correct one in essentially every output bit -- directly observable on the real top-level `digest`/`digest_valid` ports, with `ready`'s handshake timing completely unaffected (so this is purely a data-value Trojan, not a timing or protocol one).",
+  "expected_value_if_clean": "digest exactly matches the independently-computed (Python hashlib) reference for every possible message block, including the trigger block.",
+  "expected_value_if_infected": "digest matches the reference for every message block except one whose final 32-bit word is exactly 0xdeadc0de, where it differs in essentially every output bit due to SHA-256's avalanche property.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_sha256_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

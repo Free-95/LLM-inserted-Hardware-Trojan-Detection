@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (single-file design, no submodule split -- the top module is necessarily the target)",
+  "category": "cat6_watermark",
+  "trigger_description": "A register-register ADD instruction (the existing instr_add decode flag) has its second operand's low 16 bits equal to exactly 16'hca11. P <= 2^-16 per executed reg-reg ADD. Verified empirically: the full real RV32IM self-checking firmware ran to a genuine SIMULATION PASSED with this exact magic value present in the design.",
+  "observable_effect": "The trace_valid/trace_data debug/trace output port -- genuinely idle in this design's actual deployed configuration, since the golden testbench instantiates the core with ENABLE_TRACE=0, every trace_valid<=1 assignment except this one is wrapped in an 'if (ENABLE_TRACE)' guard that never fires at that setting, and the testbench leaves trace_valid/trace_data entirely unconnected -- pulses once with a fixed pattern (0xca110000) on the triggering cycle. This was specifically distinguished during design from the pcpi_valid/pcpi_insn PCPI port, which looked like a similar candidate but was ruled out: WITH_PCPI = ENABLE_PCPI || ENABLE_MUL || ENABLE_FAST_MUL || ENABLE_DIV, so with ENABLE_MUL=1 and ENABLE_DIV=1 (the golden testbench's actual configuration), pcpi_valid legitimately pulses on every multiply/divide instruction via the internal MUL/DIV co-processor dispatch, and is therefore NOT a genuinely idle channel in this configuration.",
+  "expected_value_if_clean": "trace_valid never asserts and trace_data is don't-care, for the entire run, in this ENABLE_TRACE=0 configuration.",
+  "expected_value_if_infected": "trace_valid pulses exactly once, with trace_data == 0xca110000 on the low 32 bits, on the one triggering instruction; every other cycle, and every other instruction's functional behavior (every memory bus transaction: mem_valid/mem_addr/mem_wdata/mem_wstrb, and trap), is bit-for-bit identical to the clean design for the entire run, not just at a few checkpoints.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

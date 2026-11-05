@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (single-file design, no submodule split -- the top module is necessarily the target)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "A hidden counter (instr_cnt) counts how many instructions this core has decoded, reusing the existing decoder_trigger pulse (asserted once per instruction decode, already present in the design's own pipeline control logic) as the count-enable condition rather than a new always-active counter. The real RV32IM golden firmware retires 1,903 instructions total across its entire run (confirmed by direct instrumented count). The counter's terminal/arming value is 2500, safely outside golden-firmware range but reachable by running the core for longer. Once armed, the latch stays set permanently (does not self-clear).",
+  "observable_effect": "From the instruction after the counter reaches its terminal value onward, every register-register ADD instruction (the existing instr_add decode flag specifically -- LUI/AUIPC/JAL/JALR/ADDI, which share the same ALU datapath, are unaffected) has its result's LSB flipped. The corruption is independent of the operand values; it depends only on cumulative retired-instruction count, and persists for every subsequent ADD once armed.",
+  "expected_value_if_clean": "ADD rd, rs1, rs2 always computes rd = rs1 + rs2 exactly, regardless of how many prior instructions have executed.",
+  "expected_value_if_infected": "ADD rd, rs1, rs2 computes the correct sum for the first 2,500 retired instructions' worth of ADDs, then has its result's LSB flipped for every ADD from the 2,501st retired instruction onward, with no recovery short of a full reset.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

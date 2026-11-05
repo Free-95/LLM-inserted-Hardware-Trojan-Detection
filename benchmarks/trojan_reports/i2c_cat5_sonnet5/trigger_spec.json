@@ -1,0 +1,64 @@
+{
+  "design": "i2c",
+  "category": "cat5_parametric_rare_value_corruption",
+  "target_file": "i2c_master_top.v",
+  "target_module": "i2c_master_top",
+  "new_signals": [
+    {
+      "name": "lo_cal",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "low-byte register-load calibration check, reused for write-path bookkeeping"
+    }
+  ],
+  "target_parameter": {
+    "register": "PRER_LO (Wishbone address 3'b000, low byte of the 16-bit clock-prescale register `prer`)",
+    "role_in_clean_design": "a genuine functional configuration parameter of the core -- not per-transaction payload data. `prer` is wired directly into i2c_master_bit_ctrl's `clk_cnt` input and sets the SCL clock-divider count used for the lifetime of the core's operation until reprogrammed, so corrupting it silently changes how every subsequent I2C transaction is timed, not just one transfer."
+  },
+  "trigger_condition": {
+    "expression": "lo_cal = (wb_dat_i == 8'h5a)",
+    "checked_at": "the existing PRER_LO case arm of the register-write always block (only reachable when wb_wacc & (wb_adr_i == 3'b000), i.e. an actual host write to PRER_LO)",
+    "inputs_used": [
+      {
+        "name": "wb_dat_i",
+        "pre_existing": true,
+        "description": "existing 8-bit Wishbone write-data input, already the sole source for every register-load case arm in this always block"
+      }
+    ],
+    "magic_value": "8'h5a",
+    "magic_value_derivation": "arbitrary rare byte value, confirmed not to collide with any PRER_LO value the design's own golden testbench ever writes (0xFA, 0xC8, 0x04 -- confirmed directly by running the unmodified golden testbench against this infected file: Eval1 PASS)"
+  },
+  "payload": {
+    "clean_behavior": "prer[7:0] <= wb_dat_i;",
+    "infected_behavior": "prer[7:0] <= lo_cal ? (wb_dat_i ^ 8'h01) : wb_dat_i;",
+    "description": "when the host writes exactly 0x5A to PRER_LO, the design silently stores 0x5B (the written byte XOR 8'h01) instead. Every other PRER_LO value, and every other register (PRER_HI, CTR, TXR, SADR), is loaded exactly as in the clean design. Because PRER directly feeds the bit controller's clock-divider input, the corrupted stored value is not a dead/unused field -- it measurably changes the real SCL clock period for every subsequent I2C transaction until the host reprograms PRER_LO again."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of i2c_master_top (register write + read-back) and the real scl_pad_o top-level pin (clock-period measurement); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a Wishbone write of 8'h5A to PRER_LO",
+      "read PRER_LO back over the Wishbone interface -- on the infected design this returns 8'h5B instead of the written 8'h5A",
+      "program CTR=0x80 (enable core) and issue one ordinary START+address-write+data-write+STOP transaction",
+      "measure the real SCL high-period on the top-level scl_pad_o pin during that transaction -- on the infected design this measurably differs from the clean design's period (observed in this run: infected=5060ns vs clean=4830ns, both DUTs driven with the identical requested PRER_LO=0x5A)"
+    ]
+  },
+  "one_shot_or_persistent": "persistent: the corrupted value remains the operative clock-prescale setting for every subsequent I2C transaction until the host reprograms PRER_LO (with any value other than 0x5A) or the core is reset; this differs from the cat1/cat2/cat3 variants submitted for this design, which affect only the one transaction/cycle during which their trigger condition holds",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of all three design files, top-module chip area 9925.7696 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_i2c_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden testbench's own explicit register-sanity and prescaler-variation checks write PRER_LO=0xFA, 0xC8, and 0x04 and assert the read-back value is unchanged -- none of these is the magic value 0x5A, so the trigger never activates and those assertions pass exactly as in the clean design"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench, checking both a real Wishbone PRER_LO readback and a real top-level SCL period measurement",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: PRER_LO=0xC8 near-miss (readback unchanged on both), PRER_LO=0x5A TRIGGER (infected readback silently corrupted to 0x5B while clean readback matches the written value; infected real SCL period measurably differs from clean, 5060ns vs 4830ns), PRER_LO=0x5B near-miss (readback unchanged on both, confirming an exact single-value match) -- 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, lo_cal, is named and commented as ordinary write-path calibration bookkeeping with no trigger/trojan/corruption terminology; the diff against the clean file is a 2-line wire declaration/comment and a one-line change to a single existing case arm inside the register-write always block -- port list, parameters, and this module's two sub-module instantiations are all untouched; the payload sits inline inside a case statement a reviewer would already expect conditional logic in, rather than as an obviously separate new block, and it only ever fires on a register write that the host itself initiates (no hidden free-running counter or hierarchical signal is needed)"
+}

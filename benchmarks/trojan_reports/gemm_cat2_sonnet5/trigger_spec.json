@@ -1,0 +1,16 @@
+{
+  "design": "gemm",
+  "target_file": "systolic_pe.v",
+  "target_module": "systolic_pe (a leaf PE instantiated 9x inside the top module systolic_array_gemm -- a shared, deeply-reused submodule, not the top itself)",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "Each PE counts how many accumulation windows it has serviced (how many times clr_acc has pulsed while en was asserted), reusing those two already-existing signals as the count-enable condition rather than adding a brand-new always-active counter. The golden testbench exercises the design through 18 such windows across its entire run; the counter's terminal/arming value is 19 (reached on the 20th window), safely outside golden-testbench range but reachable by simply running the design longer. Once armed, the latch stays set permanently (does not self-clear).",
+  "observable_effect": "From the window in which the counter reaches its terminal value onward, every PE's c_out accumulator write -- and therefore the corresponding element(s) of the top-level c_mat_out bus -- is offset by +8192 relative to the correct value. The corruption is independent of the operand data; it depends only on cumulative usage count, and persists for every subsequent operation once armed.",
+  "expected_value_if_clean": "c_mat_out elements equal the exact golden matrix-multiply accumulation on every invocation, regardless of how many prior invocations occurred.",
+  "expected_value_if_infected": "c_mat_out elements match the golden result for the first 19 accumulation-window invocations, then are offset by +8192 from the 20th invocation onward, with no recovery.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_gemm_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

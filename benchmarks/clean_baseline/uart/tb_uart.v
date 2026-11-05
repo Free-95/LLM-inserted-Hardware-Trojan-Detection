@@ -25,7 +25,7 @@
 //
 
 `default_nettype none
-`timescale 1ns / 1ns
+`timescale 1ns / 1ps
 
 module tb_uart;
 	// Simulation-friendly baud/clock ratio: real hardware values (50 MHz / 9600 baud) 

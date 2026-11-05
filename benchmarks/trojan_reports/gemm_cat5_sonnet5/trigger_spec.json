@@ -1,0 +1,16 @@
+{
+  "design": "gemm",
+  "target_file": "systolic_pe.v",
+  "target_module": "systolic_pe (a leaf PE instantiated 9x inside the top module systolic_array_gemm -- a shared, deeply-reused submodule, not the top itself)",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "The incoming activation operand a_in equals exactly 16'sd12345 -- one single, specific 16-bit operand value, not a partial-bit or combinational AND-of-several-fields match. P = 2^-16 per active cycle, nowhere near the golden testbench's small (-9..100) operand range, and confirmed to not fire on operand values immediately adjacent to the magic constant (12344, 12346).",
+  "observable_effect": "The affected PE's c_out accumulator write (and therefore the corresponding element of the top-level c_mat_out bus) is offset by +256 relative to the correct matrix-multiply result for that write. Every other operand value -- including values one apart from the trigger -- takes the untouched path and is bit-exact.",
+  "expected_value_if_clean": "c_mat_out element equals the exact golden matrix-multiply accumulation for every operand value, with no offset ever applied.",
+  "expected_value_if_infected": "c_mat_out element matches the golden result for every operand value except a_in==12345, where it is offset by +256.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_gemm_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

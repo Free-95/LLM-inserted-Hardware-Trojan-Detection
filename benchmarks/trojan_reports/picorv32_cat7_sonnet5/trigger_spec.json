@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (single-file design, no submodule split -- the top module is necessarily the target)",
+  "category": "cat7_protocol_violation",
+  "trigger_description": "A register-register ADD instruction (the existing instr_add decode flag) has its second operand's low 16 bits equal to exactly 16'hbadd. P <= 2^-16 per executed reg-reg ADD. Verified empirically: the full real RV32IM self-checking firmware ran to a genuine SIMULATION PASSED with this exact magic value present in the design. Detection (via a sticky pending latch) and the actual mislabel are deliberately decoupled: detection happens on the triggering ADD instruction, and the mislabel is applied to the immediately following real write transaction (via the existing mem_do_wdata signal, so it lands on the correct, same-edge start of that transaction rather than one cycle late), rather than trying to act within the ADD instruction's own tightly-pipelined execution window.",
+  "observable_effect": "The real, correctly-timed, correctly-addressed, correctly-valued data write immediately following the trigger has its mem_instr field forced to 1 (claiming it is an instruction fetch) instead of the correct 0 (a data write). The write's address, data, write-strobe, and timing are all completely unaffected -- a downstream bus observer, cache, or MMU that uses mem_instr to distinguish instruction fetches from data accesses (for permission checking, cache partitioning, or NX-style protections) would misclassify this access, while the CPU's own architectural state and the actual value written to memory remain entirely correct.",
+  "expected_value_if_clean": "mem_instr correctly reflects whether each bus transaction is an instruction fetch (1) or a data access (0), for every transaction, always.",
+  "expected_value_if_infected": "mem_instr is correct for every transaction except the one real data write immediately following the triggering ADD instruction, where it is incorrectly asserted as 1.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

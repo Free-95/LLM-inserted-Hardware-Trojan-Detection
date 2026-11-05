@@ -1,0 +1,16 @@
+{
+  "design": "sha256",
+  "target_file": "sha256_core.v",
+  "target_module": "sha256_core (the top module -- the real ready/busy handshake this trojan hangs is the core's own top-level port, and the FSM state it needs is internal to the core)",
+  "category": "cat4_denial_of_service_hang",
+  "trigger_description": "The message block's word at bits [95:64] (word index 13 of 16) equals exactly 32'hf00dfeed. The arming check fires on the first round cycle after entering CTRL_ROUNDS (sha256_ctrl_reg==CTRL_ROUNDS && t_ctr_reg==0), a condition stable for a full clock cycle rather than a single-cycle init pulse, chosen deliberately to avoid a same-edge testbench/DUT race. P = 2^-32 per block. Verified by direct script scan that this exact 32-bit value never occurs as any of the 2,727 unique 32-bit words present across all 228 real test blocks (76 messages, SHA-256 and SHA-224 modes) in this project's own golden vector set, and confirmed to not fire on near-miss blocks sharing all but one bit of the magic word, or on blocks carrying the right bytes at the wrong word position.",
+  "observable_effect": "A sticky latch (hold) is set and never clears (short of a full reset). From that cycle on, the round counter (t_ctr_reg) permanently stops advancing, so the control FSM never reaches the round count needed to leave CTRL_ROUNDS, and the real top-level `ready` handshake signal never reasserts again -- a genuine, unrecoverable hang of the core's actual busy/ready protocol, not an adapted freeze of unrelated datapath state. The round datapath keeps churning on stale operands forever, but no block ever completes.",
+  "expected_value_if_clean": "`ready` reasserts (and `digest_valid` pulses) within the design's normal, bounded processing latency for every block, indefinitely.",
+  "expected_value_if_infected": "`ready` reasserts normally for every block except one whose word at bits [95:64] is exactly 0xf00dfeed, after which it never reasserts again for any subsequent block, requiring a full reset to recover.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_sha256_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

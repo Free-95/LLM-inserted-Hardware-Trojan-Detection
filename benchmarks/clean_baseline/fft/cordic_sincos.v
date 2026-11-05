@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module cordic_sincos (
     input                    clk,
     input                    reset_n,                    

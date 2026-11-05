@@ -1,0 +1,64 @@
+{
+  "design": "sram",
+  "category": "cat7_protocol_violation",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "proto",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "post-commit settle qualifier, reused for ack-pipe bookkeeping"
+    },
+    {
+      "name": "ack_pipe",
+      "type": "reg",
+      "width": 1,
+      "comment_in_source": "settle-pipe flag, reused for post-commit bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "check_expression": "proto = (latched_wdata == 32'hC0DE1337), evaluated/latched into ack_pipe at the real S_WR_ACK cycle",
+    "inputs_used": [
+      {
+        "name": "latched_wdata",
+        "pre_existing": true,
+        "description": "existing 32-bit register that latches the write-data word on every write transaction, already used by the controller's own RMW merge logic"
+      }
+    ],
+    "magic_value": "32'hC0DE1337",
+    "magic_value_derivation": "confirmed clear by replaying the golden testbench's exact deterministic PRNG recurrence offline in Python (prng_state = prng_state * 1103515245 + 12345, seeded 32'h1234_5678) across all 260 pseudo-random 32-bit words it generates in this testbench, plus every fixed non-PRNG constant it ever writes (0xB0B0B0B0, 0xE0E0E0E0, 0xBAADF00D, 0xC0FFEE00, 0x11223344) -- 0xC0DE1337 collides with none of them, and is chosen distinct from the magic values used in the cat1-cat6 variants for this same design. Empirically confirmed via a full Eval1 run: SIMULATION PASSED, meaning latched_wdata never equals 0xC0DE1337 at the S_WR_ACK cycle of any write anywhere in the golden run, so ack_pipe is never armed"
+  },
+  "payload": {
+    "clean_behavior": "S_WR_ACK: begin wb_ack_o <= 1'b1; state <= S_IDLE; end  //  S_IDLE: (no ack logic beyond the existing wb_valid-gated transition)",
+    "infected_behavior": "S_WR_ACK: begin wb_ack_o <= 1'b1; ack_pipe <= proto; state <= S_IDLE; end  //  S_IDLE: begin if (ack_pipe) begin wb_ack_o <= 1'b1; ack_pipe <= 1'b0; end  if (wb_valid) begin ... end end",
+    "description": "the controller's existing single-cycle ack pulse for a full-word write (asserted for exactly one clock in S_WR_ACK, then deasserted by the top-of-block default wb_ack_o<=1'b0 on every subsequent cycle) is left completely intact for every ordinary write. The infected design adds a one-shot latch, ack_pipe, armed with proto at the exact cycle the real ack fires. One clock cycle later -- by which point the bus master has typically already dropped wb_cyc_i/wb_stb_i, since it only needed to hold them through the real ack -- the controller asserts wb_ack_o a SECOND time, entirely unconditioned on wb_cyc_i or wb_stb_i. This is a direct Wishbone B4 protocol violation: a slave must never assert ack_o except in response to an active, addressed cyc_i/stb_i-qualified transaction. A spurious post-transaction ack can be misinterpreted by a pipelined master, arbiter, or bus-fabric bridge as confirmation of a transaction that was never issued, potentially corrupting downstream transaction accounting without touching a single data value anywhere in the design."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (a full-word write with a specific data value, observed over the cycle immediately following its ack with wb_cyc_i/wb_stb_i already deasserted); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a full-word write (wb_we_i=1, wb_sel_i=4'hF) whose write-data word (wb_dat_i) is exactly 32'hC0DE1337, and wait for the real wb_ack_o pulse as usual",
+      "drop wb_cyc_i and wb_stb_i immediately after the real ack, as any well-behaved master would",
+      "observe wb_ack_o on the very next clock cycle: the infected design asserts it a second time despite wb_cyc_i already being low, while the clean design stays low"
+    ]
+  },
+  "one_shot_or_persistent": "one-shot per triggering write: ack_pipe is armed exactly once (at the real ack of the matching write) and self-clears the cycle it fires the phantom pulse, so each occurrence of the magic write-data value produces exactly one extra spurious ack, never a persistent or repeating fault; confirmed in checkpoint 3, where an ordinary write issued immediately after the trigger acks normally with no further spurious pulses",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156518.864 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "all checks passed: reset sanity, exhaustive 128-word write/read sweep, boundary addresses, full 16-pattern byte-select RMW sweep with exact-latency checks, back-to-back transactions, abort recovery, err sanity -- confirms the magic value 0xC0DE1337 never appears as any write's data word anywhere in the golden run, so ack_pipe is never armed and every write's ack behavior is bit-for-bit, cycle-for-cycle identical to the clean design"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench driving both DUTs from one shared, lockstepped stimulus bus (required because the trojan's effect is a single-cycle spurious pulse tied to a specific clock edge, which independently-sequenced per-DUT transactions would not let a comparator observe on the correct matching cycle) through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: (1) near-miss -- ordinary full-word write (data != magic value): both DUTs ack at the same latency with 0 ack pulses observed in the 8 cycles after wb_cyc_i/wb_stb_i drop; (2) TRIGGER -- full-word write with the exact magic value 0xC0DE1337: clean DUT shows 0 ack pulses after cyc/stb drop, infected DUT shows exactly 1 (the phantom ack, asserted while wb_cyc_i is already low) -- the documented protocol violation; (3) one-shot/recovery -- an ordinary write issued immediately after the trigger acks normally with 0 further spurious pulses on either DUT, confirming the violation does not persist. 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the two new elements, proto (\"post-commit settle qualifier, reused for ack-pipe bookkeeping\") and ack_pipe (\"settle-pipe flag, reused for post-commit bookkeeping\"), are named and commented like ordinary pipeline/settle-timing bookkeeping, a plausible artifact of a settle-delay or bus-turnaround design pattern; no comment anywhere mentions a trigger, protocol violation, spurious ack, or anything trojan-related. The diff against the clean file is a 4-line declaration/comment block (after the existing wb_valid declaration), a one-line register declaration alongside the existing FSM registers, a one-line reset-value addition, a 4-line addition at the top of the existing S_IDLE case arm (guarded by the new flag, placed before the pre-existing wb_valid-gated logic which is otherwise untouched), and a one-line addition inside the existing S_WR_ACK case arm -- port list, parameters, FSM state encoding, and the module's SRAM-macro instantiation are all untouched. No data path, address decode, or memory-access logic is touched anywhere; the trojan only ever affects the ack-pulse timing of the bus protocol itself."
+}

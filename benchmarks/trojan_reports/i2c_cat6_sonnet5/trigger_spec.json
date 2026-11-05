@@ -1,0 +1,76 @@
+{
+  "design": "i2c",
+  "category": "cat6_benign_watermark",
+  "target_file": "i2c_master_top.v",
+  "target_module": "i2c_master_top",
+  "new_signals": [
+    {
+      "name": "cr_ld_echo",
+      "type": "reg",
+      "width": 1,
+      "comment_in_source": "command-register load echo, reused by the debug-readback path"
+    }
+  ],
+  "trigger_condition": {
+    "expression": "cr_ld_echo <= (wb_dat_i == 8'h04)  // latched when (wb_wacc & core_en & (wb_adr_i == 3'b100))",
+    "inputs_used": [
+      {
+        "name": "wb_wacc",
+        "pre_existing": true,
+        "description": "existing Wishbone write-access strobe (wb_we_i & wb_ack_o)"
+      },
+      {
+        "name": "core_en",
+        "pre_existing": true,
+        "description": "existing core-enable bit (ctr[7]), already gating the real cr load in the clean design"
+      },
+      {
+        "name": "wb_adr_i",
+        "pre_existing": true,
+        "description": "existing 3-bit register-select address"
+      },
+      {
+        "name": "wb_dat_i",
+        "pre_existing": true,
+        "description": "existing 8-bit Wishbone write-data input"
+      }
+    ],
+    "magic_value": "8'h04",
+    "magic_value_derivation": "the command register's own documented reserved bit (cr[2]) set alone, with every real command bit (sta=cr[7], sto=cr[6], rd=cr[5], wr=cr[4], ack=cr[3], sl_cont=cr[1], iack=cr[0]) at zero -- a pattern no real I2C driver ever legitimately writes on its own, since it starts nothing, stops nothing, and transfers no data; hardware already auto-clears this same reserved bit one cycle after any write in the clean design"
+  },
+  "payload": {
+    "location": "the debug command-register readback path, Wishbone address 3'b110 (labeled \"Debug out control reg\" in the clean source; not used by any real driver, which reads live status via SR at address 3'b100 instead)",
+    "clean_behavior": "wb_dat_o <= cr;",
+    "infected_behavior": "wb_dat_o <= cr_ld_echo ? 8'hc5 : cr;",
+    "description": "when the most recently loaded command word was exactly the reserved-bit-only pattern 8'h04, every subsequent read of the debug CR address returns a fixed signature byte (8'hC5) instead of the real (by then auto-cleared back to the normal idle value) command-register content, until the command register is written again with a different value."
+  },
+  "benign_verification_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of i2c_master_top (register write + debug-address read-back, status-register poll) and the real scl_pad_o top-level pin (bus-activity witness); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "program PRER=0x00C8, CTR=0x80 (enable core)",
+      "write 8'h04 to CR (the command register, address 3'b100)",
+      "read back the debug CR address (3'b110): infected returns 8'hC5 (the signature); clean returns the real, already auto-cleared cr value",
+      "read back SR (status register) and confirm TIP (bit 1) is 0 on both DUTs -- no transfer was ever initiated",
+      "confirm SCL never transitioned low on either DUT's top-level scl_pad_i/scl_pad_o node throughout the entire checkpoint -- the bus was never touched"
+    ]
+  },
+  "one_shot_or_persistent": "persistent until the command register is written again with any value other than 8'h04 (or a reset occurs); re-arms on the next 8'h04 write",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of all three design files, top-module chip area 9990.832 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_i2c_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden testbench never writes 8'h04 to CR (its CR writes are all real command-bit combinations: 0x90, 0x10, 0x20, 0x28, 0x40, 0x41, 0x50, 0x01) and never reads the debug CR address (3'b110) at all, so the trigger never activates and its substituted readback value is never observed"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench, checking the debug-CR readback AND an explicit bus-activity witness (SCL negedge latch) AND SR[TIP] on both DUTs",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: ordinary START/STOP command traffic near-miss (debug-CR readback matches on both, 0x40), CR=0x04 TRIGGER (infected debug-CR readback=0xC5 vs clean=0x00; SCL never toggled on either DUT; TIP stayed 0 on both, confirming zero functional side effect), CR=0x05 near-miss (debug-CR readback matches on both, 0x00) -- 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, cr_ld_echo, is named and commented as an ordinary command-register load echo with no trigger/trojan/watermark terminology; the diff against the clean file is a 2-line register declaration/comment, a one-line change to a single existing case arm inside the debug-readback mux, and a 10-line always block that mirrors cr's own existing load-guard condition verbatim -- port list, parameters, and this module's two sub-module instantiations are all untouched; the watermark only affects a diagnostic readback path no real driver uses and cannot initiate, continue, or disturb any I2C bus activity, since the triggering write sets no real command bit"
+}

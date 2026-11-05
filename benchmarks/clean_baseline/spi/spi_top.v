@@ -37,10 +37,8 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-
-
-`include "spi_defines.v"
 `timescale 1ns / 10ps
+`include "spi_defines.v"
 
 module spi_top
 (

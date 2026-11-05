@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "impl_top.v",
+  "target_module": "impl_top (the top module -- the marker needs a real top-level, legitimately-observable output to appear on, and the only candidate temporal gap the golden testbench never samples is the one impl_top's own led_reg mux already has)",
+  "category": "cat6_watermark",
+  "trigger_description": "TWO conditions ANDed, both required: (1) sw_1 held high -- an input the stock design's documented functionality never reads or depends on at all -- AND (2) arm_cnt (a 16-bit counter, identical in structure to the cat3 sample's idle tracker: resets on reset or on any uart_rx_valid reception, free-runs otherwise) reaching/exceeding 20000 cycles of continuous link idle. Both half-triggers were independently tested and confirmed to produce zero effect alone: 6000 cycles of idle with sw_1 low stays silent, and sw_1 held high with idle kept short also stays silent. The golden testbench's own longest naturally-occurring idle gap was directly measured at 4201 cycles (see the cat3 sample for the measurement), so the 20000-cycle threshold -- deliberately set higher than cat3's 12000, to keep the two samples' thresholds from being identical/collide-able -- leaves roughly 4.76x headroom above that measured maximum.",
+  "observable_effect": "Once both conditions hold, led_reg is continuously driven from a FIXED, hardcoded constant (8'hC6) instead of holding its last legitimately-received value -- unlike the cat3 sample, this value carries zero information about session traffic or any other internal state; it is the same constant every single time, regardless of what was ever received. This is a textbook benign watermark: a test fixture that knows to assert sw_1 (otherwise a documented don't-care pin) and wait out a long idle period can visually confirm this specific build is on the bench, with no corruption of any documented functional output, no effect on uart_txd at any time, and -- as with the cat3 sample -- invisible to the golden testbench's own checkpoint discipline, which never samples led during idle gaps. led_reg naturally holds the marker value (the same hold-on-idle behavior the clean design's own register already exhibits) until the next genuine reception overwrites it with real data; this is not sticky corruption, just the register's ordinary idle-hold semantics applied to the marker's own assignment.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

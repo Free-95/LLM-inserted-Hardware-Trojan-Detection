@@ -37,9 +37,8 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-
-`include "spi_defines.v"
 `timescale 1ns / 10ps
+`include "spi_defines.v"
 
 module spi_clgen (clk_in, rst, go, enable, last_clk, divider, clk_out, pos_edge, neg_edge); 
 

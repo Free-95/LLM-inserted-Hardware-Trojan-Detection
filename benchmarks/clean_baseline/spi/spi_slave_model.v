@@ -37,7 +37,6 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-
 `timescale 1ns / 10ps
 
 module spi_slave_model (rst, ss, sclk, mosi, miso);

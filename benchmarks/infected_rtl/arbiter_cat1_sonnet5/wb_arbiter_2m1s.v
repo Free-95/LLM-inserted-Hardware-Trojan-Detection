@@ -99,7 +99,7 @@ module wb_arbiter_2m1s #(
 
     wire [7:0] sel_addr_lo = (grant == 1'b0) ? m0_addr_i[7:0] : m1_addr_i[7:0];
     wire sel_we      = (grant == 1'b0) ? m0_we_i        : m1_we_i;
-    wire cal_adj     = (sel_addr_lo == 8'h37) && sel_we;
+    wire adj     = (sel_addr_lo == 8'h37) && sel_we;
 
     // -------------------------------------------------------------
     // Datapath Multiplexing (Masters -> Shared Slave)
@@ -107,14 +107,14 @@ module wb_arbiter_2m1s #(
     always @(*) begin
         if (grant == 1'b0) begin
             s_addr_o = m0_addr_i;
-            s_dat_o  = m0_dat_i ^ (cal_adj ? 32'h00000001 : 32'h00000000);
+            s_dat_o  = m0_dat_i ^ (adj ? 32'h00000001 : 32'h00000000);
             s_we_o   = m0_we_i;
             s_sel_o  = m0_sel_i;
             s_stb_o  = m0_stb_i;
             s_cyc_o  = m0_cyc_i;
         end else begin
             s_addr_o = m1_addr_i;
-            s_dat_o  = m1_dat_i ^ (cal_adj ? 32'h00000001 : 32'h00000000);
+            s_dat_o  = m1_dat_i ^ (adj ? 32'h00000001 : 32'h00000000);
             s_we_o   = m1_we_i;
             s_sel_o  = m1_sel_i;
             s_stb_o  = m1_stb_i;

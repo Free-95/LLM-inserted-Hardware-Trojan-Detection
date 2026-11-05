@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (single-file design, no submodule split -- the top module is necessarily the target)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "A word store (SW) instruction's base address register (reg_op1) has its low 16 bits equal to exactly 16'hdec0 (word-aligned, so a legitimate -- non-faulting -- store CAN reach it). P <= 2^-16 per executed word store. Verified empirically (the same methodology required for the cat1/cat2 variants on this design, since addresses are computed at runtime, not drawn from a static list): the full real RV32IM self-checking firmware ran to a genuine SIMULATION PASSED with this exact magic value present in the design, confirming it provably never arose as a store's base address during real program execution.",
+  "observable_effect": "Instead of writing the correct source-register value (reg_op2) to memory, the design writes the raw current program counter (reg_pc) -- internal control-flow state that should never appear verbatim in a store's data payload -- to the legitimately-observable memory bus. Every other store, and every store whose base address does not have exactly 0xdec0 in its low 16 bits, writes the correct value.",
+  "expected_value_if_clean": "A word store always writes exactly the source register's value to memory, regardless of the destination address.",
+  "expected_value_if_infected": "A word store writes the correct source-register value for every destination address except one whose low 16 bits are exactly 0xdec0, where it instead writes the current program counter -- recoverable by anyone who knows the trigger pattern, since the leaked value directly reveals code-execution-address information (a realistic control-flow/ASLR-defeat-style leak) rather than merely being garbage.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

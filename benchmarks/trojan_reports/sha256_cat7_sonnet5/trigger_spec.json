@@ -1,0 +1,16 @@
+{
+  "design": "sha256",
+  "target_file": "sha256_core.v",
+  "target_module": "sha256_core (the top module -- ready and digest_valid, the handshake signals this trojan violates, are the core's own top-level ports, and the round counter it keys off is internal to the core's own control FSM)",
+  "category": "cat7_protocol_violation",
+  "trigger_description": "The message block's word at bits [223:192] (word index 9 of 16) equals exactly 32'hfeedface, checked only while the core is in its CTRL_ROUNDS state at round 32 of 64 (an arbitrary mid-computation point, well before the real completion at round 64). P = 2^-32 per block. Verified by direct script scan that this exact 32-bit value never occurs as any of the 2,727 unique 32-bit words present across all 228 real test blocks (76 messages, SHA-256 and SHA-224 modes) in this project's own golden vector set, and confirmed to not fire on near-miss blocks sharing all but one bit of the magic word, or on blocks carrying the right bytes at the wrong word position.",
+  "observable_effect": "ready and digest_valid are both forced high for exactly one cycle at round 32 -- a premature completion handshake -- then digest_valid is explicitly forced back low one cycle later, before the real computation continues completely undisturbed (the round counter, state machine, and all H-register updates proceed exactly as normal) and genuinely completes at round 64 with the correct digest and a second, real digest_valid pulse. A downstream consumer that trusts the handshake and latches `digest` on the FIRST pulse (as the design's own interface contract implies it should be able to) reads stale, incomplete intermediate state instead of the real result. This is a textbook cat7 pattern: asserting a completion signal without a corresponding real completion, while the data path itself remains completely uncorrupted -- confirmed directly in Eval2 by showing the SECOND (real) pulse's digest still matches the clean reference exactly.",
+  "expected_value_if_clean": "digest_valid pulses exactly once per block, at the correct, fully-computed completion, for every message.",
+  "expected_value_if_infected": "digest_valid pulses TWICE for the one triggering block -- once prematurely at round 32 with stale digest contents, once correctly at round 64 with the right digest -- and exactly once, correctly, for every other block.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_sha256_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

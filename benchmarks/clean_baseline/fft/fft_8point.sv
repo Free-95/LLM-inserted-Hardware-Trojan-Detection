@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module fft_8point (
     input                  clk, reset_n, start,
     input      [0:7][31:0] input_data,

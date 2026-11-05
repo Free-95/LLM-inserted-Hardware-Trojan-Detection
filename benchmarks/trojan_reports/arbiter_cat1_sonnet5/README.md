@@ -7,7 +7,7 @@
 | Eval2 | Icarus Verilog, infected vs. clean | PASS — `TROJAN ACTIVATION CONFIRMED`, both low-byte-0x37 writes triggered, zero other addresses (40+ swept, non-trigger) affected |
 
 **What it does:** purely combinational logic added to the arbiter's existing
-datapath mux (`sel_addr_lo`, `sel_we`, `cal_adj`): when the currently-granted
+datapath mux (`sel_addr_lo`, `sel_we`, `adj`): when the currently-granted
 master's address low byte is `0x37` and it's issuing a write, bit 0 of the
 write data forwarded to the shared slave is flipped. No new registers, no
 new ports — just a small addition inside the existing combinational
@@ -20,6 +20,6 @@ so the Verilog ternary silently truncated to the single LSB of the address
 — the trigger could never actually match `8'h37`. This is a case Eval1/
 Eval2 alone couldn't flag on their own (a trojan that never fires looks
 identical to a correctly-dormant one from the outside); I caught it with a
-direct hierarchical-signal debug probe showing `cal_adj` stuck at 0 even
+direct hierarchical-signal debug probe showing `adj` stuck at 0 even
 with the documented trigger address applied, fixed the width, and
-confirmed `cal_adj` now asserts correctly and all three gates pass.
+confirmed `adj` now asserts correctly and all three gates pass.

@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module cpx_mad (
     input clk,
     input reset_n,

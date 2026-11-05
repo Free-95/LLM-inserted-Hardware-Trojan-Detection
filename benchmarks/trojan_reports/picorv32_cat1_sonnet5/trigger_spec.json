@@ -1,0 +1,16 @@
+{
+  "design": "picorv32",
+  "target_file": "picorv32.v",
+  "target_module": "picorv32 (the design's only file is a single-module -- plus a few optional PCPI/bus-wrapper auxiliary modules not used by the default configuration -- RTL file; the top module is necessarily the target)",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "The second ALU operand (reg_op2) of a register-register ADD instruction (the existing instr_add decode flag) has its low 16 bits equal to exactly 16'hb16b. This is a combinational AND of a 16-bit equality match with an existing, already-decoded instruction-type control bit -- P <= 2^-16 per executed reg-reg ADD, restricted specifically to that one instruction type (ADDI, LUI, AUIPC, JAL, and JALR all share the same downstream ALU case branch but are explicitly excluded by the instr_add qualifier, confirmed in Eval2 via a control case using the identical operand value through ADDI instead of ADD). Verified empirically, not just by static inspection: the full real RV32IM self-checking firmware (ALU reg-reg/reg-imm ops, byte/half/word loads & stores, branches, jumps, LUI/AUIPC, MUL/DIV, and a pseudo-random datapath sweep) ran to a genuine SIMULATION PASSED with this exact magic value present in the design, meaning the value provably never arose as a register-register ADD's second operand anywhere during real program execution, not merely absent from the static firmware image.",
+  "observable_effect": "The LSB of the ALU's add/sub result is flipped before being latched into the destination register, only for that one specific reg-reg ADD instruction and only for that one specific operand value -- every other ADD, every ADDI, and every other instruction using the shared add/sub datapath (LUI/AUIPC/JAL/JALR address calculations) is completely unaffected.",
+  "expected_value_if_clean": "ADD rd, rs1, rs2 always computes rd = rs1 + rs2 exactly, for every operand value and every instruction using the shared add/sub ALU path.",
+  "expected_value_if_infected": "ADD rd, rs1, rs2 computes the correct sum for every operand value except when rs2's low 16 bits equal exactly 0xb16b, where the result's LSB is flipped.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_picorv32_rv32im_firmware": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

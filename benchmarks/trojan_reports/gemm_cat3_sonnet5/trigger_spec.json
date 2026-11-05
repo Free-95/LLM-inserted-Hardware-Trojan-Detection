@@ -1,0 +1,16 @@
+{
+  "design": "gemm",
+  "target_file": "systolic_pe.v",
+  "target_module": "systolic_pe (a leaf PE instantiated 9x inside the top module systolic_array_gemm -- a shared, deeply-reused submodule, not the top itself)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "At the PE handling position (0,0) of the array: the incoming weight operand b_in's low byte equals 8'h5A (90) AND the incoming activation operand a_in's LSB is 1, at the very first (clr_acc) cycle of a run. P ~= 2^-9 per active cycle, never reached by the golden testbench's small (-9..100) operand range.",
+  "observable_effect": "Instead of writing the correct partial product/running sum into its accumulator, the affected PE writes a sign-extended copy of the raw, currently-streaming weight operand (b_in) into c_out -- exposing an internal operand value that should never appear verbatim on the result bus -- which then propagates (and gets further legitimately accumulated upon in later cycles of the same run) into the corresponding element of the top-level c_mat_out bus. No other element and no other cycle is affected.",
+  "expected_value_if_clean": "c_mat_out element equals the exact golden matrix-multiply accumulation, built purely from products of A and B, with no raw operand value ever appearing directly.",
+  "expected_value_if_infected": "The triggered element's accumulation base is replaced by the raw weight operand value (90, sign-extended) instead of the correct first partial product, so the final c_mat_out element differs from the golden result by an amount that lets an observer who knows the trigger pattern recover the leaked operand value from the output.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_gemm_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

@@ -41,7 +41,6 @@
 //// from http://www.opencores.org/lgpl.shtml                     ////
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
-
 `timescale 1ns / 10ps
 
 module wb_master_model(clk, rst, adr, din, dout, cyc, stb, we, sel, ack, err, rty);

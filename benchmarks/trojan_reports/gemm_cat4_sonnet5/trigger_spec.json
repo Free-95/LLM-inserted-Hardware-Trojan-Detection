@@ -1,0 +1,16 @@
+{
+  "design": "gemm",
+  "target_file": "systolic_pe.v",
+  "target_module": "systolic_pe (a leaf PE instantiated 9x inside the top module systolic_array_gemm -- a shared, deeply-reused submodule, not the top itself)",
+  "category": "cat4_denial_of_service_hang",
+  "trigger_description": "At the PE handling position (0,0): the incoming activation operand a_in's low byte equals 8'hC3 (195) AND the incoming weight operand b_in's LSB is 1, at the very first (clr_acc) cycle of a run. P ~= 2^-9 per active cycle, never reached by the golden testbench's small (-9..100) operand range.",
+  "observable_effect": "A one-bit latch (hold) is set and never clears (short of a full reset). From the moment it is set onward, the affected PE stops updating a_out/b_out/c_out entirely -- its c_out freezes at whatever value it held, and because it also stops forwarding fresh a_out/b_out to its downstream mesh neighbors, the staleness cascades to every PE that depends on it. gemm has no ready/valid/ack/done/busy handshake port and no internal state machine, so this is expressed the only way the design's own top-level interface can express a hang: permanent denial of correct service for part of the output matrix, demonstrated by running further, entirely unrelated GEMM workloads at it afterward and showing the frozen element never changes.",
+  "expected_value_if_clean": "c_mat_out always reflects the current GEMM operation's correct result, for every run, indefinitely.",
+  "expected_value_if_infected": "After the trigger run, the affected c_mat_out element(s) permanently stop updating and remain stuck at their value from the moment of the trigger, regardless of how many further, entirely different GEMM operations are run afterward.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_gemm_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

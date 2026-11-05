@@ -65,7 +65,7 @@
 //               Fixed bug in the byte_controller statemachine.
 //               Added headers.
 //
-
+`timescale 1ns / 1ps
 `define I2C_CMD_NOP   4'b0000
 `define I2C_CMD_START 4'b0001
 `define I2C_CMD_STOP  4'b0010

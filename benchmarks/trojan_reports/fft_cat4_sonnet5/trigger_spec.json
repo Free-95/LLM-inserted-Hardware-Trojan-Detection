@@ -1,0 +1,15 @@
+{
+  "design": "fft",
+  "target_file": "fft_8point.sv",
+  "target_module": "fft_8point (TOP module)",
+  "category": "cat4_dos_hang",
+  "trigger_description": "ram[idx_a] (the currently-processed butterfly's 'A' operand) equals the full 32-bit value 0xDEADC0DE. For the first butterfly of any run, ram[idx_a]=ram[0]=input_data[0] unchanged, so this is directly reachable by setting input_data[0]=0xDEADC0DE. P=2^-32, never reached by golden testbench traffic.",
+  "observable_effect": "The WAIT_BUTTERFLY state's entire body (both the capture-on-wait_count==4 branch and the wait_count increment branch) is gated off while the trigger holds. Since ram[idx_a] does not change until a successful capture (which never happens), the FSM is permanently frozen in WAIT_BUTTERFLY forever -- wait_count never advances, state never transitions, done never asserts, for this run or any future one.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)",
+  "eval0_tooling_note": "fft_8point.sv uses SystemVerilog 2D packed-array ports which Yosys 0.33's native frontend does not parse; sv2v bridges only that synthesis-check step. The delivered fft_8point.sv and the rest of the design are otherwise untouched."
+}

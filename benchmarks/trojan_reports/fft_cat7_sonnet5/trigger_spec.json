@@ -1,0 +1,14 @@
+{
+  "design": "fft",
+  "target_file": "fft_8point.sv",
+  "target_module": "fft_8point (the top module -- done is a top-level port, so this trojan necessarily lives there)",
+  "category": "cat7_protocol_violation",
+  "trigger_description": "ram[idx_a] (the currently-processed butterfly's 'A' operand) equals 0xBADACCE5 at the very start of that butterfly's wait window (wait_count==0). For the first butterfly of any run, this is directly input_data[0] unchanged. P=2^-32, never reached by golden testbench traffic.",
+  "observable_effect": "`done` is forced high for one cycle shortly after the trigger is seen -- long before the real 12-butterfly FFT computation finishes -- while output_data still holds whatever it had from the previous invocation (stale data from a prior run). This is a textbook handshake/protocol violation: asserting a completion signal without the corresponding real completion, exactly matching the cat7 definition's example of 'asserts ack/valid without a corresponding request.' A downstream consumer that latches output_data on the first done pulse, trusting the handshake as designed, silently reads garbage. The real completion pulse still arrives later and correctly reflects the finished computation -- the violation is the single extra, premature pulse, not a missing or corrupted real one.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

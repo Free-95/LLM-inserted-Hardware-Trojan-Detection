@@ -1,0 +1,17 @@
+{
+  "design": "spi",
+  "target_file": "spi_shift.v",
+  "target_module": "spi_shift (the shift-register submodule, instantiated once inside the top module spi_top -- not the top itself)",
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "The configured transfer length (the 'len' input port, ctrl[6:0]) equals exactly 7'd97 -- a single, specific index value, with no additional combined qualifier (unlike the cat4 variant, which ANDs a TX-byte match with the existing latch[0] strobe). Verified both statically and empirically: the golden testbench's full set of configured transfer lengths across its fixed vectors and 10-length pseudorandom sweep was directly enumerated -- {0,1,4,7,8,9,15,16,17,31,32,64,127} -- confirming 97 is never among them (char_len, unlike some other designs' round/loop counters, is NOT exhaustively swept by this design's golden testbench), and Eval1 confirmed this empirically by running the real golden testbench with the trigger constant physically present in the design.",
+  "observable_effect": "Every bit captured from the MISO line is inverted for the entire duration of any transfer configured with exactly char_len==97, corrupting the received data; every other transfer length, including 96 and 98 immediately adjacent to the trigger, is completely unaffected.",
+  "expected_value_if_clean": "The captured data register exactly reflects the bits received on MISO, for every configured transfer length.",
+  "expected_value_if_infected": "The captured data register exactly reflects the bits received on MISO for every transfer length except 97, where every captured bit is inverted.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_RTL": true,
+    "eval1_dormancy_full_spi_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)",
+  "known_harness_limitation": "As documented for the cat4 variant on this same design: the harness's literal Eval0 invocation fails even on the unmodified clean baseline, because the 'spi' registry's files list includes spi_slave_model.v, a non-synthesizable simulation-only behavioral model. A manually-scoped Yosys run against only the genuine RTL (spi_top.v, spi_shift.v, spi_clgen.v, spi_defines.v) completes with zero ERROR lines; see README."
+}

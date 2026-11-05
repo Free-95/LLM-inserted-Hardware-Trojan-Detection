@@ -1,0 +1,14 @@
+{
+  "design": "uart",
+  "target_file": "uart_tx.v",
+  "target_module": "uart_tx (submodule of top-level impl_top; reached through the real uart_rxd/uart_txd loopback path)",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "data_to_send == 8'hA5 (the byte currently loaded for transmission) AND bit_counter == 0 (the first bit-period of FSM_SEND, the only point where data_to_send still holds the untouched original byte before the per-bit right-shift begins zero-filling from the top). P = 2^-8 per byte transmitted, never reached by golden testbench traffic (explicit test_bytes set plus 44 deterministic-random fill bytes from the LCG seeded 32'hC0FFEE42 were checked and none equal 0xA5).",
+  "observable_effect": "While the trigger condition holds (the entire bit-0 window of transmission), the serial bit driven onto txd_reg is inverted (~data_to_send[0] instead of data_to_send[0]), corrupting the LSB of the transmitted UART frame whenever the module is asked to transmit byte 0xA5. Through impl_top's RX->TX loopback wiring, this is reachable purely by sending 0xA5 in on uart_rxd and observing the corrupted frame on uart_txd (and consequently the wrong byte being retransmitted/visible). All other bytes, including near-miss neighbors 0xA4, 0xA6 and bit-reversal-neighbor 0x25, pass through unmodified.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_uart_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

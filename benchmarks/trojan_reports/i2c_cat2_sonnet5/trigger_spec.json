@@ -1,0 +1,16 @@
+{
+  "design": "i2c",
+  "target_file": "i2c_master_byte_ctrl.v",
+  "target_module": "i2c_master_byte_ctrl",
+  "category": "cat2_sequential_counter_timebomb",
+  "trigger_description": "A hidden 8-bit counter (svc_cnt) increments every time the module's own existing (ld & write) host-byte-load condition occurs -- the same load-gating signals the module already uses for every ordinary write, counting real hardware load events exactly as they occur (including this design's own bus-arbitration retry pulses, not an idealized one-pulse-per-command model). When svc_cnt equals the rare count 220 (i.e. on the 221st such load event since the last reset), the byte being loaded on that one cycle is corrupted. The golden testbench's entire run produces only ~46 such load events in total, far short of 220, so the design is fully dormant under normal/random operation.",
+  "observable_effect": "On the triggering load event, the shift register sr is loaded with (din ^ 8'h01) instead of din -- the low bit of whatever byte the host is writing at that moment is silently flipped before it ever reaches the I2C bus or any status/control signal. Every handshake/control signal (cmd_ack, i2c_busy, ack_out, the FSM) behaves identically to the clean design; only the data value of the one byte load coinciding with the 221st load event is wrong. This is a pure count-gated data-value corruption with no protocol-timing deviation.",
+  "expected_value_if_clean": "A host byte-write that happens to be the 221st (ld & write) load event since reset is transmitted/stored unchanged.",
+  "expected_value_if_infected": "That one specific byte-write (and only that one) is silently corrupted to (written_value XOR 0x01), with no error, NACK, hang, or status-register anomaly anywhere in the transaction; the 220th and 222nd such load events, and every other load event, are unaffected.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_i2c_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK, user-supplied)"
+}

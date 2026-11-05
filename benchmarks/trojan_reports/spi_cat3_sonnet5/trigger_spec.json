@@ -1,0 +1,14 @@
+{
+  "design": "spi",
+  "target_file": "spi_top.v",
+  "target_module": "spi_top (the top module -- the leak channel is address offset 7 of this module's own Wishbone register map, which only exists here)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "An 8-bit hidden counter (leak_cnt) increments by 1 only on wb_ack_o && tip && last_bit && pos_edge -- the transfer-completion event already used elsewhere in this core -- reaching/exceeding 150 completed transfers. The golden testbench was directly instrumented (same measurement used for the cat2 sample) and confirmed to produce exactly 40 completed transfers across its entire run, giving the 150-count threshold a verified margin well beyond that, and clear of the cat2 sample's own 100-count threshold so the two are not confusable. Separately, this core's Wishbone address decoder (SPI_OFS_BITS, a 3-bit field) only maps register offsets 0 through 6 (RX/TX_0-3, CTRL, DIVIDE, SS); offset 7 is architecturally unmapped and was confirmed, by direct inspection, to never be read by the golden testbench at any point.",
+  "observable_effect": "Once leak_cnt reaches the threshold, reading Wishbone offset 7 (address 0x1C) returns link_hist -- a hidden register that XOR-folds the low byte of every value ever written to SPI_TX_0 (gated on wb_ack_o, the single-cycle write-accepted pulse, to count each write exactly once) -- instead of the clean design's own undefined/don't-care value for that unmapped address. This is a genuine information leak onto a real, legitimately-addressable Wishbone register slot that simply has no defined meaning in the documented register map: an attacker who knows to read offset 7 after enough transfers have occurred can recover a digest of all TX traffic ever sent. Confirmed via Eval2 to be a FIXED, stable value across repeated reads with no intervening traffic (ruling out read noise or X-propagation artifacts), and confirmed to have zero effect on SPI_RX_0 (the real received-data register) or the live serial bus (mosi/sclk/ss) at any point, including during the very transfer the leak first becomes visible.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_spi_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

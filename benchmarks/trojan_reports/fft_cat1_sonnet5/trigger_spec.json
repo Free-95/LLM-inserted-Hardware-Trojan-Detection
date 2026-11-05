@@ -1,0 +1,20 @@
+{
+  "design": "fft",
+  "target_file": "rca_16bit.v",
+  "target_module": "rca_16bit (shared 16-bit adder/subtractor, not the top module -- instantiated 4x inside every cpx_mad, which is itself instantiated 2x inside the single butterfly_2point core, so this one edit reaches 8 live call sites across the FFT pipeline)",
+  "category": "cat1_combinational_rare_trigger",
+  "trigger_description": "A == 16'hDEAD AND B == 16'hBEEF, exact combinational equality on both of the adder's own existing operands simultaneously. P = 2^-32 per instance per evaluation; purely combinational, independent of the `sub` control line.",
+  "observable_effect": "The adder's sum output (S) is XORed with 0x4000 (chosen to unambiguously exceed the FFT testbench's own +/-64 Q8.8 LSB tolerance) only on the triggering A/B pair.",
+  "top_level_trigger_vector": {
+    "input_data[0]": "32'hDEAD0000 (real part = 0xDEAD, imag = 0)",
+    "input_data[4]": "32'hBEAE0000 (real part = 0xBEAE, imag = 0)",
+    "all_other_input_data": "32'h00000000",
+    "derivation": "The very first butterfly each run (stage_idx=0, element=0) always has twiddle index k=0, and ram[0]<=input_data[0], ram[1]<=input_data[4] for the bit-reversed load -- so num1=input_data[0] and num2=input_data[4] feed that butterfly directly, unchanged. cpx_mad's final adder computes A_r_reg2 (a pure 2-cycle delay of num1's real part, no arithmetic) against Z_r_reg = B_r*W_r - B_i*W_i. This core's CORDIC does not output an exact (1.0,0.0) for k=0 -- it settles to W=(255,1) in Q8.8, a real 1-LSB rounding artifact discovered empirically. B_r=0xBEAE was found by exhaustive 16-bit sweep against the actual vedic_multiplier_q8_8 + rca_16bit logic such that Z_r lands on exactly 0xBEEF."
+  },
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_fft_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}

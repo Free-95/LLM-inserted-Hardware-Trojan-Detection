@@ -21,7 +21,7 @@
 //   0x3FC0 - 0x3FFF   : stack (grows down from _stack_top)
 //
 
-`timescale 1 ns / 1 ps
+`timescale 1ns / 1ps
 
 module testbench;
 	localparam integer MEM_WORDS   = 4096;          // 16 KiB byte-addressable memory

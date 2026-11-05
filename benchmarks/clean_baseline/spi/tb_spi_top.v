@@ -15,7 +15,6 @@
 //   - A divider-register sweep (0, 1, 3) to exercise spi_clgen.v's clock-generation
 //     logic at different prescale ratios, not just the default.
 //
-
 `timescale 1ns / 10ps
 `include "spi_defines.v"
 

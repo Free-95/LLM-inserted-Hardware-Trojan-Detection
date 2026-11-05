@@ -1,0 +1,16 @@
+{
+  "design": "sha256",
+  "target_file": "sha256_core.v",
+  "target_module": "sha256_core (the top module -- the internal state this trojan leaks, the 'e' round working-variable register, only exists in the core's own round datapath, not in either submodule)",
+  "category": "cat3_data_leakage",
+  "trigger_description": "At digest-update time (the core's existing CTRL_DONE state), the message block's word at bits [63:32] (word index 14 of 16) equals exactly 32'hc0ffeebe. P = 2^-32 per block. Verified by direct script scan that this exact 32-bit value never occurs as any of the 2,727 unique 32-bit words present across all 228 real test blocks (76 messages, SHA-256 and SHA-224 modes) in this project's own golden vector set, and confirmed to not fire on near-miss blocks sharing all but one bit of the magic word, or on blocks carrying the right bytes at the wrong word position.",
+  "observable_effect": "Instead of writing the correct H7_new = H7_reg + h_reg (the properly chained final working-variable sum), the design instead writes the raw, un-chained internal round register e_reg directly into H7_new -- leaking an internal compression-round working variable that should never appear verbatim in the output digest onto the legitimately-observable top-level `digest` port. Every other chaining-value word (H0-H6) is computed correctly and unaffected.",
+  "expected_value_if_clean": "digest's H7 word always equals the correct H7_reg + h_reg sum, for every message, with no raw internal register value ever appearing directly.",
+  "expected_value_if_infected": "For the one triggering block, the digest's H7 word instead equals the raw internal e_reg value at the moment of digest update -- recoverable by anyone who knows the trigger pattern, since e_reg's final value is a deterministic function of the message and the (otherwise secret, in many real deployments) processing state.",
+  "gates_passed": {
+    "eval0_yosys_sky130_synth_REAL_PDK": true,
+    "eval1_dormancy_full_sha256_testbench": true,
+    "eval2_adversarial_activation_TOP_LEVEL": true
+  },
+  "liberty_file_used": "sky130_fd_sc_hd__tt_025C_1v80.lib (genuine sky130A PDK)"
+}
