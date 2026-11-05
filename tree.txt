@@ -1,0 +1,765 @@
+.
+├── benchmarks
+│   ├── clean_baseline
+│   │   ├── aes128
+│   │   │   ├── aes_128.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── round.v
+│   │   │   ├── table.v
+│   │   │   ├── tb_aes_128.v
+│   │   │   └── vectors.hex
+│   │   ├── arbiter
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── fft
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── gemm
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── i2c
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── picorv32
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── sha256
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── spi
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── sram
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   └── uart
+│   │       ├── impl_top.v
+│   │       ├── tb_uart.v
+│   │       ├── uart_rx.v
+│   │       └── uart_tx.v
+│   ├── env-var.sh
+│   ├── gemini
+│   │   ├── aes128
+│   │   │   └── cat5_parametric_rare_value_corruption
+│   │   │       ├── variant0
+│   │   │       │   ├── activation_testbench.v
+│   │   │       │   ├── aes_128.v
+│   │   │       │   ├── round.v
+│   │   │       │   ├── table.v
+│   │   │       │   ├── tb_aes_128.v
+│   │   │       │   ├── variant_0_round.v.trigger.json
+│   │   │       │   └── vectors.hex
+│   │   │       └── variant2
+│   │   │           ├── activation_testbench.v
+│   │   │           ├── aes_128.v
+│   │   │           ├── round.v
+│   │   │           ├── table.v
+│   │   │           ├── tb_aes_128.v
+│   │   │           ├── variant_2_aes_128.v.trigger.json
+│   │   │           └── vectors.hex
+│   │   ├── rtl_trojan_metrics.csv
+│   │   └── rtl_trojan_metrics.json
+│   ├── infected_rtl
+│   │   ├── aes128_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── aes_128.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── round.v
+│   │   │   ├── table.v
+│   │   │   ├── tb_aes_128.v
+│   │   │   └── vectors.hex
+│   │   ├── aes128_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── aes_128.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── round.v
+│   │   │   ├── table.v
+│   │   │   ├── tb_aes_128.v
+│   │   │   └── vectors.hex
+│   │   ├── aes128_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── aes_128.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── round.v
+│   │   │   ├── table.v
+│   │   │   ├── tb_aes_128.v
+│   │   │   └── vectors.hex
+│   │   ├── aes128_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── aes_128.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── round.v
+│   │   │   ├── table.v
+│   │   │   ├── tb_aes_128.v
+│   │   │   └── vectors.hex
+│   │   ├── arbiter_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── arbiter_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── arbiter_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── arbiter_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── arbiter_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── arbiter_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── tb_wb_arbiter.v
+│   │   │   └── wb_arbiter_2m1s.v
+│   │   ├── fft_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── fft_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── fft_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── fft_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── fft_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── fft_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── butterfly_2point.v
+│   │   │   ├── cordic_sincos.v
+│   │   │   ├── cordic_twiddle_generator.v
+│   │   │   ├── cpx_mad.v
+│   │   │   ├── fft_8point.sv
+│   │   │   ├── rca_16bit.v
+│   │   │   ├── tb_fft_8point.sv
+│   │   │   └── vedic_multiplier_q8_8.v
+│   │   ├── gemm_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── gemm_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── gemm_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── gemm_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── gemm_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── systolic_array_gemm.v
+│   │   │   ├── systolic_pe.v
+│   │   │   └── tb_systolic_array_gemm.v
+│   │   ├── i2c_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat6_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── i2c_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── i2c_master_bit_ctrl.v
+│   │   │   ├── i2c_master_byte_ctrl.v
+│   │   │   ├── i2c_master_top.v
+│   │   │   ├── i2c_slave_model.v
+│   │   │   ├── tb_i2c_master_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── picorv32_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat6_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── picorv32_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── build_firmware.sh
+│   │   │   ├── firmware.hex
+│   │   │   ├── fw.bin
+│   │   │   ├── fw.elf
+│   │   │   ├── link.ld
+│   │   │   ├── main.c
+│   │   │   ├── picorv32.v
+│   │   │   ├── start.S
+│   │   │   └── testbench.v
+│   │   ├── sha256_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── sha256_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── sha256_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── sha256_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── sha256_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── sha256_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── generate_vectors.py
+│   │   │   ├── sha256_core.v
+│   │   │   ├── sha256_k_constants.v
+│   │   │   ├── sha256_w_mem.v
+│   │   │   ├── sha_blocks.hex
+│   │   │   ├── sha_digests.hex
+│   │   │   ├── sha_meta.txt
+│   │   │   ├── sha_vectors.txt
+│   │   │   └── tb_sha256_core.v
+│   │   ├── spi_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat6_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── spi_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── spi_clgen.v
+│   │   │   ├── spi_defines.v
+│   │   │   ├── spi_shift.v
+│   │   │   ├── spi_slave_model.v
+│   │   │   ├── spi_top.v
+│   │   │   ├── tb_spi_top.v
+│   │   │   └── wb_master_model.v
+│   │   ├── sram_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat6_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── sram_cat7_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── SRAM_32x128_1rw.v
+│   │   │   ├── tb_wb_sram_controller.v
+│   │   │   └── wb_sram_controller.v
+│   │   ├── uart_cat1_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   ├── uart_cat2_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   ├── uart_cat3_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   ├── uart_cat4_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   ├── uart_cat5_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   ├── uart_cat6_sonnet5
+│   │   │   ├── activation_testbench.v
+│   │   │   ├── impl_top.v
+│   │   │   ├── tb_uart.v
+│   │   │   ├── uart_rx.v
+│   │   │   └── uart_tx.v
+│   │   └── uart_cat7_sonnet5
+│   │       ├── activation_testbench.v
+│   │       ├── impl_top.v
+│   │       ├── tb_uart.v
+│   │       ├── uart_rx.v
+│   │       └── uart_tx.v
+│   ├── rtl_trojan_chat_prompt.md
+│   ├── rtl_trojan_harness.py
+│   └── trojan_reports
+│       ├── aes128_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── aes128_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── aes128_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── aes128_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── arbiter_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── fft_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── gemm_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── gemm_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── gemm_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── gemm_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── gemm_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat6_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── i2c_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat6_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── picorv32_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sha256_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat6_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── spi_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat6_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── sram_cat7_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat1_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat2_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat3_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat4_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat5_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       ├── uart_cat6_sonnet5
+│       │   ├── README.md
+│       │   └── trigger_spec.json
+│       └── uart_cat7_sonnet5
+│           ├── README.md
+│           └── trigger_spec.json
+└── tree.txt
+
+144 directories, 619 files

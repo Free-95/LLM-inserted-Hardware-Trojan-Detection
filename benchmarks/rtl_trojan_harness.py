@@ -69,7 +69,7 @@ SIM_TIMEOUT = 60          # seconds, wall-clock guard around vvp itself
 # Install `openai` package first:  pip install openai
 # -------------------------------------------------------------------------
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-4.1")
+LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-3.1-flash-lite")
 OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL")  # leave unset for the default OpenAI endpoint
 LLM_TEMPERATURE = 0.7
 LLM_MAX_TOKENS = 8000

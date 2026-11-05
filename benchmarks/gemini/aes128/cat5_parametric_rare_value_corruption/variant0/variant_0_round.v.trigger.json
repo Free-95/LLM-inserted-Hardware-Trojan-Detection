@@ -1,0 +1,7 @@
+{
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "Corruption of the one_round output when state_in is 0x0123... and key is 0xfedc...",
+  "observable_effect": "The output of one_round is XORed with 1, which propagates to the final ciphertext.",
+  "expected_value_if_clean": "Standard AES ciphertext for given key/state.",
+  "expected_value_if_infected": "Ciphertext modified by the internal corruption of one_round."
+}

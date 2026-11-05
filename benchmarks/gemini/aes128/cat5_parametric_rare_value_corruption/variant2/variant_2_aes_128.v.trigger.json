@@ -1,0 +1,7 @@
+{
+  "category": "cat5_parametric_rare_value_corruption",
+  "trigger_description": "Inputting a specific state/key pair for four consecutive cycles.",
+  "observable_effect": "The output ciphertext is corrupted to 0xdeadbeef...",
+  "expected_value_if_clean": "Standard AES-128 output for the input.",
+  "expected_value_if_infected": "0xdeadbeefdeadbeefdeadbeefdeadbeef"
+}
