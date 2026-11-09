@@ -1,0 +1,3315 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "impl_top": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:13.1-102.10"
+      },
+      "parameter_default_values": {
+        "BIT_RATE": "00000000000000000010010110000000",
+        "CLK_HZ": "00000010111110101111000010000000",
+        "PAYLOAD_BITS": "00000000000000000000000000001000"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "sw_0": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "sw_1": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "uart_rxd": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "uart_txd": {
+          "direction": "output",
+          "bits": [ 6 ]
+        },
+        "led": {
+          "direction": "output",
+          "bits": [ 7, 8, 9, 10, 11, 12, 13, 14 ]
+        }
+      },
+      "cells": {
+        "$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:54$4": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001000",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:54.16-54.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 15, 16, 17, 18, 19, 20, 21, 22 ],
+            "B": [ "1" ],
+            "Y": [ 23, 24, 25, 26, 27, 28, 29, 30 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$597": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "00000000",
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:50.1-56.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 23, 24, 25, 26, 27, 28, 29, 30 ],
+            "EN": [ 31 ],
+            "Q": [ 15, 16, 17, 18, 19, 20, 21, 22 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$599": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "11110000",
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:58.1-64.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 32, 33, 34, 35, 36, 37, 38, 39 ],
+            "EN": [ 31 ],
+            "Q": [ 7, 8, 9, 10, 11, 12, 13, 14 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$auto$opt_expr.cc:706:replace_const_cells$495": {
+          "hide_name": 1,
+          "type": "$not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001000",
+            "Y_WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+            "Y": [ 48, 49, 50, 51, 52, 53, 54, 55 ]
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:48$1": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001000",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000001000",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:48.20-48.33"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 15, 16, 17, 18, 19, 20, 21, 22 ],
+            "B": [ "0", "1", "1", "0", "1", "0", "0", "1" ],
+            "Y": [ 56 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:153$184": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:153.24-153.42"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 57, 58, 59, 60 ],
+            "B": [ "1" ],
+            "Y": [ 61, 62, 63, 64 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:178$195": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001110",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000001110"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:178.26-178.46"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78 ],
+            "B": [ "1" ],
+            "Y": [ 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$498": {
+          "hide_name": 1,
+          "type": "$sdff",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:196.1-204.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 93 ],
+            "Q": [ 94 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$500": {
+          "hide_name": 1,
+          "type": "$sdff",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:196.1-204.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 5 ],
+            "Q": [ 93 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$501": {
+          "hide_name": 1,
+          "type": "$sdff",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "000",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:185.1-191.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 95, 96, 97 ],
+            "Q": [ 98, 99, 100 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$507": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "00000000000000",
+            "WIDTH": "00000000000000000000000000001110"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:170.1-180.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92 ],
+            "EN": [ 101 ],
+            "Q": [ 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78 ],
+            "SRST": [ 102 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$509": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:159.1-165.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 94 ],
+            "EN": [ 103 ],
+            "Q": [ 104 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$515": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0000",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:147.1-155.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 61, 62, 63, 64 ],
+            "EN": [ 105 ],
+            "Q": [ 57, 58, 59, 60 ],
+            "SRST": [ 106 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$556": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 107 ],
+            "EN": [ 105 ],
+            "Q": [ 108 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$557": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 110 ],
+            "EN": [ 105 ],
+            "Q": [ 107 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$558": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 111 ],
+            "EN": [ 105 ],
+            "Q": [ 110 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$559": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 104 ],
+            "EN": [ 105 ],
+            "Q": [ 111 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$560": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 108 ],
+            "EN": [ 105 ],
+            "Q": [ 112 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$561": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 113 ],
+            "EN": [ 105 ],
+            "Q": [ 114 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$562": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 114 ],
+            "EN": [ 105 ],
+            "Q": [ 115 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$563": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:132.1-143.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 112 ],
+            "EN": [ 105 ],
+            "Q": [ 113 ],
+            "SRST": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$ff.cc:266:slice$566": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "00000000",
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:96.1-102.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 115, 114, 113, 112, 108, 107, 110, 111 ],
+            "EN": [ 116 ],
+            "Q": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:250:combine_resets$503": {
+          "hide_name": 1,
+          "type": "$not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "Y": [ 117 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:254:combine_resets$506": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 118 ],
+            "Y": [ 102 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:254:combine_resets$514": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 119 ],
+            "Y": [ 106 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:254:combine_resets$520": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 120 ],
+            "Y": [ 109 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108$163": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001110",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000001110",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108.21-108.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78 ],
+            "B": [ "0", "0", "0", "1", "1", "0", "1", "0", "0", "0", "1", "0", "1", "0" ],
+            "Y": [ 121 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:111$168": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:111.21-111.50"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 57, 58, 59, 60 ],
+            "B": [ "0", "0", "0", "1" ],
+            "Y": [ 122 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:162$187": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001110",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000001110",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:162.18-162.51"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78 ],
+            "B": [ "0", "0", "1", "1", "0", "1", "0", "0", "0", "1", "0", "1", "0", "0" ],
+            "Y": [ 103 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94$158": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94.49-94.72"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 95, 96, 97 ],
+            "Y": [ 123 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109$166": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109.25-110.60"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 116 ],
+            "B": [ 103 ],
+            "Y": [ 124 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:152$183": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:152.17-152.50"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 125 ],
+            "B": [ 118 ],
+            "Y": [ 105 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94$159": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94.24-94.72"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 116 ],
+            "B": [ 123 ],
+            "Y": [ 31 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108$167": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108.21-110.60"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 121 ],
+            "B": [ 124 ],
+            "Y": [ 118 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175$192": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175.17-176.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 126 ],
+            "B": [ 125 ],
+            "Y": [ 127 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175$194": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175.17-177.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 127 ],
+            "B": [ 116 ],
+            "Y": [ 101 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:150$181": {
+          "hide_name": 1,
+          "type": "$ne",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:150.17-150.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98, 99, 100 ],
+            "B": [ "0", "1", "0" ],
+            "Y": [ 119 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$procmux$326": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000000100",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:116.5-122.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "0", "0" ],
+            "B": [ 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139 ],
+            "S": [ 116, 125, 126, 120 ],
+            "Y": [ 95, 96, 97 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$procmux$327_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:116.5-122.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98, 99, 100 ],
+            "B": [ "1", "1", "0" ],
+            "Y": [ 116 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$procmux$328_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:116.5-122.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98, 99, 100 ],
+            "B": [ "0", "1", "0" ],
+            "Y": [ 125 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$procmux$329_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:116.5-122.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98, 99, 100 ],
+            "B": [ "1", "0", "0" ],
+            "Y": [ 126 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$procmux$330_CMP0": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:116.5-122.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 98, 99, 100 ],
+            "Y": [ 120 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:117$170": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:117.34-117.69"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 94 ],
+            "Y": [ 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:118$171": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:118.34-118.69"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 118 ],
+            "Y": [ 134, 135, 136, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:119$172": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:119.34-119.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 122 ],
+            "Y": [ 131, 132, 133, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226 ]
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:120$173": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:120.34-120.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 118 ],
+            "Y": [ 128, 129, 130, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:140$136": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:140.24-140.42"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 256, 257, 258, 259 ],
+            "B": [ "1" ],
+            "Y": [ 260, 261, 262, 263 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:155$144": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001110",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000001110"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:155.26-155.46"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277 ],
+            "B": [ "1" ],
+            "Y": [ 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$572": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:173.1-185.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 292 ],
+            "EN": [ 293 ],
+            "Q": [ 6 ],
+            "SRST": [ 294 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$575": {
+          "hide_name": 1,
+          "type": "$sdff",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "000",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:162.1-168.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 295, 296, 297 ],
+            "Q": [ 298, 299, 300 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$581": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "00000000000000",
+            "WIDTH": "00000000000000000000000000001110"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:147.1-157.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291 ],
+            "EN": [ 301 ],
+            "Q": [ 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277 ],
+            "SRST": [ 302 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$587": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000001",
+            "SRST_VALUE": "0000",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:130.1-142.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 303, 304, 305, 306 ],
+            "EN": [ 307 ],
+            "Q": [ 256, 257, 258, 259 ],
+            "SRST": [ 308 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$592": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "0",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:115.1-125.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 47 ],
+            "EN": [ 309 ],
+            "Q": [ 310 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$ff.cc:266:slice$593": {
+          "hide_name": 1,
+          "type": "$sdffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "SRST_POLARITY": "00000000000000000000000000000000",
+            "SRST_VALUE": "0000000",
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:115.1-125.4"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output",
+            "SRST": "input"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 311, 312, 313, 314, 315, 316, 317 ],
+            "EN": [ 318 ],
+            "Q": [ 319, 320, 321, 322, 323, 324, 325 ],
+            "SRST": [ 3 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:195:make_patterns_logic$574": {
+          "hide_name": 1,
+          "type": "$reduce_bool",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 326, 327, 328 ],
+            "Y": [ 293 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:195:make_patterns_logic$589": {
+          "hide_name": 1,
+          "type": "$reduce_bool",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 329, 330 ],
+            "Y": [ 307 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:195:make_patterns_logic$595": {
+          "hide_name": 1,
+          "type": "$reduce_bool",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 309, 330 ],
+            "Y": [ 318 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:254:combine_resets$571": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 331 ],
+            "Y": [ 294 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:254:combine_resets$580": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 332 ],
+            "Y": [ 302 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:254:combine_resets$586": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 117, 333, 334 ],
+            "Y": [ 308 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135$129": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135.42-135.65"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 295, 296, 297 ],
+            "B": [ "1", "1", "0" ],
+            "Y": [ 335 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:92$107": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000001110",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000001110",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:92.21-92.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277 ],
+            "B": [ "0", "0", "0", "1", "1", "0", "1", "0", "0", "0", "1", "0", "1", "0" ],
+            "Y": [ 332 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:93$108": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:93.21-93.50"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 256, 257, 258, 259 ],
+            "B": [ "0", "0", "0", "1" ],
+            "Y": [ 336 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94$109": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94.21-94.47"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 256, 257, 258, 259 ],
+            "B": [ "1", "0", "0", "0" ],
+            "Y": [ 337 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118$120": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 331 ],
+            "B": [ 31 ],
+            "Y": [ 309 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$127": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.17-133.63"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 338 ],
+            "B": [ 339 ],
+            "Y": [ 333 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135$130": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135.17-135.65"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 327 ],
+            "B": [ 335 ],
+            "Y": [ 334 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137$132": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137.17-137.49"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 326 ],
+            "B": [ 332 ],
+            "Y": [ 329 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:139$135": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:139.17-139.50"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 327 ],
+            "B": [ 332 ],
+            "Y": [ 330 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94$111": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94.21-94.72"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 337 ],
+            "B": [ 326 ],
+            "Y": [ 340 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152$141": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152.17-153.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 328 ],
+            "B": [ 327 ],
+            "Y": [ 341 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152$143": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152.17-154.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 341 ],
+            "B": [ 326 ],
+            "Y": [ 301 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$125": {
+          "hide_name": 1,
+          "type": "$ne",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.17-133.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "B": [ "0", "1", "0" ],
+            "Y": [ 338 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$126": {
+          "hide_name": 1,
+          "type": "$ne",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.42-133.63"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "B": [ "1", "1", "0" ],
+            "Y": [ 339 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$336": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:182.14-184.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:182.17-182.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ "1" ],
+            "S": [ 326 ],
+            "Y": [ 342 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$339": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:180.14-184.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:180.17-180.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 342 ],
+            "B": [ 319 ],
+            "S": [ 327 ],
+            "Y": [ 343 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$342": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:178.14-184.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:178.17-178.39"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 343 ],
+            "B": [ "0" ],
+            "S": [ 328 ],
+            "Y": [ 292 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$361": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:139.14-141.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:139.17-139.50"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x", "x", "x", "x" ],
+            "B": [ 260, 261, 262, 263 ],
+            "S": [ 330 ],
+            "Y": [ 344, 345, 346, 347 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$364": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137.14-141.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137.17-137.49"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 344, 345, 346, 347 ],
+            "B": [ 260, 261, 262, 263 ],
+            "S": [ 329 ],
+            "Y": [ 303, 304, 305, 306 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$385": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 321 ],
+            "S": [ 330 ],
+            "Y": [ 348 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$388": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 348 ],
+            "B": [ 41 ],
+            "S": [ 309 ],
+            "Y": [ 312 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$394": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 320 ],
+            "S": [ 330 ],
+            "Y": [ 349 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$397": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 349 ],
+            "B": [ 40 ],
+            "S": [ 309 ],
+            "Y": [ 311 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$403": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 322 ],
+            "S": [ 330 ],
+            "Y": [ 350 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$406": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 350 ],
+            "B": [ 42 ],
+            "S": [ 309 ],
+            "Y": [ 313 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$412": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 323 ],
+            "S": [ 330 ],
+            "Y": [ 351 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$415": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 351 ],
+            "B": [ 43 ],
+            "S": [ 309 ],
+            "Y": [ 314 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$421": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 324 ],
+            "S": [ 330 ],
+            "Y": [ 352 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$424": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 352 ],
+            "B": [ 44 ],
+            "S": [ 309 ],
+            "Y": [ 315 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$430": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 325 ],
+            "S": [ 330 ],
+            "Y": [ 353 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$433": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 353 ],
+            "B": [ 45 ],
+            "S": [ 309 ],
+            "Y": [ 316 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$439": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 310 ],
+            "S": [ 330 ],
+            "Y": [ 354 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$442": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.14-124.8|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 354 ],
+            "B": [ 46 ],
+            "S": [ 309 ],
+            "Y": [ 317 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$463": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000000100",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:99.5-105.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "0", "0" ],
+            "B": [ 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366 ],
+            "S": [ 326, 327, 328, 331 ],
+            "Y": [ 295, 296, 297 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$464_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:99.5-105.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "B": [ "1", "1", "0" ],
+            "Y": [ 326 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$465_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:99.5-105.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "B": [ "0", "1", "0" ],
+            "Y": [ 327 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$466_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:99.5-105.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "B": [ "1", "0", "0" ],
+            "Y": [ 328 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$467_CMP0": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:99.5-105.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 298, 299, 300 ],
+            "Y": [ 331 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:100$113": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:100.34-100.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 31 ],
+            "Y": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:101$114": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:101.34-101.69"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 332 ],
+            "Y": [ 361, 362, 363, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:102$115": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:102.34-102.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 336 ],
+            "Y": [ 358, 359, 360, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453 ]
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:103$116": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:103.34-103.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
+            "S": [ 340 ],
+            "Y": [ 355, 356, 357, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:62$8": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:62.20-62.73"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+            "B": [ 48, 49, 50, 51, 52, 53, 54, 55 ],
+            "S": [ 56 ],
+            "Y": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
+          }
+        }
+      },
+      "netnames": {
+        "$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:54$4_Y": {
+          "hide_name": 1,
+          "bits": [ 23, 24, 25, 26, 27, 28, 29, 30 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:54.16-54.26"
+          }
+        },
+        "$auto$rtlil.cc:2401:Not$496": {
+          "hide_name": 1,
+          "bits": [ 48, 49, 50, 51, 52, 53, 54, 55 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_rx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:153$184_Y": {
+          "hide_name": 1,
+          "bits": [ 61, 62, 63, 64 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:153.24-153.42"
+          }
+        },
+        "$flatten\\i_uart_rx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:178$195_Y": {
+          "hide_name": 1,
+          "bits": [ 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:178.26-178.46"
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:253:combine_resets$505": {
+          "hide_name": 1,
+          "bits": [ 102 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:253:combine_resets$513": {
+          "hide_name": 1,
+          "bits": [ 106 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$opt_dff.cc:253:combine_resets$519": {
+          "hide_name": 1,
+          "bits": [ 109 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_rx.$auto$rtlil.cc:2401:Not$504": {
+          "hide_name": 1,
+          "bits": [ 117 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108$163_Y": {
+          "hide_name": 1,
+          "bits": [ 121 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108.21-108.52"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109$164_Y": {
+          "hide_name": 1,
+          "bits": [ 116 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109.25-109.52"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:110$165_Y": {
+          "hide_name": 1,
+          "bits": [ 103 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:110.25-110.60"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:135$176_Y": {
+          "hide_name": 1,
+          "bits": [ 120 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:135.17-135.38"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:137$177_Y": {
+          "hide_name": 1,
+          "bits": [ 125 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:137.17-137.38"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175$190_Y": {
+          "hide_name": 1,
+          "bits": [ 126 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175.17-175.39"
+          }
+        },
+        "$flatten\\i_uart_rx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94$158_Y": {
+          "hide_name": 1,
+          "bits": [ 123 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:94.49-94.72"
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109$166_Y": {
+          "hide_name": 1,
+          "bits": [ 124 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:109.25-110.60"
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:137$178_Y": {
+          "hide_name": 1,
+          "bits": [ 105 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:137.17-137.50"
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175$192_Y": {
+          "hide_name": 1,
+          "bits": [ 127 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175.17-176.38"
+          }
+        },
+        "$flatten\\i_uart_rx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175$194_Y": {
+          "hide_name": 1,
+          "bits": [ 101 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:175.17-177.38"
+          }
+        },
+        "$flatten\\i_uart_rx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:150$181_Y": {
+          "hide_name": 1,
+          "bits": [ 119 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:150.17-150.38"
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:117$170_Y": {
+          "hide_name": 1,
+          "bits": [ 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:117.34-117.69",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:118$171_Y": {
+          "hide_name": 1,
+          "bits": [ 134, 135, 136, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:118.34-118.69",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:119$172_Y": {
+          "hide_name": 1,
+          "bits": [ 131, 132, 133, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:119.34-119.68",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_rx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:120$173_Y": {
+          "hide_name": 1,
+          "bits": [ 128, 129, 130, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:120.34-120.68",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_tx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:138$133_Y": {
+          "hide_name": 1,
+          "bits": [ 260, 261, 262, 263 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:138.24-138.42"
+          }
+        },
+        "$flatten\\i_uart_tx.$add$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:155$144_Y": {
+          "hide_name": 1,
+          "bits": [ 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:155.26-155.46"
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:194:make_patterns_logic$573": {
+          "hide_name": 1,
+          "bits": [ 293 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:194:make_patterns_logic$588": {
+          "hide_name": 1,
+          "bits": [ 307 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:194:make_patterns_logic$594": {
+          "hide_name": 1,
+          "bits": [ 318 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:253:combine_resets$570": {
+          "hide_name": 1,
+          "bits": [ 294 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:253:combine_resets$579": {
+          "hide_name": 1,
+          "bits": [ 302 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$auto$opt_dff.cc:253:combine_resets$585": {
+          "hide_name": 1,
+          "bits": [ 308 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118$119_Y": {
+          "hide_name": 1,
+          "bits": [ 331 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.38"
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120$121_Y": {
+          "hide_name": 1,
+          "bits": [ 327 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.44"
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135$129_Y": {
+          "hide_name": 1,
+          "bits": [ 335 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135.42-135.65"
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137$131_Y": {
+          "hide_name": 1,
+          "bits": [ 326 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137.17-137.38"
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152$139_Y": {
+          "hide_name": 1,
+          "bits": [ 328 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152.17-152.39"
+          }
+        },
+        "$flatten\\i_uart_tx.$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94$109_Y": {
+          "hide_name": 1,
+          "bits": [ 337 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94.21-94.47"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118$120_Y": {
+          "hide_name": 1,
+          "bits": [ 309 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:118.17-118.52"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120$122_Y": {
+          "hide_name": 1,
+          "bits": [ 330 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:120.17-120.62"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$127_Y": {
+          "hide_name": 1,
+          "bits": [ 333 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.17-133.63"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135$130_Y": {
+          "hide_name": 1,
+          "bits": [ 334 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:135.17-135.65"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137$132_Y": {
+          "hide_name": 1,
+          "bits": [ 329 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:137.17-137.49"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152$141_Y": {
+          "hide_name": 1,
+          "bits": [ 341 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152.17-153.38"
+          }
+        },
+        "$flatten\\i_uart_tx.$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152$143_Y": {
+          "hide_name": 1,
+          "bits": [ 301 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:152.17-154.38"
+          }
+        },
+        "$flatten\\i_uart_tx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$125_Y": {
+          "hide_name": 1,
+          "bits": [ 338 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.17-133.38"
+          }
+        },
+        "$flatten\\i_uart_tx.$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133$126_Y": {
+          "hide_name": 1,
+          "bits": [ 339 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:133.42-133.63"
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$336_Y": {
+          "hide_name": 1,
+          "bits": [ 342 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$339_Y": {
+          "hide_name": 1,
+          "bits": [ 343 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$342_Y": {
+          "hide_name": 1,
+          "bits": [ 292 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$361_Y": {
+          "hide_name": 1,
+          "bits": [ 344, 345, 346, 347 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$364_Y": {
+          "hide_name": 1,
+          "bits": [ 303, 304, 305, 306 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$385_Y": {
+          "hide_name": 1,
+          "bits": [ 348 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$388_Y": {
+          "hide_name": 1,
+          "bits": [ 312 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$394_Y": {
+          "hide_name": 1,
+          "bits": [ 349 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$397_Y": {
+          "hide_name": 1,
+          "bits": [ 311 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$403_Y": {
+          "hide_name": 1,
+          "bits": [ 350 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$406_Y": {
+          "hide_name": 1,
+          "bits": [ 313 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$412_Y": {
+          "hide_name": 1,
+          "bits": [ 351 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$415_Y": {
+          "hide_name": 1,
+          "bits": [ 314 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$421_Y": {
+          "hide_name": 1,
+          "bits": [ 352 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$424_Y": {
+          "hide_name": 1,
+          "bits": [ 315 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$430_Y": {
+          "hide_name": 1,
+          "bits": [ 353 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$433_Y": {
+          "hide_name": 1,
+          "bits": [ 316 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$439_Y": {
+          "hide_name": 1,
+          "bits": [ 354 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$procmux$442_Y": {
+          "hide_name": 1,
+          "bits": [ 317 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:100$113_Y": {
+          "hide_name": 1,
+          "bits": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:100.34-100.68",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:101$114_Y": {
+          "hide_name": 1,
+          "bits": [ 361, 362, 363, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:101.34-101.69",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:102$115_Y": {
+          "hide_name": 1,
+          "bits": [ 358, 359, 360, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:102.34-102.68",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$flatten\\i_uart_tx.$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:103$116_Y": {
+          "hide_name": 1,
+          "bits": [ 355, 356, 357, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482 ],
+          "signed": 1,
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:103.34-103.68",
+            "unused_bits": "3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31"
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:62$8_Y": {
+          "hide_name": 1,
+          "bits": [ 32, 33, 34, 35, 36, 37, 38, 39 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:62.20-62.73"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:14.21-14.24"
+          }
+        },
+        "cnt": {
+          "hide_name": 0,
+          "bits": [ 15, 16, 17, 18, 19, 20, 21, 22 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:47.13-47.16"
+          }
+        },
+        "due": {
+          "hide_name": 0,
+          "bits": [ 56 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:48.13-48.16"
+          }
+        },
+        "i_uart_rx.bit_counter": {
+          "hide_name": 0,
+          "bits": [ 57, 58, 59, 60 ],
+          "attributes": {
+            "hdlname": "i_uart_rx bit_counter",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:73.11-73.22"
+          }
+        },
+        "i_uart_rx.bit_sample": {
+          "hide_name": 0,
+          "bits": [ 104 ],
+          "attributes": {
+            "hdlname": "i_uart_rx bit_sample",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:77.5-77.15"
+          }
+        },
+        "i_uart_rx.clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "hdlname": "i_uart_rx clk",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:10.19-10.22"
+          }
+        },
+        "i_uart_rx.cycle_counter": {
+          "hide_name": 0,
+          "bits": [ 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78 ],
+          "attributes": {
+            "hdlname": "i_uart_rx cycle_counter",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:69.25-69.38"
+          }
+        },
+        "i_uart_rx.fsm_state": {
+          "hide_name": 0,
+          "bits": [ 98, 99, 100 ],
+          "attributes": {
+            "hdlname": "i_uart_rx fsm_state",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:81.11-81.20"
+          }
+        },
+        "i_uart_rx.n_fsm_state": {
+          "hide_name": 0,
+          "bits": [ 95, 96, 97 ],
+          "attributes": {
+            "hdlname": "i_uart_rx n_fsm_state",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:82.11-82.22"
+          }
+        },
+        "i_uart_rx.next_bit": {
+          "hide_name": 0,
+          "bits": [ 118 ],
+          "attributes": {
+            "hdlname": "i_uart_rx next_bit",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:108.6-108.14"
+          }
+        },
+        "i_uart_rx.payload_done": {
+          "hide_name": 0,
+          "bits": [ 122 ],
+          "attributes": {
+            "hdlname": "i_uart_rx payload_done",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:111.6-111.18"
+          }
+        },
+        "i_uart_rx.recieved_data": {
+          "hide_name": 0,
+          "bits": [ 115, 114, 113, 112, 108, 107, 110, 111 ],
+          "attributes": {
+            "hdlname": "i_uart_rx recieved_data",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:65.24-65.37"
+          }
+        },
+        "i_uart_rx.resetn": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "hdlname": "i_uart_rx resetn",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:11.19-11.25"
+          }
+        },
+        "i_uart_rx.rxd_reg": {
+          "hide_name": 0,
+          "bits": [ 94 ],
+          "attributes": {
+            "hdlname": "i_uart_rx rxd_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:60.5-60.12"
+          }
+        },
+        "i_uart_rx.rxd_reg_0": {
+          "hide_name": 0,
+          "bits": [ 93 ],
+          "attributes": {
+            "hdlname": "i_uart_rx rxd_reg_0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:61.5-61.14"
+          }
+        },
+        "i_uart_rx.uart_rx_data": {
+          "hide_name": 0,
+          "bits": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+          "attributes": {
+            "hdlname": "i_uart_rx uart_rx_data",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:16.32-16.44"
+          }
+        },
+        "i_uart_rx.uart_rx_en": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "hdlname": "i_uart_rx uart_rx_en",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:13.19-13.29"
+          }
+        },
+        "i_uart_rx.uart_rx_valid": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "hdlname": "i_uart_rx uart_rx_valid",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:15.19-15.32"
+          }
+        },
+        "i_uart_rx.uart_rxd": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "hdlname": "i_uart_rx uart_rxd",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:75.3-83.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_rx.v:12.19-12.27"
+          }
+        },
+        "i_uart_tx.bit_counter": {
+          "hide_name": 0,
+          "bits": [ 256, 257, 258, 259 ],
+          "attributes": {
+            "hdlname": "i_uart_tx bit_counter",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:72.11-72.22"
+          }
+        },
+        "i_uart_tx.clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "hdlname": "i_uart_tx clk",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:11.21-11.24"
+          }
+        },
+        "i_uart_tx.cycle_counter": {
+          "hide_name": 0,
+          "bits": [ 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277 ],
+          "attributes": {
+            "hdlname": "i_uart_tx cycle_counter",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:68.25-68.38"
+          }
+        },
+        "i_uart_tx.data_to_send": {
+          "hide_name": 0,
+          "bits": [ 319, 320, 321, 322, 323, 324, 325, 310 ],
+          "attributes": {
+            "hdlname": "i_uart_tx data_to_send",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:64.24-64.36"
+          }
+        },
+        "i_uart_tx.fsm_state": {
+          "hide_name": 0,
+          "bits": [ 298, 299, 300 ],
+          "attributes": {
+            "hdlname": "i_uart_tx fsm_state",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:76.11-76.20"
+          }
+        },
+        "i_uart_tx.n_fsm_state": {
+          "hide_name": 0,
+          "bits": [ 295, 296, 297 ],
+          "attributes": {
+            "hdlname": "i_uart_tx n_fsm_state",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:77.11-77.22"
+          }
+        },
+        "i_uart_tx.next_bit": {
+          "hide_name": 0,
+          "bits": [ 332 ],
+          "attributes": {
+            "hdlname": "i_uart_tx next_bit",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:92.6-92.14"
+          }
+        },
+        "i_uart_tx.payload_done": {
+          "hide_name": 0,
+          "bits": [ 336 ],
+          "attributes": {
+            "hdlname": "i_uart_tx payload_done",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:93.6-93.18"
+          }
+        },
+        "i_uart_tx.resetn": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "hdlname": "i_uart_tx resetn",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:12.21-12.27"
+          }
+        },
+        "i_uart_tx.stop_done": {
+          "hide_name": 0,
+          "bits": [ 340 ],
+          "attributes": {
+            "hdlname": "i_uart_tx stop_done",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:94.6-94.15"
+          }
+        },
+        "i_uart_tx.txd_reg": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "hdlname": "i_uart_tx txd_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:60.5-60.12"
+          }
+        },
+        "i_uart_tx.uart_tx_data": {
+          "hide_name": 0,
+          "bits": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+          "attributes": {
+            "hdlname": "i_uart_tx uart_tx_data",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:16.34-16.46"
+          }
+        },
+        "i_uart_tx.uart_tx_en": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "hdlname": "i_uart_tx uart_tx_en",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:15.21-15.31"
+          }
+        },
+        "i_uart_tx.uart_txd": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "hdlname": "i_uart_tx uart_txd",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:92.3-99.2|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/uart/uart_tx.v:13.21-13.29"
+          }
+        },
+        "led": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 9, 10, 11, 12, 13, 14 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:19.21-19.24"
+          }
+        },
+        "led_reg": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 9, 10, 11, 12, 13, 14 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:35.26-35.33"
+          }
+        },
+        "sw_0": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:15.21-15.25"
+          }
+        },
+        "sw_1": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:16.21-16.25"
+          }
+        },
+        "uart_rx_data": {
+          "hide_name": 0,
+          "bits": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:27.26-27.38"
+          }
+        },
+        "uart_rx_valid": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:28.13-28.26"
+          }
+        },
+        "uart_rxd": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:17.21-17.29"
+          }
+        },
+        "uart_tx_data": {
+          "hide_name": 0,
+          "bits": [ 40, 41, 42, 43, 44, 45, 46, 47 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:32.26-32.38"
+          }
+        },
+        "uart_tx_en": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:33.13-33.23"
+          }
+        },
+        "uart_txd": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/uart_cat2_sonnet5/impl_top.v:18.21-18.29"
+          }
+        }
+      }
+    }
+  }
+}

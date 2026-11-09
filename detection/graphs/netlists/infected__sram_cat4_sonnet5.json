@@ -1,0 +1,2260 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "wb_sram_controller": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:12.1-199.10"
+      },
+      "parameter_default_values": {
+        "ADDR_WIDTH": "00000000000000000000000000100000",
+        "DATA_WIDTH": "00000000000000000000000000100000",
+        "SRAM_ADDR_WIDTH": "00000000000000000000000000000111"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "wb_addr_i": {
+          "direction": "input",
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 ]
+        },
+        "wb_dat_i": {
+          "direction": "input",
+          "bits": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ]
+        },
+        "wb_dat_o": {
+          "direction": "output",
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+        },
+        "wb_we_i": {
+          "direction": "input",
+          "bits": [ 100 ]
+        },
+        "wb_sel_i": {
+          "direction": "input",
+          "bits": [ 101, 102, 103, 104 ]
+        },
+        "wb_stb_i": {
+          "direction": "input",
+          "bits": [ 105 ]
+        },
+        "wb_cyc_i": {
+          "direction": "input",
+          "bits": [ 106 ]
+        },
+        "wb_ack_o": {
+          "direction": "output",
+          "bits": [ 107 ]
+        },
+        "wb_err_o": {
+          "direction": "output",
+          "bits": [ "0" ]
+        }
+      },
+      "cells": {
+        "$and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40$16": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40.23-40.42"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 106 ],
+            "B": [ 105 ],
+            "Y": [ 108 ]
+          }
+        },
+        "$and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40$18": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40.23-40.54"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 108 ],
+            "B": [ 109 ],
+            "Y": [ 110 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$370": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "00000000000000000000000000000000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142 ],
+            "EN": [ 143 ],
+            "Q": [ 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$371": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "0000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 101, 102, 103, 104 ],
+            "EN": [ 176 ],
+            "Q": [ 177, 178, 179, 180 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$374": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "00000000000000000000000000000000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212 ],
+            "EN": [ 213 ],
+            "Q": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$375": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "0000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 214, 215, 216, 217 ],
+            "EN": [ 218 ],
+            "Q": [ 219, 220, 221, 222 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$382": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "0000000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 6, 7, 8, 9, 10, 11, 12 ],
+            "EN": [ 176 ],
+            "Q": [ 223, 224, 225, 226, 227, 228, 229 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$385": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "00000000000000000000000000000000",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ],
+            "EN": [ 176 ],
+            "Q": [ 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261 ]
+          }
+        },
+        "$auto$opt_dff.cc:195:make_patterns_logic$377": {
+          "hide_name": 1,
+          "type": "$ne",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 110, 262 ],
+            "B": [ "0", "1" ],
+            "Y": [ 263 ]
+          }
+        },
+        "$auto$opt_dff.cc:195:make_patterns_logic$379": {
+          "hide_name": 1,
+          "type": "$ne",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 264, 143 ],
+            "B": [ "1", "1" ],
+            "Y": [ 265 ]
+          }
+        },
+        "$auto$opt_dff.cc:220:make_patterns_logic$373": {
+          "hide_name": 1,
+          "type": "$reduce_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 110, 262 ],
+            "Y": [ 176 ]
+          }
+        },
+        "$auto$opt_dff.cc:220:make_patterns_logic$381": {
+          "hide_name": 1,
+          "type": "$reduce_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 265, 263 ],
+            "Y": [ 218 ]
+          }
+        },
+        "$auto$opt_reduce.cc:128:opt_pmux$368": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 266, 267, 268, 213 ],
+            "Y": [ 269 ]
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:143$39": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:143.34-143.53"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 101, 102, 103, 104 ],
+            "B": [ "1", "1", "1", "1" ],
+            "Y": [ 270 ]
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145$40": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145.34-145.53"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 101, 102, 103, 104 ],
+            "Y": [ 271 ]
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:44$19": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000100000",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000100000",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:44.18-44.47"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261 ],
+            "B": [ "1", "0", "1", "1", "0", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "0", "0", "1", "1", "0", "1", "0", "1", "1", "1", "1", "1" ],
+            "Y": [ 264 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$ff.cc:266:slice$388": {
+          "hide_name": 1,
+          "type": "$dffe",
+          "parameters": {
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303 ],
+            "EN": [ 304 ],
+            "Q": [ 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$opt_dff.cc:210:make_patterns_logic$389": {
+          "hide_name": 1,
+          "type": "$not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 305 ],
+            "Y": [ 306 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$opt_dff.cc:220:make_patterns_logic$392": {
+          "hide_name": 1,
+          "type": "$reduce_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 307, 306 ],
+            "Y": [ 304 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$proc_memwr.cc:45:proc_memwr$367": {
+          "hide_name": 1,
+          "type": "$memwr_v2",
+          "parameters": {
+            "ABITS": "00000000000000000000000000000111",
+            "CLK_ENABLE": "1",
+            "CLK_POLARITY": "1",
+            "MEMID": "\\u_sram_macro.mem",
+            "PORTID": "00000000000000000000000000000000",
+            "PRIORITY_MASK": "",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29.17-29.43"
+          },
+          "port_directions": {
+            "ADDR": "input",
+            "CLK": "input",
+            "DATA": "input",
+            "EN": "input"
+          },
+          "connections": {
+            "ADDR": [ 308, 309, 310, 311, 312, 313, 314 ],
+            "CLK": [ 2 ],
+            "DATA": [ 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346 ],
+            "EN": [ 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$memrd$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:33$14": {
+          "hide_name": 1,
+          "type": "$memrd",
+          "parameters": {
+            "ABITS": "00000000000000000000000000000111",
+            "CLK_ENABLE": "00000000000000000000000000000000",
+            "CLK_POLARITY": "00000000000000000000000000000000",
+            "MEMID": "\\u_sram_macro.mem",
+            "TRANSPARENT": "00000000000000000000000000000000",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:33.26-33.29"
+          },
+          "port_directions": {
+            "ADDR": "input",
+            "CLK": "input",
+            "DATA": "output",
+            "EN": "input"
+          },
+          "connections": {
+            "ADDR": [ 348, 349, 350, 351, 352, 353, 354 ],
+            "CLK": [ "x" ],
+            "DATA": [ 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303 ],
+            "EN": [ "x" ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procdff$360": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 355 ],
+            "Q": [ 305 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procdff$361": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 356 ],
+            "Q": [ 307 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procdff$362": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 357, 358, 359, 360, 361, 362, 363 ],
+            "Q": [ 348, 349, 350, 351, 352, 353, 354 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procdff$363": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ],
+            "Q": [ 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$317": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.13-34.16|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.17-28.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0" ],
+            "S": [ 307 ],
+            "Y": [ 428 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$323": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.13-34.16|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.17-28.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427 ],
+            "B": [ "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x" ],
+            "S": [ 307 ],
+            "Y": [ 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$329": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.13-34.16|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:28.17-28.26"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 348, 349, 350, 351, 352, 353, 354 ],
+            "B": [ "x", "x", "x", "x", "x", "x", "x" ],
+            "S": [ 307 ],
+            "Y": [ 461, 462, 463, 464, 465, 466, 467 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$334": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.9-35.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.13-26.22"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 428 ],
+            "B": [ "0" ],
+            "S": [ 305 ],
+            "Y": [ 347 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$337": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.9-35.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.13-26.22"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460 ],
+            "B": [ "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x" ],
+            "S": [ 305 ],
+            "Y": [ 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346 ]
+          }
+        },
+        "$flatten\\u_sram_macro.$procmux$340": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.9-35.12|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:26.13-26.22"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 461, 462, 463, 464, 465, 466, 467 ],
+            "B": [ "x", "x", "x", "x", "x", "x", "x" ],
+            "S": [ 305 ],
+            "Y": [ 308, 309, 310, 311, 312, 313, 314 ]
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40$17": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40.45-40.54"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 107 ],
+            "Y": [ 109 ]
+          }
+        },
+        "$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104$23": {
+          "hide_name": 1,
+          "type": "$reduce_bool",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104.34-104.53"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 101, 102, 103, 104 ],
+            "Y": [ 468 ]
+          }
+        },
+        "$procdff$349": {
+          "hide_name": 1,
+          "type": "$adff",
+          "parameters": {
+            "ARST_POLARITY": "0",
+            "ARST_VALUE": "0",
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 469 ],
+            "Q": [ 107 ]
+          }
+        },
+        "$procmux$142": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000001000",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "0", "0", "0" ],
+            "B": [ "0", "1", "0", "1", 470, 471, 472, 473, "0", "0", "0", "1", "1", "1", "1", "0", "1", "0", "1", "0", "0", "0", "1", "0", "0", "1", "0", "0", 474, 475, 476, 477 ],
+            "S": [ 478, 143, 479, 480, 481, 482, 483, 262 ],
+            "Y": [ 214, 215, 216, 217 ]
+          }
+        },
+        "$procmux$144": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:175.25-175.28|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:175.21-176.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "0", "1" ],
+            "B": [ "x", "x", "x", "x" ],
+            "S": [ 264 ],
+            "Y": [ 470, 471, 472, 473 ]
+          }
+        },
+        "$procmux$146_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "0", "0", "0", "1" ],
+            "Y": [ 143 ]
+          }
+        },
+        "$procmux$147_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "1", "1", "0" ],
+            "Y": [ 479 ]
+          }
+        },
+        "$procmux$148_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "0", "1", "1", "0" ],
+            "Y": [ 480 ]
+          }
+        },
+        "$procmux$149_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "0", "0", "1", "0" ],
+            "Y": [ 481 ]
+          }
+        },
+        "$procmux$150_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "1", "0", "0" ],
+            "Y": [ 482 ]
+          }
+        },
+        "$procmux$151_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "0", "0", "0" ],
+            "Y": [ 483 ]
+          }
+        },
+        "$procmux$153": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145.34-145.53|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145.30-148.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0", "1", "1", "0" ],
+            "B": [ "1", "1", "0", "1" ],
+            "S": [ 271 ],
+            "Y": [ 484, 485, 486, 487 ]
+          }
+        },
+        "$procmux$156": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:143.34-143.53|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:143.30-148.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 484, 485, 486, 487 ],
+            "B": [ "1", "0", "0", "0" ],
+            "S": [ 270 ],
+            "Y": [ 488, 489, 490, 491 ]
+          }
+        },
+        "$procmux$159": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:141.29-141.37|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:141.25-148.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "1", "0", "0" ],
+            "B": [ 488, 489, 490, 491 ],
+            "S": [ 100 ],
+            "Y": [ 492, 493, 494, 495 ]
+          }
+        },
+        "$procmux$161": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:136.25-136.33|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:136.21-149.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x", "x", "x", "x" ],
+            "B": [ 492, 493, 494, 495 ],
+            "S": [ 110 ],
+            "Y": [ 474, 475, 476, 477 ]
+          }
+        },
+        "$procmux$172_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "0", "1", "0" ],
+            "Y": [ 213 ]
+          }
+        },
+        "$procmux$192": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104.34-104.53|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104.30-106.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0" ],
+            "S": [ 468 ],
+            "Y": [ 496 ]
+          }
+        },
+        "$procmux$220": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102.34-102.53|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102.30-106.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0" ],
+            "S": [ 270 ],
+            "Y": [ 497 ]
+          }
+        },
+        "$procmux$233": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102.34-102.53|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102.30-106.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 496 ],
+            "B": [ "0" ],
+            "S": [ 270 ],
+            "Y": [ 498 ]
+          }
+        },
+        "$procmux$246": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:100.25-100.33|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:100.21-106.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ 497 ],
+            "S": [ 100 ],
+            "Y": [ 499 ]
+          }
+        },
+        "$procmux$256": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:100.25-100.33|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:100.21-106.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ 498 ],
+            "S": [ 100 ],
+            "Y": [ 500 ]
+          }
+        },
+        "$procmux$282": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:98.21-98.29|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:98.17-108.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ 499 ],
+            "S": [ 110 ],
+            "Y": [ 501 ]
+          }
+        },
+        "$procmux$289": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:98.21-98.29|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:98.17-108.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ 500 ],
+            "S": [ 110 ],
+            "Y": [ 502 ]
+          }
+        },
+        "$procmux$300": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ],
+            "B": [ 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175 ],
+            "S": [ 478 ],
+            "Y": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ]
+          }
+        },
+        "$procmux$304": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000111"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 6, 7, 8, 9, 10, 11, 12 ],
+            "B": [ 223, 224, 225, 226, 227, 228, 229 ],
+            "S": [ 478 ],
+            "Y": [ 357, 358, 359, 360, 361, 362, 363 ]
+          }
+        },
+        "$procmux$308": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000000010",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0", 501 ],
+            "S": [ 478, 262 ],
+            "Y": [ 356 ]
+          }
+        },
+        "$procmux$312": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000000010",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0", 502 ],
+            "S": [ 478, 262 ],
+            "Y": [ 355 ]
+          }
+        },
+        "$procmux$313_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "0", "0", "1" ],
+            "Y": [ 478 ]
+          }
+        },
+        "$procmux$314_CMP0": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:96.9-116.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "Y": [ 262 ]
+          }
+        },
+        "$procmux$82": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "1" ],
+            "S": [ 269 ],
+            "Y": [ 469 ]
+          }
+        },
+        "$procmux$83_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "0", "1", "0", "1" ],
+            "Y": [ 266 ]
+          }
+        },
+        "$procmux$84_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "1", "1", "0", "1" ],
+            "Y": [ 267 ]
+          }
+        },
+        "$procmux$86_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000100",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000100",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:134.13-185.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 219, 220, 221, 222 ],
+            "B": [ "0", "1", "0", "0" ],
+            "Y": [ 268 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:80$41": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:80.34-80.68"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 181, 182, 183, 184, 185, 186, 187, 188 ],
+            "B": [ 230, 231, 232, 233, 234, 235, 236, 237 ],
+            "S": [ 177 ],
+            "Y": [ 111, 112, 113, 114, 115, 116, 117, 118 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:81$42": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:81.34-81.69"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 189, 190, 191, 192, 193, 194, 195, 196 ],
+            "B": [ 238, 239, 240, 241, 242, 243, 244, 245 ],
+            "S": [ 178 ],
+            "Y": [ 119, 120, 121, 122, 123, 124, 125, 126 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:82$43": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:82.34-82.70"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 197, 198, 199, 200, 201, 202, 203, 204 ],
+            "B": [ 246, 247, 248, 249, 250, 251, 252, 253 ],
+            "S": [ 179 ],
+            "Y": [ 127, 128, 129, 130, 131, 132, 133, 134 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:83$44": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000001000"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:83.34-83.70"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 205, 206, 207, 208, 209, 210, 211, 212 ],
+            "B": [ 254, 255, 256, 257, 258, 259, 260, 261 ],
+            "S": [ 180 ],
+            "Y": [ 135, 136, 137, 138, 139, 140, 141, 142 ]
+          }
+        }
+      },
+      "memories": {
+        "u_sram_macro.mem": {
+          "hide_name": 0,
+          "attributes": {
+            "hdlname": "u_sram_macro mem",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:11.16-11.19"
+          },
+          "width": 32,
+          "start_offset": 0,
+          "size": 128
+        }
+      },
+      "netnames": {
+        "$0\\state[3:0]": {
+          "hide_name": 1,
+          "bits": [ 214, 215, 216, 217 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          }
+        },
+        "$0\\wb_ack_o[0:0]": {
+          "hide_name": 1,
+          "bits": [ 469 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:122.5-187.8"
+          }
+        },
+        "$2\\sram_csb[0:0]": {
+          "hide_name": 1,
+          "bits": [ 502 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$2\\sram_web[0:0]": {
+          "hide_name": 1,
+          "bits": [ 501 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$3\\sram_csb[0:0]": {
+          "hide_name": 1,
+          "bits": [ 500 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$3\\sram_web[0:0]": {
+          "hide_name": 1,
+          "bits": [ 499 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$4\\sram_csb[0:0]": {
+          "hide_name": 1,
+          "bits": [ 498 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$4\\sram_web[0:0]": {
+          "hide_name": 1,
+          "bits": [ 497 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$5\\sram_csb[0:0]": {
+          "hide_name": 1,
+          "bits": [ 496 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:90.5-117.8"
+          }
+        },
+        "$and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40$16_Y": {
+          "hide_name": 1,
+          "bits": [ 108 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40.23-40.42"
+          }
+        },
+        "$auto$opt_dff.cc:194:make_patterns_logic$376": {
+          "hide_name": 1,
+          "bits": [ 263 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_dff.cc:194:make_patterns_logic$378": {
+          "hide_name": 1,
+          "bits": [ 265 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_dff.cc:219:make_patterns_logic$372": {
+          "hide_name": 1,
+          "bits": [ 176 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_dff.cc:219:make_patterns_logic$380": {
+          "hide_name": 1,
+          "bits": [ 218 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_reduce.cc:134:opt_pmux$369": {
+          "hide_name": 1,
+          "bits": [ 269 ],
+          "attributes": {
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102$22_Y": {
+          "hide_name": 1,
+          "bits": [ 270 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:102.34-102.53"
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145$40_Y": {
+          "hide_name": 1,
+          "bits": [ 271 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:145.34-145.53"
+          }
+        },
+        "$flatten\\u_sram_macro.$0$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_ADDR[6:0]$3": {
+          "hide_name": 1,
+          "bits": [ 308, 309, 310, 311, 312, 313, 314 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$0$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_DATA[31:0]$4": {
+          "hide_name": 1,
+          "bits": [ 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$0$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_EN[31:0]$5": {
+          "hide_name": 1,
+          "bits": [ 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347, 347 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$2$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_ADDR[6:0]$11": {
+          "hide_name": 1,
+          "bits": [ 461, 462, 463, 464, 465, 466, 467 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$2$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_DATA[31:0]$12": {
+          "hide_name": 1,
+          "bits": [ 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$2$memwr$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:29$1_EN[31:0]$13": {
+          "hide_name": 1,
+          "bits": [ 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428, 428 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:19.5-36.8"
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$opt_dff.cc:219:make_patterns_logic$391": {
+          "hide_name": 1,
+          "bits": [ 304 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\u_sram_macro.$auto$rtlil.cc:2401:Not$390": {
+          "hide_name": 1,
+          "bits": [ 306 ],
+          "attributes": {
+          }
+        },
+        "$flatten\\u_sram_macro.$memrd$\\mem$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:33$14_DATA": {
+          "hide_name": 1,
+          "bits": [ 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:33.26-33.29"
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40$17_Y": {
+          "hide_name": 1,
+          "bits": [ 109 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:40.45-40.54"
+          }
+        },
+        "$ne$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104$23_Y": {
+          "hide_name": 1,
+          "bits": [ 468 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:104.34-104.53"
+          }
+        },
+        "$procmux$107_CMP": {
+          "hide_name": 1,
+          "bits": [ 262 ],
+          "attributes": {
+          }
+        },
+        "$procmux$143_CMP": {
+          "hide_name": 1,
+          "bits": [ 478 ],
+          "attributes": {
+          }
+        },
+        "$procmux$144_Y": {
+          "hide_name": 1,
+          "bits": [ 470, 471, 472, 473 ],
+          "attributes": {
+          }
+        },
+        "$procmux$146_CMP": {
+          "hide_name": 1,
+          "bits": [ 143 ],
+          "attributes": {
+          }
+        },
+        "$procmux$147_CMP": {
+          "hide_name": 1,
+          "bits": [ 479 ],
+          "attributes": {
+          }
+        },
+        "$procmux$148_CMP": {
+          "hide_name": 1,
+          "bits": [ 480 ],
+          "attributes": {
+          }
+        },
+        "$procmux$149_CMP": {
+          "hide_name": 1,
+          "bits": [ 481 ],
+          "attributes": {
+          }
+        },
+        "$procmux$150_CMP": {
+          "hide_name": 1,
+          "bits": [ 482 ],
+          "attributes": {
+          }
+        },
+        "$procmux$151_CMP": {
+          "hide_name": 1,
+          "bits": [ 483 ],
+          "attributes": {
+          }
+        },
+        "$procmux$153_Y": {
+          "hide_name": 1,
+          "bits": [ 484, 485, 486, 487 ],
+          "attributes": {
+          }
+        },
+        "$procmux$156_Y": {
+          "hide_name": 1,
+          "bits": [ 488, 489, 490, 491 ],
+          "attributes": {
+          }
+        },
+        "$procmux$159_Y": {
+          "hide_name": 1,
+          "bits": [ 492, 493, 494, 495 ],
+          "attributes": {
+          }
+        },
+        "$procmux$161_Y": {
+          "hide_name": 1,
+          "bits": [ 474, 475, 476, 477 ],
+          "attributes": {
+          }
+        },
+        "$procmux$172_CMP": {
+          "hide_name": 1,
+          "bits": [ 213 ],
+          "attributes": {
+          }
+        },
+        "$procmux$83_CMP": {
+          "hide_name": 1,
+          "bits": [ 266 ],
+          "attributes": {
+          }
+        },
+        "$procmux$84_CMP": {
+          "hide_name": 1,
+          "bits": [ 267 ],
+          "attributes": {
+          }
+        },
+        "$procmux$86_CMP": {
+          "hide_name": 1,
+          "bits": [ 268 ],
+          "attributes": {
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:80$41_Y": {
+          "hide_name": 1,
+          "bits": [ 111, 112, 113, 114, 115, 116, 117, 118 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:80.34-80.68"
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:81$42_Y": {
+          "hide_name": 1,
+          "bits": [ 119, 120, 121, 122, 123, 124, 125, 126 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:81.34-81.69"
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:82$43_Y": {
+          "hide_name": 1,
+          "bits": [ 127, 128, 129, 130, 131, 132, 133, 134 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:82.34-82.70"
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:83$44_Y": {
+          "hide_name": 1,
+          "bits": [ 135, 136, 137, 138, 139, 140, 141, 142 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:83.34-83.70"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:17.11-17.14"
+          }
+        },
+        "latched_addr": {
+          "hide_name": 0,
+          "bits": [ 223, 224, 225, 226, 227, 228, 229 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:63.16-63.28"
+          }
+        },
+        "latched_sel": {
+          "hide_name": 0,
+          "bits": [ 177, 178, 179, 180 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:65.16-65.27"
+          }
+        },
+        "latched_wdata": {
+          "hide_name": 0,
+          "bits": [ 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:64.16-64.29"
+          }
+        },
+        "merge_bytes$func$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:174$15.new_w": {
+          "hide_name": 0,
+          "bits": [ "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x" ],
+          "attributes": {
+            "nosync": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:77.22-77.27"
+          }
+        },
+        "merge_bytes$func$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:174$15.old_w": {
+          "hide_name": 0,
+          "bits": [ "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x" ],
+          "attributes": {
+            "nosync": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:76.22-76.27"
+          }
+        },
+        "merge_bytes$func$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:174$15.sel": {
+          "hide_name": 0,
+          "bits": [ "x", "x", "x", "x" ],
+          "attributes": {
+            "nosync": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:78.22-78.25"
+          }
+        },
+        "merged_word": {
+          "hide_name": 0,
+          "bits": [ 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:66.16-66.27"
+          }
+        },
+        "mg": {
+          "hide_name": 0,
+          "bits": [ 264 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:43.10-43.12"
+          }
+        },
+        "rst_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:18.11-18.16"
+          }
+        },
+        "sram_addr": {
+          "hide_name": 0,
+          "bits": [ 6, 7, 8, 9, 10, 11, 12 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:35.32-35.41"
+          }
+        },
+        "sram_addr_in": {
+          "hide_name": 0,
+          "bits": [ 357, 358, 359, 360, 361, 362, 363 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:71.32-71.44"
+          }
+        },
+        "sram_csb": {
+          "hide_name": 0,
+          "bits": [ 355 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:69.32-69.40"
+          }
+        },
+        "sram_din": {
+          "hide_name": 0,
+          "bits": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:72.32-72.40"
+          }
+        },
+        "sram_dout": {
+          "hide_name": 0,
+          "bits": [ 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:73.32-73.41"
+          }
+        },
+        "sram_web": {
+          "hide_name": 0,
+          "bits": [ 356 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:70.32-70.40"
+          }
+        },
+        "state": {
+          "hide_name": 0,
+          "bits": [ 219, 220, 221, 222 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:62.16-62.21"
+          }
+        },
+        "u_sram_macro.addr0": {
+          "hide_name": 0,
+          "bits": [ 357, 358, 359, 360, 361, 362, 363 ],
+          "attributes": {
+            "hdlname": "u_sram_macro addr0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:5.26-5.31"
+          }
+        },
+        "u_sram_macro.addr0_reg": {
+          "hide_name": 0,
+          "bits": [ 348, 349, 350, 351, 352, 353, 354 ],
+          "attributes": {
+            "hdlname": "u_sram_macro addr0_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:16.16-16.25"
+          }
+        },
+        "u_sram_macro.clk0": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "hdlname": "u_sram_macro clk0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:2.26-2.30"
+          }
+        },
+        "u_sram_macro.csb0": {
+          "hide_name": 0,
+          "bits": [ 355 ],
+          "attributes": {
+            "hdlname": "u_sram_macro csb0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:3.26-3.30"
+          }
+        },
+        "u_sram_macro.csb0_reg": {
+          "hide_name": 0,
+          "bits": [ 305 ],
+          "attributes": {
+            "hdlname": "u_sram_macro csb0_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:14.16-14.24"
+          }
+        },
+        "u_sram_macro.din0": {
+          "hide_name": 0,
+          "bits": [ 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395 ],
+          "attributes": {
+            "hdlname": "u_sram_macro din0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:6.26-6.30"
+          }
+        },
+        "u_sram_macro.din0_reg": {
+          "hide_name": 0,
+          "bits": [ 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427 ],
+          "attributes": {
+            "hdlname": "u_sram_macro din0_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:17.16-17.24"
+          }
+        },
+        "u_sram_macro.dout0": {
+          "hide_name": 0,
+          "bits": [ 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212 ],
+          "attributes": {
+            "hdlname": "u_sram_macro dout0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:7.26-7.31"
+          }
+        },
+        "u_sram_macro.web0": {
+          "hide_name": 0,
+          "bits": [ 356 ],
+          "attributes": {
+            "hdlname": "u_sram_macro web0",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:4.26-4.30"
+          }
+        },
+        "u_sram_macro.web0_reg": {
+          "hide_name": 0,
+          "bits": [ 307 ],
+          "attributes": {
+            "hdlname": "u_sram_macro web0_reg",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:190.21-197.6|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/sram/SRAM_32x128_1rw.v:15.16-15.24"
+          }
+        },
+        "wb_ack_o": {
+          "hide_name": 0,
+          "bits": [ 107 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:28.33-28.41"
+          }
+        },
+        "wb_addr_i": {
+          "hide_name": 0,
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:21.33-21.42"
+          }
+        },
+        "wb_cyc_i": {
+          "hide_name": 0,
+          "bits": [ 106 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:27.33-27.41"
+          }
+        },
+        "wb_dat_i": {
+          "hide_name": 0,
+          "bits": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:22.33-22.41"
+          }
+        },
+        "wb_dat_o": {
+          "hide_name": 0,
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:23.33-23.41"
+          }
+        },
+        "wb_err_o": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:29.33-29.41"
+          }
+        },
+        "wb_sel_i": {
+          "hide_name": 0,
+          "bits": [ 101, 102, 103, 104 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:25.33-25.41"
+          }
+        },
+        "wb_stb_i": {
+          "hide_name": 0,
+          "bits": [ 105 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:26.33-26.41"
+          }
+        },
+        "wb_valid": {
+          "hide_name": 0,
+          "bits": [ 110 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:39.10-39.18"
+          }
+        },
+        "wb_we_i": {
+          "hide_name": 0,
+          "bits": [ 100 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/infected_rtl/sram_cat4_sonnet5/wb_sram_controller.v:24.33-24.40"
+          }
+        }
+      }
+    }
+  }
+}

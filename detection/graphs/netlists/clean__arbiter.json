@@ -1,0 +1,1217 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "wb_arbiter_2m1s": {
+      "attributes": {
+        "dynports": "00000000000000000000000000000001",
+        "top": "00000000000000000000000000000001",
+        "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:4.1-133.10"
+      },
+      "parameter_default_values": {
+        "ADDR_WIDTH": "00000000000000000000000000100000",
+        "DATA_WIDTH": "00000000000000000000000000100000",
+        "SELECT_WIDTH": "00000000000000000000000000000100"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "rst_n": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "m0_addr_i": {
+          "direction": "input",
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 ]
+        },
+        "m0_dat_i": {
+          "direction": "input",
+          "bits": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ]
+        },
+        "m0_dat_o": {
+          "direction": "output",
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+        },
+        "m0_we_i": {
+          "direction": "input",
+          "bits": [ 100 ]
+        },
+        "m0_sel_i": {
+          "direction": "input",
+          "bits": [ 101, 102, 103, 104 ]
+        },
+        "m0_stb_i": {
+          "direction": "input",
+          "bits": [ 105 ]
+        },
+        "m0_cyc_i": {
+          "direction": "input",
+          "bits": [ 106 ]
+        },
+        "m0_ack_o": {
+          "direction": "output",
+          "bits": [ 107 ]
+        },
+        "m0_err_o": {
+          "direction": "output",
+          "bits": [ 108 ]
+        },
+        "m1_addr_i": {
+          "direction": "input",
+          "bits": [ 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140 ]
+        },
+        "m1_dat_i": {
+          "direction": "input",
+          "bits": [ 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172 ]
+        },
+        "m1_dat_o": {
+          "direction": "output",
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+        },
+        "m1_we_i": {
+          "direction": "input",
+          "bits": [ 173 ]
+        },
+        "m1_sel_i": {
+          "direction": "input",
+          "bits": [ 174, 175, 176, 177 ]
+        },
+        "m1_stb_i": {
+          "direction": "input",
+          "bits": [ 178 ]
+        },
+        "m1_cyc_i": {
+          "direction": "input",
+          "bits": [ 179 ]
+        },
+        "m1_ack_o": {
+          "direction": "output",
+          "bits": [ 180 ]
+        },
+        "m1_err_o": {
+          "direction": "output",
+          "bits": [ 181 ]
+        },
+        "s_addr_o": {
+          "direction": "output",
+          "bits": [ 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213 ]
+        },
+        "s_dat_o": {
+          "direction": "output",
+          "bits": [ 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245 ]
+        },
+        "s_dat_i": {
+          "direction": "input",
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+        },
+        "s_we_o": {
+          "direction": "output",
+          "bits": [ 246 ]
+        },
+        "s_sel_o": {
+          "direction": "output",
+          "bits": [ 247, 248, 249, 250 ]
+        },
+        "s_stb_o": {
+          "direction": "output",
+          "bits": [ 251 ]
+        },
+        "s_cyc_o": {
+          "direction": "output",
+          "bits": [ 252 ]
+        },
+        "s_ack_i": {
+          "direction": "input",
+          "bits": [ 253 ]
+        },
+        "s_err_i": {
+          "direction": "input",
+          "bits": [ 254 ]
+        }
+      },
+      "cells": {
+        "$and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:47$1": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:47.17-47.36"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 106 ],
+            "B": [ 105 ],
+            "Y": [ 255 ]
+          }
+        },
+        "$and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:48$2": {
+          "hide_name": 1,
+          "type": "$and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:48.17-48.36"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 179 ],
+            "B": [ 178 ],
+            "Y": [ 256 ]
+          }
+        },
+        "$auto$ff.cc:266:slice$78": {
+          "hide_name": 1,
+          "type": "$adffe",
+          "parameters": {
+            "ARST_POLARITY": "00000000000000000000000000000000",
+            "ARST_VALUE": "0",
+            "CLK_POLARITY": "00000000000000000000000000000001",
+            "EN_POLARITY": "00000000000000000000000000000001",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:58.5-98.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "EN": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 257 ],
+            "EN": [ 258 ],
+            "Q": [ 259 ]
+          }
+        },
+        "$auto$opt_dff.cc:195:make_patterns_logic$80": {
+          "hide_name": 1,
+          "type": "$reduce_bool",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 260, 261, 262 ],
+            "Y": [ 263 ]
+          }
+        },
+        "$auto$opt_dff.cc:210:make_patterns_logic$81": {
+          "hide_name": 1,
+          "type": "$not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 264 ],
+            "Y": [ 265 ]
+          }
+        },
+        "$auto$opt_dff.cc:220:make_patterns_logic$84": {
+          "hide_name": 1,
+          "type": "$reduce_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 263, 265 ],
+            "Y": [ 258 ]
+          }
+        },
+        "$auto$opt_reduce.cc:128:opt_pmux$76": {
+          "hide_name": 1,
+          "type": "$reduce_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000011",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 260, 261, 262 ],
+            "Y": [ 266 ]
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:128$17": {
+          "hide_name": 1,
+          "type": "$not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:128.24-128.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 259 ],
+            "Y": [ 267 ]
+          }
+        },
+        "$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$10": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.54-66.80"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 259 ],
+            "B": [ 268 ],
+            "Y": [ 269 ]
+          }
+        },
+        "$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$7": {
+          "hide_name": 1,
+          "type": "$logic_and",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.22-66.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 267 ],
+            "B": [ 270 ],
+            "Y": [ 271 ]
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$6": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.39-66.48"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 106 ],
+            "Y": [ 270 ]
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$9": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.71-66.80"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 179 ],
+            "Y": [ 268 ]
+          }
+        },
+        "$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$11": {
+          "hide_name": 1,
+          "type": "$logic_or",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.21-66.81"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 271 ],
+            "B": [ 269 ],
+            "Y": [ 272 ]
+          }
+        },
+        "$procdff$75": {
+          "hide_name": 1,
+          "type": "$adff",
+          "parameters": {
+            "ARST_POLARITY": "0",
+            "ARST_VALUE": "0",
+            "CLK_POLARITY": "1",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:58.5-98.8"
+          },
+          "port_directions": {
+            "ARST": "input",
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "ARST": [ 3 ],
+            "CLK": [ 2 ],
+            "D": [ 273 ],
+            "Q": [ 264 ]
+          }
+        },
+        "$procmux$24": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 106 ],
+            "B": [ 179 ],
+            "S": [ 259 ],
+            "Y": [ 252 ]
+          }
+        },
+        "$procmux$27": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 105 ],
+            "B": [ 178 ],
+            "S": [ 259 ],
+            "Y": [ 251 ]
+          }
+        },
+        "$procmux$30": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 101, 102, 103, 104 ],
+            "B": [ 174, 175, 176, 177 ],
+            "S": [ 259 ],
+            "Y": [ 247, 248, 249, 250 ]
+          }
+        },
+        "$procmux$33": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 100 ],
+            "B": [ 173 ],
+            "S": [ 259 ],
+            "Y": [ 246 ]
+          }
+        },
+        "$procmux$36": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ],
+            "B": [ 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172 ],
+            "S": [ 259 ],
+            "Y": [ 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245 ]
+          }
+        },
+        "$procmux$39": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000100000"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.9-118.12"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 ],
+            "B": [ 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140 ],
+            "S": [ 259 ],
+            "Y": [ 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213 ]
+          }
+        },
+        "$procmux$42": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:71.17-95.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "1" ],
+            "S": [ 266 ],
+            "Y": [ 274 ]
+          }
+        },
+        "$procmux$47": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.21-66.81|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.17-68.20"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0" ],
+            "S": [ 272 ],
+            "Y": [ 275 ]
+          }
+        },
+        "$procmux$49": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:64.17-64.21|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:64.13-96.16"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 274 ],
+            "B": [ 275 ],
+            "S": [ 264 ],
+            "Y": [ 273 ]
+          }
+        },
+        "$procmux$53": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:83.29-83.47|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:83.25-89.28"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1" ],
+            "B": [ "0" ],
+            "S": [ 259 ],
+            "Y": [ 276 ]
+          }
+        },
+        "$procmux$55": {
+          "hide_name": 1,
+          "type": "$pmux",
+          "parameters": {
+            "S_WIDTH": "00000000000000000000000000000011",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:71.17-95.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "x" ],
+            "B": [ 276, "1", "0" ],
+            "S": [ 260, 261, 262 ],
+            "Y": [ 257 ]
+          }
+        },
+        "$procmux$67_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:71.17-95.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 255, 256 ],
+            "B": [ "1", "1" ],
+            "Y": [ 260 ]
+          }
+        },
+        "$procmux$68_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:71.17-95.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 255, 256 ],
+            "B": [ "0", "1" ],
+            "Y": [ 261 ]
+          }
+        },
+        "$procmux$69_CMP0": {
+          "hide_name": 1,
+          "type": "$eq",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000010",
+            "B_SIGNED": "00000000000000000000000000000000",
+            "B_WIDTH": "00000000000000000000000000000010",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "full_case": "00000000000000000000000000000001",
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:0.0-0.0|/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:71.17-95.24"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 255, 256 ],
+            "B": [ "1", "0" ],
+            "Y": [ 262 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:127$16": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:127.23-127.55"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 253 ],
+            "B": [ "0" ],
+            "S": [ 259 ],
+            "Y": [ 107 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:128$18": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:128.23-128.55"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 254 ],
+            "B": [ "0" ],
+            "S": [ 259 ],
+            "Y": [ 108 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:130$20": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:130.23-130.55"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ 253 ],
+            "S": [ 259 ],
+            "Y": [ 180 ]
+          }
+        },
+        "$ternary$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:131$22": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:131.23-131.55"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ 254 ],
+            "S": [ 259 ],
+            "Y": [ 181 ]
+          }
+        }
+      },
+      "netnames": {
+        "$0\\lock[0:0]": {
+          "hide_name": 1,
+          "bits": [ 273 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:58.5-98.8"
+          }
+        },
+        "$auto$opt_dff.cc:194:make_patterns_logic$79": {
+          "hide_name": 1,
+          "bits": [ 263 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_dff.cc:219:make_patterns_logic$83": {
+          "hide_name": 1,
+          "bits": [ 258 ],
+          "attributes": {
+          }
+        },
+        "$auto$opt_reduce.cc:134:opt_pmux$77": {
+          "hide_name": 1,
+          "bits": [ 266 ],
+          "attributes": {
+          }
+        },
+        "$auto$rtlil.cc:2401:Not$82": {
+          "hide_name": 1,
+          "bits": [ 265 ],
+          "attributes": {
+          }
+        },
+        "$eq$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104$14_Y": {
+          "hide_name": 1,
+          "bits": [ 267 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:104.13-104.26"
+          }
+        },
+        "$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$10_Y": {
+          "hide_name": 1,
+          "bits": [ 269 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.54-66.80"
+          }
+        },
+        "$logic_and$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$7_Y": {
+          "hide_name": 1,
+          "bits": [ 271 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.22-66.48"
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$6_Y": {
+          "hide_name": 1,
+          "bits": [ 270 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.39-66.48"
+          }
+        },
+        "$logic_not$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$9_Y": {
+          "hide_name": 1,
+          "bits": [ 268 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.71-66.80"
+          }
+        },
+        "$logic_or$/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66$11_Y": {
+          "hide_name": 1,
+          "bits": [ 272 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:66.21-66.81"
+          }
+        },
+        "$procmux$42_Y": {
+          "hide_name": 1,
+          "bits": [ 274 ],
+          "attributes": {
+          }
+        },
+        "$procmux$43_CMP": {
+          "hide_name": 1,
+          "bits": [ 260 ],
+          "attributes": {
+          }
+        },
+        "$procmux$44_CMP": {
+          "hide_name": 1,
+          "bits": [ 261 ],
+          "attributes": {
+          }
+        },
+        "$procmux$45_CMP": {
+          "hide_name": 1,
+          "bits": [ 262 ],
+          "attributes": {
+          }
+        },
+        "$procmux$47_Y": {
+          "hide_name": 1,
+          "bits": [ 275 ],
+          "attributes": {
+          }
+        },
+        "$procmux$53_Y": {
+          "hide_name": 1,
+          "bits": [ 276 ],
+          "attributes": {
+          }
+        },
+        "$procmux$55_Y": {
+          "hide_name": 1,
+          "bits": [ 257 ],
+          "attributes": {
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:9.11-9.14"
+          }
+        },
+        "grant": {
+          "hide_name": 0,
+          "bits": [ 259 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:51.9-51.14"
+          }
+        },
+        "last_grant": {
+          "hide_name": 0,
+          "bits": [ 259 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:52.9-52.19"
+          }
+        },
+        "lock": {
+          "hide_name": 0,
+          "bits": [ 264 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:53.9-53.13"
+          }
+        },
+        "m0_ack_o": {
+          "hide_name": 0,
+          "bits": [ 107 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:20.31-20.39"
+          }
+        },
+        "m0_addr_i": {
+          "hide_name": 0,
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:13.31-13.40"
+          }
+        },
+        "m0_cyc_i": {
+          "hide_name": 0,
+          "bits": [ 106 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:19.31-19.39"
+          }
+        },
+        "m0_dat_i": {
+          "hide_name": 0,
+          "bits": [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:14.31-14.39"
+          }
+        },
+        "m0_dat_o": {
+          "hide_name": 0,
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:15.31-15.39"
+          }
+        },
+        "m0_err_o": {
+          "hide_name": 0,
+          "bits": [ 108 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:21.31-21.39"
+          }
+        },
+        "m0_sel_i": {
+          "hide_name": 0,
+          "bits": [ 101, 102, 103, 104 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:17.31-17.39"
+          }
+        },
+        "m0_stb_i": {
+          "hide_name": 0,
+          "bits": [ 105 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:18.31-18.39"
+          }
+        },
+        "m0_we_i": {
+          "hide_name": 0,
+          "bits": [ 100 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:16.31-16.38"
+          }
+        },
+        "m1_ack_o": {
+          "hide_name": 0,
+          "bits": [ 180 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:31.31-31.39"
+          }
+        },
+        "m1_addr_i": {
+          "hide_name": 0,
+          "bits": [ 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:24.31-24.40"
+          }
+        },
+        "m1_cyc_i": {
+          "hide_name": 0,
+          "bits": [ 179 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:30.31-30.39"
+          }
+        },
+        "m1_dat_i": {
+          "hide_name": 0,
+          "bits": [ 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:25.31-25.39"
+          }
+        },
+        "m1_dat_o": {
+          "hide_name": 0,
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:26.31-26.39"
+          }
+        },
+        "m1_err_o": {
+          "hide_name": 0,
+          "bits": [ 181 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:32.31-32.39"
+          }
+        },
+        "m1_sel_i": {
+          "hide_name": 0,
+          "bits": [ 174, 175, 176, 177 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:28.31-28.39"
+          }
+        },
+        "m1_stb_i": {
+          "hide_name": 0,
+          "bits": [ 178 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:29.31-29.39"
+          }
+        },
+        "m1_we_i": {
+          "hide_name": 0,
+          "bits": [ 173 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:27.31-27.38"
+          }
+        },
+        "req0": {
+          "hide_name": 0,
+          "bits": [ 255 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:47.10-47.14"
+          }
+        },
+        "req1": {
+          "hide_name": 0,
+          "bits": [ 256 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:48.10-48.14"
+          }
+        },
+        "rst_n": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:10.11-10.16"
+          }
+        },
+        "s_ack_i": {
+          "hide_name": 0,
+          "bits": [ 253 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:42.35-42.42"
+          }
+        },
+        "s_addr_o": {
+          "hide_name": 0,
+          "bits": [ 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:35.35-35.43"
+          }
+        },
+        "s_cyc_o": {
+          "hide_name": 0,
+          "bits": [ 252 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:41.35-41.42"
+          }
+        },
+        "s_dat_i": {
+          "hide_name": 0,
+          "bits": [ 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:37.35-37.42"
+          }
+        },
+        "s_dat_o": {
+          "hide_name": 0,
+          "bits": [ 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:36.35-36.42"
+          }
+        },
+        "s_err_i": {
+          "hide_name": 0,
+          "bits": [ 254 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:43.35-43.42"
+          }
+        },
+        "s_sel_o": {
+          "hide_name": 0,
+          "bits": [ 247, 248, 249, 250 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:39.35-39.42"
+          }
+        },
+        "s_stb_o": {
+          "hide_name": 0,
+          "bits": [ 251 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:40.35-40.42"
+          }
+        },
+        "s_we_o": {
+          "hide_name": 0,
+          "bits": [ 246 ],
+          "attributes": {
+            "src": "/home/free/Projects/LLM-inserted-Hardware-Trojan-Detection/benchmarks/clean_baseline/arbiter/wb_arbiter_2m1s.v:38.35-38.41"
+          }
+        }
+      }
+    }
+  }
+}
